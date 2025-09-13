@@ -1,6 +1,5 @@
 import { writable } from "svelte/store";
-import { stringify, parse } from "devalue";
-import { getStorage } from "./storage";
+import { getCache, getStorage } from "./storage";
 
 type Loader<T> = () => Promise<T>;
 type Config<T> = {
@@ -60,20 +59,17 @@ export const track = <T>({
   store.set(data);
   return store;
 };
+const cache = getCache();
 export const trackCached = <T>({
   id,
   ...opts
 }: { id: string } & Omit<Config<T>, "initialData">) => {
-  const storage = getStorage();
-
-  const initialData = storage[`.cache/${id}.devalue`];
-
   const result = track<T>({
-    initialData: initialData ? parse(initialData) : undefined,
+    initialData: cache[id],
     ...opts,
   });
   result.subscribe((data) => {
-    if (data.data) storage[`.cache/${id}.devalue`] = stringify(data.data);
+    if (data.data) cache[id] = data.data;
   });
   return result;
 };
