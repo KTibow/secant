@@ -24,3 +24,7 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_USESECANT }}
           channelId: live
           projectId: usesecant
+      - name: Monoserve
+        uses: KTibow/monoserve/deploy@main
+        with:
+          config-broker-url: "https://config-broker.ktibow.workers.dev"
