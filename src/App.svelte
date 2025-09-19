@@ -28,6 +28,14 @@
     })?.period,
   );
 
+  let trackedPeriod: number | undefined = $state();
+  $effect(() => {
+    if (trackedPeriod != truePeriod) {
+      trackedPeriod = truePeriod;
+      period = truePeriod;
+    }
+  });
+
   let period = $state(1);
   let clazz = $derived(classes.find((c) => c.period == period));
   let grade = $derived(clazz?.grade);
