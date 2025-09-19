@@ -1,6 +1,6 @@
 import type { ClassGrade } from "../grades/lib/types";
 
-export type Class = {
+type Class = {
   period: number;
   name: string;
   grade?: ClassGrade;
