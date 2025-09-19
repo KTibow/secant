@@ -32,7 +32,7 @@
   $effect(() => {
     if (trackedPeriod != truePeriod) {
       trackedPeriod = truePeriod;
-      period = truePeriod;
+      if (truePeriod) period = truePeriod;
     }
   });
 
