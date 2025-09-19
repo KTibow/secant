@@ -1,13 +1,8 @@
 <script lang="ts">
-  import { calculateExtraCredit, type Assignment } from "./lib";
+  import type { Assignment, ClassGrade } from "./lib/types";
+  import { calculateExtraCredit } from "./lib/utils";
 
-  let {
-    categories,
-    assignments,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    assignments: Assignment[];
-  } = $props();
+  let { categories, assignments }: ClassGrade = $props();
 
   const calculateWidths = (
     assignments: Assignment[],
@@ -55,7 +50,6 @@
 <style>
   .bar {
     display: flex;
-    flex: 0 0 1rem;
   }
   .bar > div {
     display: flex;

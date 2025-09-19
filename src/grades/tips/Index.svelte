@@ -1,25 +1,43 @@
 <script lang="ts">
+  import type { ClassGrade } from "../lib/types";
   import PercentDone from "./PercentDone.svelte";
   import Warnings from "./Warnings.svelte";
-  import { calculateLetter, roundTo } from "./lib";
+  import { calculateLetter, getPoints, roundTo } from "../lib/utils";
+  import { getSemester } from "../lib/semester";
 
   let {
     categories,
-    failedAssignments,
-    reportedGrade,
+    assignments,
+    futureAssignments,
     grade,
-    reportedCategories,
-    progress,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    failedAssignments: { name: string }[] | undefined;
-    reportedGrade: number | undefined;
+    ...extra
+  }: ClassGrade & {
     grade: number;
-    reportedCategories:
-      | Record<string, { earned: number; possible: number; weight: number }>
-      | undefined;
-    progress: number;
   } = $props();
+
+  const now = new Date();
+  const semester = getSemester();
+  const done = semester.filter((d) => d.getTime() < now.getTime()).length;
+  const total = semester.length;
+  const timeBasedProgress = done / total;
+  let pointBasedProgress = $derived.by(() => {
+    if (!categories) {
+      const possible = getPoints(assignments).possible;
+      const futurePossible = futureAssignments.reduce((a, b) => a + b.points, 0);
+      return possible / (possible + futurePossible);
+    }
+    let cumulativeProgress = 0;
+    for (const [category, { possible, weight }] of Object.entries(categories)) {
+      const futurePossible = futureAssignments
+        .filter((a) => a.category == category)
+        .reduce((a, b) => a + b.points, 0);
+      cumulativeProgress += (possible / (possible + futurePossible)) * weight;
+    }
+    return cumulativeProgress;
+  });
+  let progress = $derived(
+    pointBasedProgress ? Math.min(timeBasedProgress, pointBasedProgress) : timeBasedProgress,
+  );
 
   const calculateXForY = (grade: number, y: number) => {
     const delta = y - progress * grade;
@@ -79,7 +97,7 @@
       could get you a {calculateLetter(above)}
     </div>
   {/if}
-  <Warnings {failedAssignments} {reportedGrade} {categories} {grade} {reportedCategories} />
+  <Warnings {categories} {assignments} {futureAssignments} {...extra} {grade} />
 </div>
 
 <style>

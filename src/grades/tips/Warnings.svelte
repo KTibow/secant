@@ -1,16 +1,14 @@
 <script lang="ts">
+  import type { ClassGrade } from "../lib/types";
+
   let {
     failedAssignments,
     reportedGrade,
     categories,
-    grade,
     reportedCategories,
-  }: {
-    failedAssignments: { name: string }[] | undefined;
-    reportedGrade: number | undefined;
-    categories: Record<string, { earned: number; possible: number }> | undefined;
+    grade,
+  }: ClassGrade & {
     grade: number;
-    reportedCategories: Record<string, { earned: number; possible: number }> | undefined;
   } = $props();
 
   let gradeDelta = $derived(reportedGrade && grade - reportedGrade);

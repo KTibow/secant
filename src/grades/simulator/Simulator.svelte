@@ -1,9 +1,9 @@
 <script lang="ts">
   import iconClose from "@ktibow/iconset-material-symbols/close-rounded";
   import { shortenCategory } from "../lib/naming";
-  import ExtPredCategory from "./ExtPredCategory.svelte";
-  import ExtPredOverall from "./ExtPredOverall.svelte";
-  import type { Assignment } from "./lib";
+  import PredictCategory from "./PredictCategory.svelte";
+  import PredictWithoutCategory from "./PredictWithoutCategory.svelte";
+  import type { ClassGrade } from "../lib/types";
   import { Icon } from "m3-svelte";
 
   let {
@@ -12,10 +12,7 @@
     futureAssignments,
     grade,
     close,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    assignments: Assignment[];
-    futureAssignments: { points: number; category: string }[];
+  }: ClassGrade & {
     grade: number;
     close: () => void;
   } = $props();
@@ -50,9 +47,9 @@
 </h2>
 {#if categories}
   {@const categoryName = Object.keys(categories)[simulating]}
-  <ExtPredCategory category={categoryName} {categories} {futureAssignments} {grade} />
+  <PredictCategory category={categoryName} {categories} {futureAssignments} {grade} />
 {:else}
-  <ExtPredOverall {assignments} {futureAssignments} {grade} />
+  <PredictWithoutCategory {assignments} {futureAssignments} {grade} />
 {/if}
 
 <style>

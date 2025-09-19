@@ -1,15 +1,10 @@
 <script lang="ts">
-  import { shortenCategory, simplifyCategory } from "../lib/naming";
-  import CategoryRepresentation from "./CategoryRepresentation.svelte";
-  import { roundTo, getPoints, type Assignment } from "./lib";
+  import { simplifyCategory, shortenCategory } from "./lib/naming";
+  import CategoryRepresentation from "./lib/CategoryRepresentation.svelte";
+  import type { ClassGrade } from "./lib/types";
+  import { roundTo, getPoints } from "./lib/utils";
 
-  let {
-    categories,
-    assignments,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    assignments: Assignment[];
-  } = $props();
+  let { categories, assignments }: ClassGrade = $props();
 </script>
 
 {#if categories}

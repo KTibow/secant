@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PredInner from "./ExtPredInner.svelte";
-  import PredSlider from "./ExtPredSlider.svelte";
+  import Inner from "./Inner.svelte";
+  import Slider from "./Slider.svelte";
 
   let {
     category,
@@ -50,5 +50,5 @@
   });
 </script>
 
-<PredSlider bind:points quickOptions={getQuickOptions(futureAssignments)} />
-<PredInner currentPercent={grade / 100} {fixedPercent} {variablePercent} />
+<Slider bind:points quickOptions={getQuickOptions(futureAssignments)} />
+<Inner currentPercent={grade / 100} {fixedPercent} {variablePercent} />

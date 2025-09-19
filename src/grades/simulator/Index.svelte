@@ -1,18 +1,8 @@
 <script lang="ts">
   import Simulator from "./Simulator.svelte";
-  import type { Assignment } from "./lib";
+  import type { ClassGrade } from "../lib/types";
 
-  let {
-    categories,
-    assignments,
-    futureAssignments,
-    grade,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    assignments: Assignment[];
-    futureAssignments: { points: number; category: string }[];
-    grade: number;
-  } = $props();
+  let clazz: ClassGrade & { grade: number } = $props();
 
   let dialogRef: HTMLDialogElement | null = null;
 
@@ -26,7 +16,7 @@
 </script>
 
 <dialog closedby="any" bind:this={dialogRef}>
-  <Simulator {categories} {assignments} {futureAssignments} {grade} {close} />
+  <Simulator {...clazz} {close} />
 </dialog>
 
 <style>

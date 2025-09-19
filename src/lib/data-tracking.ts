@@ -1,5 +1,6 @@
 import { getStorage } from "monoidentity";
-import { writable } from "svelte/store";
+import { onMount } from "svelte";
+import { get, writable } from "svelte/store";
 
 type Loader<T> = () => Promise<T>;
 type Config<T> = {
@@ -9,7 +10,7 @@ type Config<T> = {
   loader: Loader<T>;
 };
 
-export const track = <T>({
+const track = <T>({
   initialData = undefined,
   initialStale = true,
   expireAfter = 1000 * 60 * 60 * 12,
@@ -59,10 +60,8 @@ export const track = <T>({
   store.set(data);
   return store;
 };
-export const trackCached = <T>({
-  id,
-  ...opts
-}: { id: string } & Omit<Config<T>, "initialData">) => {
+type CachedConfig<T> = Omit<Config<T>, "initialData"> & { id: string };
+const trackCached = <T>({ id, ...opts }: CachedConfig<T>) => {
   const cache = getStorage("cache");
   const result = track<T>({
     initialData: cache[id],
@@ -72,4 +71,14 @@ export const trackCached = <T>({
     if (data.data) cache[id] = data.data;
   });
   return result;
+};
+export const trackCachedAuto = <T>(config: CachedConfig<T>) => {
+  const tracked = trackCached(config);
+  const run = get(tracked).run;
+  onMount(() => {
+    run();
+    const interval = setInterval(run, 5000);
+    return () => clearInterval(interval);
+  });
+  return tracked;
 };

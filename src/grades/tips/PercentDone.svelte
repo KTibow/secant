@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { roundTo } from "./lib";
-
   let { progress }: { progress: number } = $props();
 </script>
 
@@ -26,7 +24,7 @@
       stroke-dashoffset={-56.54 * (1 + progress)}
     />
   </svg>
-  {roundTo(progress * 100, 0)}% done
+  {Math.round(progress * 100)}% done
 </div>
 
 <style>

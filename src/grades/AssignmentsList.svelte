@@ -1,66 +1,44 @@
 <script lang="ts">
   import { Layer } from "m3-svelte";
-  import { simplifyCategory } from "../lib/naming";
-  import CategoryRepresentation from "./CategoryRepresentation.svelte";
-  import SimulatorDialog from "./SimulatorDialog.svelte";
-  import { roundTo, type Assignment } from "./lib";
+  import CategoryRepresentation from "./lib/CategoryRepresentation.svelte";
+  import type { ClassGrade } from "./lib/types";
+  import { simplifyCategory } from "./lib/naming";
+  import { roundTo } from "./lib/utils";
 
-  let {
-    categories,
-    assignments,
-    futureAssignments,
-    grade,
-  }: {
-    categories: Record<string, { earned: number; possible: number; weight: number }> | undefined;
-    assignments: Assignment[];
-    futureAssignments: { points: number; category: string }[];
-    grade: number;
-  } = $props();
-
-  let dialogRef: { open: () => void } | null = null;
+  let { assignments, categories, openSimulator }: ClassGrade & { openSimulator: () => void } =
+    $props();
 
   let hasCategories = $derived(categories && Object.keys(categories).length > 1);
 </script>
 
-<div class="list-wrapper">
-  <div class="list">
-    <div class="header">
-      <span>
-        {assignments.length}
-        {assignments.length == 1 ? "assignment" : "assignments"}
-      </span>
-      <div style:flex-grow="1"></div>
-      <button onclick={() => dialogRef?.open()}>
-        <Layer />
-        Simulate
-      </button>
-    </div>
+<div class="list">
+  <div class="header">
+    <span>
+      {assignments.length}
+      {assignments.length == 1 ? "assignment" : "assignments"}
+    </span>
+    <div style:flex-grow="1"></div>
+    <button onclick={openSimulator}>
+      <Layer />
+      Simulate
+    </button>
+  </div>
 
-    <SimulatorDialog bind:this={dialogRef} {categories} {assignments} {futureAssignments} {grade} />
-    <div
-      class="columns"
-      class:has-categories={hasCategories}
-      class:use-padding={assignments.some((a) => a.possible >= 10)}
-    >
-      {#each assignments as { earned, possible, name, category }, i (i)}
-        {#if hasCategories}
-          <CategoryRepresentation category={simplifyCategory(category)} />
-        {/if}
-        <p>{name}</p>
-        <p class="points">
-          {roundTo(earned, 3)} <span class="slash">/</span>
-          <span class="padded">{possible}</span>
-        </p>
-      {/each}
-    </div>
+  <div class="columns" class:has-categories={hasCategories}>
+    {#each assignments as { earned, possible, name, category }, i (i)}
+      {#if hasCategories}
+        <CategoryRepresentation category={simplifyCategory(category)} />
+      {/if}
+      <p>{name}</p>
+      <p class="points">
+        {roundTo(earned, 3)} <span class="slash">/</span>
+        <span class:padded={assignments.some((a) => a.possible >= 10)}>{possible}</span>
+      </p>
+    {/each}
   </div>
 </div>
 
 <style>
-  .list-wrapper {
-    position: relative;
-    flex: 0 0 25rem;
-  }
   .list {
     display: flex;
     flex-direction: column;
@@ -122,9 +100,7 @@
     .padded {
       display: flex;
       justify-content: end;
-      &:is(.use-padding .padded) {
-        min-width: 1.5rem;
-      }
+      min-width: 1.5rem;
     }
   }
 </style>

@@ -1,18 +1,20 @@
-import { iterating } from "./utils-xml";
-import type { FullPeriod } from "../grades/lib";
+import studentvue from "../lib/api/studentvue";
+import { simplifyClassName } from "../lib/naming";
+import { iterating } from "../lib/utils-xml";
+import type { ClassGrade } from "./lib/types";
 
 const scoreMatcher = /^([0-9.]+) \/ ([0-9.]+)$/;
 const emptyValueMatcher = /^([0-9.]+) \/ ?$/;
 const emptyScoreMatcher = /^ ?\/ ([0-9.]+)$/;
 const futureMatcher = /^([0-9.]+) Points Possible$/;
-const studentvueToCourse = (course: any) => {
+const getGrade = (clazz: any) => {
   const isMissing = (item: { "@_Notes": string }) =>
     item["@_Notes"].includes("Missing") || item["@_Notes"].includes("Missed due date");
-  const period = course["@_Period"].includes("-")
-    ? +course["@_Period"].split("-")[0]
-    : +course["@_Period"];
-  const title = course["@_Title"];
-  const mark = course.Marks.Mark;
+  const period = clazz["@_Period"].includes("-")
+    ? +clazz["@_Period"].split("-")[0]
+    : +clazz["@_Period"];
+  const title = simplifyClassName(clazz["@_Title"]);
+  const mark = clazz.Marks.Mark;
 
   if (!mark.Assignments) return undefined;
 
@@ -75,8 +77,8 @@ const studentvueToCourse = (course: any) => {
     }
   }
 
-  let categories: FullPeriod["categories"] = {};
-  let reportedCategories: FullPeriod["reportedCategories"] = {};
+  let categories: ClassGrade["categories"] = {};
+  let reportedCategories: ClassGrade["reportedCategories"] = {};
   if (mark.GradeCalculationSummary?.AssignmentGradeCalc) {
     const calcs = iterating(mark.GradeCalculationSummary.AssignmentGradeCalc);
     const assignmentsGrouped = Object.groupBy(assignments, (a) => a.category);
@@ -147,37 +149,17 @@ const studentvueToCourse = (course: any) => {
     reportedCategories,
   };
 };
-export const studentvueToGrades = (gradebook: any) => {
-  const periods: FullPeriod[] = [];
+export const getGrades = async () => {
+  const gradebook = await studentvue("Gradebook");
 
-  for (const course of iterating(gradebook?.Gradebook?.Courses?.Course)) {
-    const result = studentvueToCourse(course);
+  const periods: ClassGrade[] = [];
+
+  for (const clazz of iterating(gradebook?.Gradebook?.Courses?.Course)) {
+    const result = getGrade(clazz);
     if (result) {
-      periods.push({ ...result, _original: course });
+      periods.push({ ...result, _original: clazz });
     }
   }
-
-  return periods;
-};
-export const studentvueToSchedule = ({ StudentClassSchedule }: any) => {
-  const classList = iterating(StudentClassSchedule.ClassLists?.ClassListing);
-  const todaySchedule = iterating(
-    StudentClassSchedule.TodayScheduleInfoData?.SchoolInfos?.SchoolInfo?.Classes?.ClassInfo,
-  );
-
-  const periods = classList.map((c: any) => {
-    const timing = todaySchedule.find((t) => t["@_SectionGU"] == c["@_SectionGU"]);
-    const period = c["@_Period"].includes("-") ? +c["@_Period"].split("-")[0] : +c["@_Period"];
-
-    return {
-      name: c["@_CourseTitle"],
-      period,
-      teacher: c["@_Teacher"],
-      sectionId: c["@_SectionGU"],
-      startTime: (timing && timing["@_StartDate"] && new Date(timing["@_StartDate"])) || null,
-      endTime: (timing && timing["@_EndDate"] && new Date(timing["@_EndDate"])) || null,
-    };
-  });
 
   return periods;
 };

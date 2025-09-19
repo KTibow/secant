@@ -1,15 +1,7 @@
 <script lang="ts">
-  import { type Assignment } from "./lib";
+  import { type Assignment, type ClassGrade } from "./lib/types";
 
-  let {
-    grade,
-    categories,
-    assignments,
-  }: {
-    grade: number;
-    categories: Record<string, { weight: number }> | undefined;
-    assignments: Assignment[];
-  } = $props();
+  let { grade, categories, assignments }: ClassGrade & { grade: number } = $props();
 
   let entries = $derived.by(() => {
     const run = (these: Assignment[], weight: number): { name: string; size: number }[] => {

@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { roundTo } from "./lib";
+  import { roundTo } from "./lib/utils";
 
-  let {
-    grade,
-  }: {
-    grade: number;
-  } = $props();
+  let { grade }: { grade: number } = $props();
 </script>
 
 <div class="root" style:--percent="{grade}%">
