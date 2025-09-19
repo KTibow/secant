@@ -1,5 +1,5 @@
 <script lang="ts">
-  import semester from "../lib/semester";
+  import { getSemester } from "./semester";
   import AssignmentsList from "./AssignmentsList.svelte";
   import Grade from "./Grade.svelte";
   import GradeBar from "./GradeBar.svelte";
@@ -19,6 +19,7 @@
 
   let grade = $derived(recalculateGrade({ categories, assignments }));
   const now = new Date();
+  const semester = getSemester();
   const done = semester.filter((d) => d.getTime() < now.getTime()).length;
   const total = semester.length;
   const timeBasedProgress = done / total;

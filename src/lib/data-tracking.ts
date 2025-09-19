@@ -1,5 +1,5 @@
+import { getStorage } from "monoidentity";
 import { writable } from "svelte/store";
-import { getCache, getStorage } from "./storage";
 
 type Loader<T> = () => Promise<T>;
 type Config<T> = {
@@ -59,11 +59,11 @@ export const track = <T>({
   store.set(data);
   return store;
 };
-const cache = getCache();
 export const trackCached = <T>({
   id,
   ...opts
 }: { id: string } & Omit<Config<T>, "initialData">) => {
+  const cache = getStorage("cache");
   const result = track<T>({
     initialData: cache[id],
     ...opts,

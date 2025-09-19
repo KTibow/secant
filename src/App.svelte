@@ -31,20 +31,17 @@
     });
   };
 
-  const _auth = getLogin();
-  const auth = ["wa-nor-psv.edupoint.com", _auth.email.split("@")[0], _auth.password] as const;
-
   const grades = trackCached({
     id: "grades",
     loader: async () => {
-      const gradebook = await studentvue(...auth, "Gradebook");
+      const gradebook = await studentvue("Gradebook");
       return studentvueToGrades(gradebook);
     },
   });
   const schedule = trackCached({
     id: "schedule",
     loader: async () => {
-      const schedule = await studentvue(...auth, "StudentClassList");
+      const schedule = await studentvue("StudentClassList");
       return studentvueToSchedule(schedule);
     },
   });

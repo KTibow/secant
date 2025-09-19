@@ -1,4 +1,6 @@
+import districts from "school-districts";
 import { XMLParser } from "fast-xml-parser";
+import { getLogin } from "monoidentity";
 
 const build = (object: Record<string, string>) => {
   const params = new URLSearchParams();
@@ -9,13 +11,21 @@ const build = (object: Record<string, string>) => {
 };
 const parser = new XMLParser({ ignoreAttributes: false });
 
-export default async (
-  host: string,
-  userID: string,
-  password: string,
-  name: string,
-  params: Record<string, string> = {},
-) => {
+export default async (name: string, params: Record<string, string> = {}) => {
+  const { email, password } = getLogin();
+
+  const domain = email.split("@")[1];
+  const district = districts[domain];
+  if (!district) {
+    throw new Error("Unknown district");
+  }
+  const host = district.apps.find((a) => a.app == "StudentVue")?.host;
+  if (!host) {
+    throw new Error("District does not use StudentVue");
+  }
+
+  const userID = email.split("@")[0];
+
   const request = build({
     userID,
     password,
