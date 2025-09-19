@@ -10,6 +10,7 @@
   import { recalculateGrade } from "./lib/utils";
 
   let clazz: ClassGrade = $props();
+  $effect(() => console.log($state.snapshot(clazz)));
   let grade = $derived(recalculateGrade(clazz));
 
   let dialogRef: { open: () => void } | null = null;
