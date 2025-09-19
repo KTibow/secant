@@ -50,18 +50,18 @@
   <div class="group">
     <h3>
       Turn in missing assignments for a
-      {#if entriesTotal * 0.6 * 100 + grade == 100}
+      {#if entriesTotal * GRADE_RANGE * 100 + grade == 100}
         <span style:color="rgb(var(--m3-scheme-tertiary))">100%</span>
       {:else}
         <span style:color="rgb(var(--m3-scheme-tertiary))"
-          >{(entriesTotal * 0.6 * 100).toFixed(2)}%</span
+          >{(entriesTotal * GRADE_RANGE * 100).toFixed(2)}%</span
         >
         boost
       {/if}
     </h3>
     <div class="bar">
       <div
-        style:width="{grade + entriesTotal * 0.6 * 100}%"
+        style:width="{grade + entriesTotal * GRADE_RANGE * 100}%"
         style:background-color="rgb(var(--m3-scheme-tertiary))"
       ></div>
       <div
@@ -85,7 +85,7 @@
     <div class="table">
       {#each entries as { name, size }, i (i)}
         <p>{name}</p>
-        <p>+{(size * 0.6 * 100).toFixed(2)}%</p>
+        <p>+{(size * GRADE_RANGE * 100).toFixed(2)}%</p>
       {/each}
     </div>
   </div>
@@ -95,7 +95,7 @@
     <h3>The missing assignment {name}</h3>
     <div class="bar">
       <div
-        style:width="{grade + size * 0.6 * 100}%"
+        style:width="{grade + size * GRADE_RANGE * 100}%"
         style:background-color="rgb(var(--m3-scheme-tertiary))"
       ></div>
       <div
@@ -107,10 +107,10 @@
       <p>At missing</p>
       <p>{grade.toFixed(1)}%</p>
       <p>At 60%</p>
-      <p>{(grade + size * 0.2 * 100).toFixed(1)}%</p>
+      <p>{(grade + size * (GRADE_RANGE - 0.6) * 100).toFixed(1)}%</p>
       <p>At 100%</p>
       <p style:color="rgb(var(--m3-scheme-tertiary))">
-        {(grade + size * 0.6 * 100).toFixed(2).replace(/0$/, "")}%
+        {(grade + size * GRADE_RANGE * 100).toFixed(2).replace(/0$/, "")}%
       </p>
     </div>
   </div>
