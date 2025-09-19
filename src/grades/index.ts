@@ -2,6 +2,7 @@ import studentvue from "../lib/api/studentvue";
 import { simplifyClassName } from "../lib/naming";
 import { iterating } from "../lib/utils-xml";
 import type { ClassGrade } from "./lib/types";
+import { appearsMissing } from "./lib/const";
 
 const scoreMatcher = /^([0-9.]+) \/ ([0-9.]+)$/;
 const emptyValueMatcher = /^([0-9.]+) \/ ?$/;
@@ -41,13 +42,13 @@ const getGrade = (clazz: any) => {
     const m4 = item["@_Points"].match(emptyValueMatcher);
     if (m1) {
       const perhapsMissing = needsNote ? isMissing(item) : true;
-      const appearsMissing = Math.abs(0.4 * +m1[2] - +m1[1]) < 0.01;
+      const appearsToMiss = appearsMissing(+m1[1], +m1[2]);
       assignments.push({
         earned: +m1[1],
         possible: +m1[2],
         name,
         date: item["@_Date"],
-        missing: perhapsMissing && appearsMissing,
+        missing: perhapsMissing && appearsToMiss,
         category: item["@_Type"],
       });
     } else if (m2) {

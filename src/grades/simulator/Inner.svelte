@@ -2,6 +2,7 @@
   import iconLeft from "@ktibow/iconset-material-symbols/arrow-back-rounded";
   import iconRight from "@ktibow/iconset-material-symbols/arrow-forward-rounded";
   import { Icon } from "m3-svelte";
+  import { getMinimumGrade } from "../lib/const";
 
   let {
     currentPercent,
@@ -13,7 +14,7 @@
     variablePercent: number;
   } = $props();
 
-  let maxLoss = $derived(fixedPercent + 0.4 * variablePercent);
+  let maxLoss = $derived(getMinimumGrade(fixedPercent, variablePercent));
   let maxGain = $derived(fixedPercent + variablePercent);
   let solvedLoss = $derived((currentPercent - 0.01 - fixedPercent) / variablePercent);
   let solvedGain = $derived((currentPercent + 0.01 - fixedPercent) / variablePercent);
@@ -71,11 +72,11 @@
     style:background-color="rgb(var(--m3-scheme-surface-container-lowest))"
   ></div>
   <div
-    style:left="{(fixedPercent + variablePercent * 0.4) * 100}%"
-    style:width="{(currentPercent - (fixedPercent + variablePercent * 0.4)) * 100}%"
+    style:left="{maxLoss * 100}%"
+    style:width="{(currentPercent - maxLoss) * 100}%"
     style:border-radius="1rem 0 0 1rem"
     style:background-color="rgb(var(--m3-scheme-tertiary-container-subtle))"
-    title="Max down is {((fixedPercent + variablePercent * 0.4) * 100).toFixed(2)}%"
+    title="Max down is {(maxLoss * 100).toFixed(2)}%"
   ></div>
   <div
     style:left="{currentPercent * 100}%"
