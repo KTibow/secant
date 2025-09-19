@@ -1,6 +1,6 @@
 import { mount } from "svelte";
-import App from "./App.svelte";
+import AppWrapper from "./AppWrapper.svelte";
 
-mount(App, {
+mount(AppWrapper, {
   target: document.body,
 });

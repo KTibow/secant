@@ -29,6 +29,9 @@ importers:
       m3-svelte:
         specifier: ^5.6.0
         version: 5.6.0
+      monoidentity:
+        specifier: ^0.0.3
+        version: 0.0.3(svelte@5.38.9)
       monoserve:
         specifier: ^1.2.0
         version: 1.2.0(devalue@5.3.2)(vite@7.1.5)
@@ -554,6 +557,11 @@ packages:
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
+  monoidentity@0.0.3:
+    resolution: {integrity: sha512-a5ZHpBITxuJ7l5jQ78XqcflPgutdmFHwJLs6Kewc+DjvQdOoKcruPWyhqAblHla/HQpW1KIeZziRjs7xiqGGrA==}
+    peerDependencies:
+      svelte: ^5.0.0
+
   monoserve@1.2.0:
     resolution: {integrity: sha512-1KMexBWvYbtEbaVEGarR4nuqRJaSWDF9bEUHWStpBMIfv7BNzBsImfaLb5XbWVPBDiNhrMsTM+nyJQc0mAotfg==}
     hasBin: true
@@ -1066,6 +1074,11 @@ snapshots:
   magic-string@0.30.19:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  monoidentity@0.0.3(svelte@5.38.9):
+    dependencies:
+      devalue: 5.3.2
+      svelte: 5.38.9
 
   monoserve@1.2.0(devalue@5.3.2)(vite@7.1.5):
     dependencies:

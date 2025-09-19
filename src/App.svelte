@@ -4,17 +4,17 @@
   import iconDown from "@ktibow/iconset-material-symbols/keyboard-arrow-down-rounded";
   import iconUp from "@ktibow/iconset-material-symbols/keyboard-arrow-up-rounded";
   import { easeEmphasized, Layer, Icon } from "m3-svelte";
+  import { onMount } from "svelte";
+  import { getLogin } from "monoidentity";
   import { slide } from "svelte/transition";
   import studentvue from "./lib/api/studentvue";
   import { trackCached } from "./lib/data-tracking";
   import { now } from "./lib/utils-now.svelte";
   import Root from "./grades/Root.svelte";
   import { recalculateGrade, roundTo } from "./grades/lib";
-  import { studentvueToGrades } from "./grades/loading";
+  import { studentvueToGrades, studentvueToSchedule } from "./lib/loading";
   import { simplifyClassName } from "./lib/naming";
-  import { studentvueToSchedule } from "./schedule/loading";
   import type { Class } from "./types";
-  import { onMount } from "svelte";
 
   const ordinal = (n: number) => {
     if (n == 0) return "0";
@@ -31,7 +31,8 @@
     });
   };
 
-  const auth = ["CENSORED"] as const;
+  const _auth = getLogin();
+  const auth = ["wa-nor-psv.edupoint.com", _auth.email.split("@")[0], _auth.password] as const;
 
   const grades = trackCached({
     id: "grades",
