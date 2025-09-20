@@ -1,4 +1,4 @@
-import type { ClassGrade } from "../grades/lib/types";
+import type { ClassGrade } from "./grades/lib/types";
 
 type Class = {
   period: number;
