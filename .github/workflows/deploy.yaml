@@ -17,6 +17,9 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
+        env:
+          SC_KEY: ${{ secrets.SC_KEY }}
+          SC_SECRET: ${{ secrets.SC_SECRET }}
       - name: Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

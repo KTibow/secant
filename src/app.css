@@ -11,6 +11,9 @@ body {
 select {
   background-color: transparent;
 }
+button {
+  text-align: start;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;

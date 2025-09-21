@@ -1,4 +1,4 @@
-type Tokens = {
+export type Tokens = {
   key: string;
   secret: string;
 };
@@ -89,6 +89,10 @@ export default class {
       throw new Error(`Schoology is ${response.status}ing`);
     }
 
-    return await response.json();
+    if (response.headers.get("content-type")?.includes("application/json")) {
+      return await response.json();
+    } else {
+      return await response.text();
+    }
   }
 }

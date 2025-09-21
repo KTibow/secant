@@ -1,7 +1,5 @@
 <script lang="ts">
-  import browserTest from "./browser-test.remote";
-
-  console.log(browserTest);
+  import Setup from "./setup/Index.svelte";
 </script>
 
-<div style:margin="auto">todo</div>
+<Setup />
