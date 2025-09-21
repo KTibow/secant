@@ -49,31 +49,21 @@
 
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
-  <div class="controls">
-    <div>
+  {#snippet content()}
+    <div class="content">
       {clazz.name}
       {#if clazz.period == truePeriod && clazz.endTime}
         <span style:color="rgb(var(--m3-scheme-tertiary))">
-          {Math.ceil((new Date(clazz.endTime).getTime() - now.getTime()) / 60000)}
+          {Math.ceil((clazz.endTime.getTime() - now.getTime()) / 60000)}
         </span>
       {:else}
-        <span style:color="rgb(var(--m3-scheme-on-surface-variant))">
+        <span style:opacity="0.8">
           {ordinal(period)}
         </span>
       {/if}
     </div>
-    {#if grade}
-      <button class="focus-inset fade tnum" onclick={() => (gradeOpen = !gradeOpen)}>
-        <Layer />
-        {#if gradeOpen}
-          Grade
-          <Icon icon={iconDown} />
-        {:else if grade}
-          {roundTo(recalculateGrade(grade), 1)}%
-          <Icon icon={iconUp} />
-        {/if}
-      </button>
-    {/if}
+  {/snippet}
+  <div class="controls">
     <button
       class="focus-inset"
       class:fade={prevClass}
@@ -83,6 +73,25 @@
       <Layer />
       <Icon icon={iconLeft} />
     </button>
+    {#if grade}
+      <button class="focus-inset fade main" onclick={() => (gradeOpen = !gradeOpen)}>
+        <Layer />
+        {@render content()}
+        <div class="grade">
+          {#if gradeOpen}
+            Grade
+            <Icon icon={iconDown} />
+          {:else if grade}
+            <span class="tnum">{roundTo(recalculateGrade(grade), 1)}%</span>
+            <Icon icon={iconUp} />
+          {/if}
+        </div>
+      </button>
+    {:else}
+      <div class="main">
+        {@render content()}
+      </div>
+    {/if}
     <button
       class="focus-inset"
       class:fade={nextClass}
@@ -121,15 +130,12 @@
     > * {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
       padding: 0 1rem;
 
       transition:
         background-image var(--m3-util-easing),
         color var(--m3-util-easing);
       border-radius: var(--m3-util-rounding-medium);
-      pointer-events: auto;
       position: relative;
 
       --gradient-height: 3rem;
@@ -140,7 +146,23 @@
     > :last-child {
       border-start-end-radius: 1.5rem;
     }
-    > div {
+    > .main {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      > * {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      > .content {
+        grid-column: 2;
+      }
+      > .grade {
+        grid-column: 3;
+        justify-self: end;
+        gap: 0.25rem;
+        margin-right: -0.5rem;
+      }
       flex: 1;
     }
     > :disabled {

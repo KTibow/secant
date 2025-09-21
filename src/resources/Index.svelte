@@ -1,5 +1,6 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import Setup from "./setup/Index.svelte";
 </script>
 
-<Setup />
+<Setup /> -->
+<div style:flex-grow="1"></div>
