@@ -10,9 +10,10 @@
   import { ordinal } from "./lib/ordinal";
   import { combine } from "./combine";
   import { getGrades } from "./grades";
-  import Grades from "./grades/Index.svelte";
   import { recalculateGrade, roundTo } from "./grades/lib/utils";
   import { getSchedule } from "./schedule";
+  import Resources from "./resources/Index.svelte";
+  import Grades from "./grades/Index.svelte";
 
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
   const grades = trackCachedAuto({ id: "grades", loader: getGrades });
@@ -43,8 +44,9 @@
   let gradeShown = $derived(gradeOpen ? grade : undefined);
 </script>
 
-<div style:flex-grow="1"></div>
 {#if clazz}
+  <Resources />
+
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
   <div class="controls">
