@@ -3,7 +3,7 @@ import { fn } from "monoserve";
 
 export default fn(async () => {
   // Launch the browser
-  await using browser = await launch();
+  await using browser = await launch({ args: ["--no-sandbox"] });
 
   // Open a new page
   await using page = await browser.newPage("https://deno.land");
