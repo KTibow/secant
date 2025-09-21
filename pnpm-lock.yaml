@@ -31,8 +31,8 @@ importers:
         specifier: ^5.2.5
         version: 5.2.5
       m3-svelte:
-        specifier: ^5.6.0
-        version: 5.6.0
+        specifier: ^5.7.3
+        version: 5.7.3
       monoidentity:
         specifier: ^0.2.0
         version: 0.2.0(svelte@5.38.9)
@@ -301,8 +301,8 @@ packages:
   '@ktibow/iconset-material-symbols@0.0.1756961234':
     resolution: {integrity: sha512-fezGUWuJ3sAj7T/U+KJK6IEldUCm4YJlKDp/oCHWNOByiiYCwqll9CKlSXtPL3lBIas/yOHEfoMCNwT0wLrFQQ==}
 
-  '@ktibow/material-color-utilities-nightly@0.3.11756178429000':
-    resolution: {integrity: sha512-ETTXsRnNztrgU8gmpgJGboQJ1kWnqVYFE6MinZLgn5ddPG0tGwXwGhJwvrTFOfyOfUo9zwL6bS0zyMRBb0Ksrg==}
+  '@ktibow/material-color-utilities-nightly@0.3.11758221177000':
+    resolution: {integrity: sha512-DmnStm2E4KOrVSL43qSamkxDugD1kPwfRHz2ntdz4xE6rr1FYcxdde7VAbbXd5yBdeoejnn0IMoZmoL8BldQlg==}
 
   '@napi-rs/wasm-runtime@1.0.5':
     resolution: {integrity: sha512-TBr9Cf9onSAS2LQ2+QHx6XcC6h9+RIzJgbqG3++9TUZSH204AwEy5jg3BTQ0VATsyoGj4ee49tN/y6rvaOOtcg==}
@@ -606,8 +606,8 @@ packages:
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
 
-  m3-svelte@5.6.0:
-    resolution: {integrity: sha512-HfKJTGPU+ZdXoyWF2Kr9cxlsD/daNst+o8D39MM9pRKNcSu3dthYmI3EvlYVKWRERTVhNSvDonLHLoO+wbIeNA==}
+  m3-svelte@5.7.3:
+    resolution: {integrity: sha512-m7xg4OxHS7Fv7RcmNzMxQjwTY1ASj8i/ZWRvDMDOBCh6CVoJWHbLdLooEKwMSY4KpNj3Iw0NPV5cK8qXKO8Z7Q==}
 
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
@@ -949,7 +949,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@ktibow/material-color-utilities-nightly@0.3.11756178429000': {}
+  '@ktibow/material-color-utilities-nightly@0.3.11758221177000': {}
 
   '@napi-rs/wasm-runtime@1.0.5':
     dependencies:
@@ -1185,11 +1185,11 @@ snapshots:
 
   locate-character@3.0.0: {}
 
-  m3-svelte@5.6.0:
+  m3-svelte@5.7.3:
     dependencies:
       '@iconify/types': 2.0.0
       '@ktibow/iconset-material-symbols': 0.0.1755063979
-      '@ktibow/material-color-utilities-nightly': 0.3.11756178429000
+      '@ktibow/material-color-utilities-nightly': 0.3.11758221177000
       svelte: 5.38.9
 
   magic-string@0.30.19:
