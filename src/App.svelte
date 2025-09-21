@@ -57,7 +57,7 @@
           {Math.ceil((clazz.endTime.getTime() - now.getTime()) / 60000)}
         </span>
       {:else}
-        <span style:opacity="0.8">
+        <span style:opacity="0.6">
           {ordinal(period)}
         </span>
       {/if}
@@ -154,17 +154,24 @@
     }
     > .main {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      @media (width < 40rem) {
+        grid-template-columns: 1fr auto;
+      }
+      @media (width >= 40rem) {
+        grid-template-columns: 1fr auto 1fr;
+        .content {
+          grid-column: 2;
+        }
+        .grade {
+          grid-column: 3;
+        }
+      }
       > * {
         display: flex;
         align-items: center;
         gap: 0.5rem;
       }
-      > .content {
-        grid-column: 2;
-      }
       > .grade {
-        grid-column: 3;
         justify-self: end;
         gap: 0.25rem;
         margin-right: -0.5rem;
