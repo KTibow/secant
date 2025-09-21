@@ -142,9 +142,15 @@
     }
     > :first-child {
       border-start-start-radius: 1.5rem;
+      &:enabled {
+        border-end-start-radius: 0;
+      }
     }
     > :last-child {
       border-start-end-radius: 1.5rem;
+      &:enabled {
+        border-end-end-radius: 0;
+      }
     }
     > .main {
       display: grid;
