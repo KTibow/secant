@@ -1,5 +1,5 @@
 import { SC_KEY, SC_SECRET } from "$env/static/private";
-import fn from "monoserve/fn";
+import { fn } from "monoserve";
 import { decode } from "monoidentity";
 import { object, string, union, literal } from "valibot";
 import Schoology from "../lib/api/schoology";

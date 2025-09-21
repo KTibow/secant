@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@astral/astral':
+        specifier: jsr:^0.5.4
+        version: '@jsr/astral__astral@0.5.4'
     devDependencies:
       '@ktibow/iconset-material-symbols':
         specifier: ^0.0.1756961234
@@ -33,8 +37,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(svelte@5.38.9)
       monoserve:
-        specifier: ^1.2.0
-        version: 1.2.0(devalue@5.3.2)(vite@7.1.5)
+        specifier: ^2.1.5
+        version: 2.1.5(devalue@5.3.2)(vite@7.1.5)
       prettier:
         specifier: ^3.4.2
         version: 3.6.2
@@ -245,6 +249,51 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@jsr/astral__astral@0.5.4':
+    resolution: {integrity: sha512-jx+86Bejeyw+3aj+Cgh9x4vr5vsTrWp4Kn2v+808iCZ61jVRq+IfjqaCUtnX6KOf+6tuinHUcNgs8CrgYnb4pA==, tarball: https://npm.jsr.io/~/11/@jsr/astral__astral/0.5.4.tgz}
+
+  '@jsr/deno-library__progress@1.5.1':
+    resolution: {integrity: sha512-TvuW72cAHSV6F7Pxsp8XBbOEJKxwXswc0eMGO383ksANEYQKwq26hY3QrvaS+j8wX6hZdtJtz5ObGixdrVxz/w==, tarball: https://npm.jsr.io/~/11/@jsr/deno-library__progress/1.5.1.tgz}
+
+  '@jsr/deno__cache-dir@0.22.2':
+    resolution: {integrity: sha512-tALdXeVzXKScbTrWFN8SyZpuK9FddtRmSutYPKdbesBRmZYSrnWpfVvUJZN9wJG5CayDKlVM9J7bNugDr9KK2g==, tarball: https://npm.jsr.io/~/11/@jsr/deno__cache-dir/0.22.2.tgz}
+
+  '@jsr/deno__graph@0.86.9':
+    resolution: {integrity: sha512-+qrrma5/bL+hcG20mfaEeC8SLopqoyd1RjcKFMRu++3SAXyrTKuvuIjBJCn/NyN7X+kV+QrJG67BCHX38Rzw+g==, tarball: https://npm.jsr.io/~/11/@jsr/deno__graph/0.86.9.tgz}
+
+  '@jsr/std__async@1.0.14':
+    resolution: {integrity: sha512-aIG8W3TOmW+lKdAJA5w56qASu9EiUmBXbhW6eAlSEUBid+KVESGqQygFFg+awt/c8K+qobVM6M/u3SbIy0NyUQ==, tarball: https://npm.jsr.io/~/11/@jsr/std__async/1.0.14.tgz}
+
+  '@jsr/std__bytes@1.0.6':
+    resolution: {integrity: sha512-St6yKggjFGhxS52IFLJWvkchRFbAKg2Xh8UxA4S1EGz7GJ2Ui+ssDDldj/w2c8vCxvl6qgR0HaYbKeFJNqujmA==, tarball: https://npm.jsr.io/~/11/@jsr/std__bytes/1.0.6.tgz}
+
+  '@jsr/std__encoding@1.0.10':
+    resolution: {integrity: sha512-WK2njnDTyKefroRNk2Ooq7GStp6Y0ccAvr4To+Z/zecRAGe7+OSvH9DbiaHpAKwEi2KQbmpWMOYsdNt+TsdmSw==, tarball: https://npm.jsr.io/~/11/@jsr/std__encoding/1.0.10.tgz}
+
+  '@jsr/std__fmt@1.0.3':
+    resolution: {integrity: sha512-Nf8EywAPLhDV6k0Nbsqid3slskDji4xG2wHxyLM/ojG75NtxY3mdeFov2RVj9fsyBV+qQcoqlR/9RX5lkZJLMQ==, tarball: https://npm.jsr.io/~/11/@jsr/std__fmt/1.0.3.tgz}
+
+  '@jsr/std__fmt@1.0.8':
+    resolution: {integrity: sha512-miZHzj9OgjuajrcMKzpqNVwFb9O71UHZzV/FHVq0E0Uwmv/1JqXgmXAoBNPrn+MP0fHT3mMgaZ6XvQO7dam67Q==, tarball: https://npm.jsr.io/~/11/@jsr/std__fmt/1.0.8.tgz}
+
+  '@jsr/std__fs@1.0.19':
+    resolution: {integrity: sha512-TEjyE8g+46jPlu7dJHLrwc8NMGl8zfG+JjWxyNQyDbxP0RtqZ4JmYZfR9vy4RWYWJQbLpw6Kbt2n+K/2zAO/JA==, tarball: https://npm.jsr.io/~/11/@jsr/std__fs/1.0.19.tgz}
+
+  '@jsr/std__internal@1.0.10':
+    resolution: {integrity: sha512-fmD6yKep/sMnB2yPQU/REZG7Z4N9SZwcUBNnceo4QkXk67l3JEfxHoROQ/YHeVSOmq6x55Ra6nuMjz2ib3nj3g==, tarball: https://npm.jsr.io/~/11/@jsr/std__internal/1.0.10.tgz}
+
+  '@jsr/std__io@0.225.0':
+    resolution: {integrity: sha512-Ac4n8K+nuj9amzP6+dQoVm0NjyFtaq7zWIK/iEksYVms5xJh6x+g5WfP/Vt6VDamk/WS5KStjcyZXNZZNa18Uw==, tarball: https://npm.jsr.io/~/11/@jsr/std__io/0.225.0.tgz}
+
+  '@jsr/std__io@0.225.2':
+    resolution: {integrity: sha512-QNImMbao6pKXvV4xpFkY2zviZi1r+1KpYzgMqaa2gHDPZhXQqlia/Og+VqMxxfAr8Pw6BF3tw/hSw3LrWWTRmA==, tarball: https://npm.jsr.io/~/11/@jsr/std__io/0.225.2.tgz}
+
+  '@jsr/std__path@1.1.2':
+    resolution: {integrity: sha512-5hkOR1s5M7am02Bn9KS+SNMNwUSivz7t7/w2HBhFIfO7Eh8+mWilaZ+1tdanV9aaSHr4c99Zo4Da+cCSuzUOdA==, tarball: https://npm.jsr.io/~/11/@jsr/std__path/1.1.2.tgz}
+
+  '@jsr/zip-js__zip-js@2.8.2':
+    resolution: {integrity: sha512-SOuyBjOSEh0t5B+FLXZvl7oyGMOO95VPnpstZ92UCPbAoAbJFOi88uAv6PQAvfSQbiP3npjTGO75rdQkU39Pww==, tarball: https://npm.jsr.io/~/11/@jsr/zip-js__zip-js/2.8.2.tgz}
 
   '@ktibow/iconset-material-symbols@0.0.1755063979':
     resolution: {integrity: sha512-ru49BoA2f+GZHFk1Ha/gUqEUOqBit+8bUIYYR2lbGwH9MwOCIdbl3pgrDHbgeW+q96rDnJDyg8+HXgI8AwCLSg==}
@@ -568,12 +617,12 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
-  monoserve@1.2.0:
-    resolution: {integrity: sha512-1KMexBWvYbtEbaVEGarR4nuqRJaSWDF9bEUHWStpBMIfv7BNzBsImfaLb5XbWVPBDiNhrMsTM+nyJQc0mAotfg==}
+  monoserve@2.1.5:
+    resolution: {integrity: sha512-nMDrh4ewXhLGeYb/Lmc3wrEbBttNxi+GLyP+lHQyDYtbdFtDjBHw0NPq+So3cbKTutv4Mun8w22Saxv1toFPOw==}
     hasBin: true
     peerDependencies:
       devalue: ^5.3.2
-      vite: ^7.1.3
+      vite: ^7.1.5
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -836,6 +885,62 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@jsr/astral__astral@0.5.4':
+    dependencies:
+      '@jsr/deno-library__progress': 1.5.1
+      '@jsr/deno__cache-dir': 0.22.2
+      '@jsr/std__async': 1.0.14
+      '@jsr/std__encoding': 1.0.10
+      '@jsr/std__fs': 1.0.19
+      '@jsr/std__path': 1.1.2
+      '@jsr/zip-js__zip-js': 2.8.2
+
+  '@jsr/deno-library__progress@1.5.1':
+    dependencies:
+      '@jsr/std__fmt': 1.0.3
+      '@jsr/std__io': 0.225.0
+
+  '@jsr/deno__cache-dir@0.22.2':
+    dependencies:
+      '@jsr/deno__graph': 0.86.9
+      '@jsr/std__fmt': 1.0.8
+      '@jsr/std__fs': 1.0.19
+      '@jsr/std__io': 0.225.2
+      '@jsr/std__path': 1.1.2
+
+  '@jsr/deno__graph@0.86.9': {}
+
+  '@jsr/std__async@1.0.14': {}
+
+  '@jsr/std__bytes@1.0.6': {}
+
+  '@jsr/std__encoding@1.0.10': {}
+
+  '@jsr/std__fmt@1.0.3': {}
+
+  '@jsr/std__fmt@1.0.8': {}
+
+  '@jsr/std__fs@1.0.19':
+    dependencies:
+      '@jsr/std__internal': 1.0.10
+      '@jsr/std__path': 1.1.2
+
+  '@jsr/std__internal@1.0.10': {}
+
+  '@jsr/std__io@0.225.0':
+    dependencies:
+      '@jsr/std__bytes': 1.0.6
+
+  '@jsr/std__io@0.225.2':
+    dependencies:
+      '@jsr/std__bytes': 1.0.6
+
+  '@jsr/std__path@1.1.2':
+    dependencies:
+      '@jsr/std__internal': 1.0.10
+
+  '@jsr/zip-js__zip-js@2.8.2': {}
+
   '@ktibow/iconset-material-symbols@0.0.1755063979':
     dependencies:
       '@iconify/types': 2.0.0
@@ -1097,7 +1202,7 @@ snapshots:
       idb: 8.0.3
       svelte: 5.38.9
 
-  monoserve@1.2.0(devalue@5.3.2)(vite@7.1.5):
+  monoserve@2.1.5(devalue@5.3.2)(vite@7.1.5):
     dependencies:
       '@standard-schema/spec': 1.0.0
       devalue: 5.3.2
