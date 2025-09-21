@@ -15,6 +15,8 @@ export default fn(async () => {
   await emailInput.type("1000000@apps.nsd.org", { delay: 100 });
   await emailInput.type("\n");
 
+  await page.waitForNetworkIdle({ idleTime: 1500 });
+
   const screenshot = await page.screenshot();
 
   return new Response(screenshot, { headers: { "Content-Type": "image/png" } });
