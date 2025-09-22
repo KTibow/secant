@@ -18,8 +18,8 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          SC_KEY: ${{ secrets.SC_KEY }}
-          SC_SECRET: ${{ secrets.SC_SECRET }}
+          SC_KEY_A1: ${{ secrets.SC_KEY_A1 }}
+          SC_SECRET_A1: ${{ secrets.SC_SECRET_A1 }}
       - name: Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
