@@ -148,7 +148,7 @@
       &:last-child:enabled {
         border-end-end-radius: 0;
       }
-      &:active {
+      &:active:enabled {
         border-radius: var(--m3-util-rounding-small);
       }
       position: relative;
