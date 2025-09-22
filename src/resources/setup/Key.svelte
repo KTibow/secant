@@ -19,7 +19,7 @@
 </script>
 
 <div class="center">
-  <a class="m3-font-body-medium" href="https://nsd.schoology.com/api">
+  <a class="m3-font-body-medium" href="https://nsd.schoology.com/api" target="_blank">
     <Icon icon={iconExternal} width="1.25rem" height="1.25rem" />
     Get key
   </a>
