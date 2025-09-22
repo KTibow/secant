@@ -134,23 +134,27 @@
 
       transition:
         background-image var(--m3-util-easing),
-        color var(--m3-util-easing);
+        color var(--m3-util-easing),
+        border-radius var(--m3-util-easing-fast);
       border-radius: var(--m3-util-rounding-medium);
+      &:first-child {
+        border-start-start-radius: 1.5rem;
+      }
+      &:first-child:enabled {
+        border-end-start-radius: 0;
+      }
+      &:last-child {
+        border-start-end-radius: 1.5rem;
+      }
+      &:last-child:enabled {
+        border-end-end-radius: 0;
+      }
+      &:active {
+        border-radius: var(--m3-util-rounding-small);
+      }
       position: relative;
 
       --gradient-height: 3rem;
-    }
-    > :first-child {
-      border-start-start-radius: 1.5rem;
-      &:enabled {
-        border-end-start-radius: 0;
-      }
-    }
-    > :last-child {
-      border-start-end-radius: 1.5rem;
-      &:enabled {
-        border-end-end-radius: 0;
-      }
     }
     > .main {
       display: grid;
