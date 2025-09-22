@@ -12,7 +12,7 @@
   import { getGrades } from "./grades";
   import { recalculateGrade, roundTo } from "./grades/lib/utils";
   import { getSchedule } from "./schedule";
-  import Resources from "./resources/Index.svelte";
+  import Resources from "./resources/AuthLayer.svelte";
   import Grades from "./grades/Index.svelte";
 
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
@@ -44,9 +44,8 @@
   let gradeShown = $derived(gradeOpen ? grade : undefined);
 </script>
 
+<Resources {clazz} />
 {#if clazz}
-  <Resources />
-
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
   {#snippet content()}

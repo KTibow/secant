@@ -1,0 +1,278 @@
+<script lang="ts">
+  import iconDone from "@ktibow/iconset-material-symbols/done-all-rounded";
+  import { Icon, Layer } from "m3-svelte";
+
+  let {
+    resources,
+    links,
+    // big,
+    // howOnline,
+    // suspended,
+    completedAssignments,
+  }: {
+    resources: any[];
+    links: { title: string; url: string }[];
+    // big?: { title: string; content: string; url: string };
+    // howOnline: number;
+    // suspended: boolean;
+    completedAssignments: string[];
+  } = $props();
+
+  const iconTest = {
+    body: `<path d="M17 2a5 5 90 010 10h-10a5 5 90 010-10zM17 12A5 5 90 0117 22h-10a5 5 90 010-10z" fill="currentColor"/>`,
+    width: 24,
+    height: 24,
+  };
+  const iconExternal = {
+    body: `<path d="m7 7A5 5 0 0117 7v10A5 5 0 017 17z" transform="rotate(45 12 12)" fill="currentColor"/>`,
+    width: 24,
+    height: 24,
+  };
+
+  type Box = {
+    type: string;
+    href: string;
+    title: string;
+    content?: string;
+    width?: number;
+    height?: number;
+  };
+
+  let { layout, view } = $derived.by(() => {
+    const linksCopy = structuredClone(links);
+    const resourcesCopy = structuredClone(resources);
+
+    const start: Box[] = [];
+    const middle: Box[] = [];
+    const end: Box[] = [];
+    let view = "emptiness";
+    const updateView = (title: string) => {
+      if (view == "emptiness") view = "zen";
+      if (view == "zen" && !completedAssignments.includes(title)) view = "";
+    };
+    const getFreeSpace = () =>
+      8 -
+      [...start, ...middle, ...end].reduce(
+        (acc, box) => acc + (box.width || 1) * (box.height || 1),
+        0,
+      );
+
+    // primary: an assignment
+    // if (big) {
+    //   start.push({
+    //     type: "none",
+    //     href: big.url,
+    //     title: big.title,
+    //     content: big.content,
+    //     width: 2,
+    //     height: 2,
+    //   });
+    //   hasAny = true;
+    // } else {
+    const resource = resourcesCopy.shift();
+    if (resource) {
+      start.push({
+        type: resource.icon,
+        href: resource.url,
+        title: resource.title,
+        width: 2,
+        height: 1,
+      });
+      updateView(resource.title);
+    }
+    // }
+
+    // secondary: a link
+    const link = linksCopy.pop();
+    if (link) {
+      end.unshift({
+        type: "link",
+        href: link.url,
+        title: link.title,
+        width: 2,
+        height: 1,
+      });
+    }
+
+    // tertiary: another link
+    const link2 = linksCopy.pop();
+    if (link2) {
+      end.unshift({
+        type: "link",
+        href: link2.url,
+        title: link2.title,
+        width: 1,
+        height: 1,
+      });
+    }
+
+    // fill in the rest
+    if (
+      // !big &&
+      getFreeSpace() >= resourcesCopy.length + 2 ||
+      (resourcesCopy.length == 4 && getFreeSpace() == 5)
+    ) {
+      // we can make primary bigger
+      const primary = start[0];
+      if (primary) {
+        primary.height = 2;
+      }
+    }
+    while (getFreeSpace() > 0 && resourcesCopy.length > 0) {
+      const resource = resourcesCopy.shift();
+      if (start.some((p) => p.href == resource.url)) {
+        continue;
+      }
+      middle.push({
+        type: resource.icon,
+        href: resource.url,
+        title: resource.title,
+      });
+      updateView(resource.title);
+    }
+
+    return {
+      layout: [...start, ...middle, ...end],
+      view,
+    };
+  });
+</script>
+
+{#snippet fittingIcon(type: string)}
+  <!-- {#if type == "link"}
+    <Icon icon={iconExternal} width="1.5rem" height="1.5rem" />
+  {:else if type == "test"}
+    <Icon icon={iconTest} width="1.5rem" height="1.5rem" />
+  {/if} -->
+{/snippet}
+{#if view == "zen" || view == "emptiness"}
+  <div class="zen m3-font-headline-large">
+    {#if view == "zen"}
+      <Icon icon={iconDone} width="2.5rem" height="2.5rem" />
+    {/if}
+    In {view}
+  </div>
+  <div class="zen-links-anchor">
+    <div class="zen-links m3-font-body-medium">
+      {#each links as { title, url }}
+        <a href={url} target="_blank">
+          <Layer />
+          {title}
+        </a>
+      {/each}
+    </div>
+  </div>
+{:else}
+  <div class="grid">
+    {#each layout as box}
+      {@const { type, href, title, content, width, height } = box}
+      <a
+        {href}
+        target="_blank"
+        class="entry fade"
+        class:secondary={type == "link"}
+        class:has-icon={type != "none"}
+        class:has-content={content}
+        style:grid-column="span {width || 1}"
+        style:grid-row="span {height || 1}"
+      >
+        <h2>{title}</h2>
+        <!-- {#if content}
+          <p class="content">{content}</p>
+        {/if}
+        {@render fittingIcon(type)} -->
+      </a>
+    {/each}
+  </div>
+{/if}
+
+<style>
+  .zen {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: auto;
+    > :global(svg) {
+      color: rgb(var(--m3-scheme-secondary));
+    }
+  }
+  .zen-links-anchor {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .zen-links {
+    display: flex;
+    gap: 1rem;
+    align-self: center;
+    position: absolute;
+    bottom: 1.5rem;
+    > a {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      border-radius: var(--m3-util-rounding-full);
+      color: rgb(var(--m3-scheme-secondary));
+      padding-inline: 1rem;
+      position: relative;
+    }
+  }
+  .grid {
+    display: flex;
+    flex-direction: column;
+    @media (width >= 60rem) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    gap: 1.5rem;
+
+    flex-grow: 1;
+    margin: 1.5rem;
+  }
+  .entry {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 2rem;
+    gap: 2rem;
+
+    --gradient-height: clamp(4rem, 20dvh, 8rem);
+
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+
+    &.has-icon {
+      padding-right: 4rem;
+    }
+    &.has-content {
+      h2 {
+        overflow: hidden;
+      }
+    }
+    /*&.secondary {
+      color: rgb(var(--m3-scheme-secondary));
+      background-image: none;
+      background-color: rgb(var(--m3-scheme-secondary-container-subtle));
+    }*/
+
+    :global(svg) {
+      position: absolute;
+      width: 2.5rem;
+      height: 2.5rem;
+      top: 1rem;
+      right: 1rem;
+    }
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0.012em;
+      max-height: 5rem;
+    }
+    .content {
+      white-space: pre-wrap;
+    }
+  }
+</style>

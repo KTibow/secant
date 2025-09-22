@@ -1,8 +1,9 @@
 import type { ClassGrade } from "./grades/lib/types";
 
-type Class = {
+export type Class = {
   period: number;
   name: string;
+  id?: string;
   grade?: ClassGrade;
   startTime?: Date;
   endTime?: Date;
@@ -15,6 +16,7 @@ export const combine = (schedule?: Class[], grades?: ClassGrade[]) => {
       output[clazz.period] ||= {
         period: clazz.period,
         name: clazz.name,
+        id: clazz.id,
       };
       if (clazz.startTime) {
         output[clazz.period].startTime = clazz.startTime;

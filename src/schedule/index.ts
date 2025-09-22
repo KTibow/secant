@@ -16,8 +16,8 @@ export const getSchedule = async () => {
     return {
       name: simplifyClassName(c["@_CourseTitle"]),
       period,
+      id: c["@_SectionGU"],
       teacher: c["@_Teacher"],
-      sectionId: c["@_SectionGU"],
       startTime: (timing && timing["@_StartDate"] && new Date(timing["@_StartDate"])) || undefined,
       endTime: (timing && timing["@_EndDate"] && new Date(timing["@_EndDate"])) || undefined,
     };
