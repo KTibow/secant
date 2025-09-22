@@ -49,9 +49,10 @@
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
   {#snippet content()}
-    <div class="content">
+    {@const active = clazz.period == truePeriod && clazz.endTime}
+    <div class="content" class:active>
       {clazz.name}
-      {#if clazz.period == truePeriod && clazz.endTime}
+      {#if active}
         <span style:color="rgb(var(--m3-scheme-tertiary))">
           {Math.ceil((clazz.endTime.getTime() - now.getTime()) / 60000)}
         </span>
@@ -110,12 +111,13 @@
 
 <style>
   :global(.fade) {
+    --fade-color: var(--m3-scheme-primary-container-subtle);
     background-image: linear-gradient(
       to bottom,
-      rgb(var(--m3-scheme-primary-container-subtle) / 1) 0,
-      rgb(var(--m3-scheme-primary-container-subtle) / 0.8) calc(var(--gradient-height) * 0.25),
-      rgb(var(--m3-scheme-primary-container-subtle) / 0.4) calc(var(--gradient-height) * 0.5),
-      rgb(var(--m3-scheme-primary-container-subtle) / 0.2) calc(var(--gradient-height) * 0.75),
+      rgb(var(--fade-color) / 1) 0,
+      rgb(var(--fade-color) / 0.8) calc(var(--gradient-height) * 0.25),
+      rgb(var(--fade-color) / 0.4) calc(var(--gradient-height) * 0.5),
+      rgb(var(--fade-color) / 0.2) calc(var(--gradient-height) * 0.75),
       transparent var(--gradient-height)
     );
     color: rgb(var(--m3-scheme-on-primary-container-subtle));
@@ -136,6 +138,10 @@
         color var(--m3-util-easing),
         border-radius var(--m3-util-easing-fast);
       border-radius: var(--m3-util-rounding-medium);
+      &.active {
+        --fade-color: var(--m3-scheme-tertiary-container-subtle);
+        color: rgb(var(--m3-scheme-on-tertiary-container-subtle));
+      }
       &:first-child {
         border-start-start-radius: 1.5rem;
       }
