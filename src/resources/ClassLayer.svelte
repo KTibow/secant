@@ -10,7 +10,7 @@
     auth,
   }: { clazzId: string; completedAssignments: string[]; auth: FullAuth } = $props();
 
-  const resources = trackCachedAuto({ id: "resources", loader: () => loader(auth) });
+  const resources = trackCachedAuto({ id: "resources", loader: () => loader(auth), expireAfter: 1000 * 60 * 10 });
   let classResources = $derived.by(() => $resources.data?.[clazzId]);
 </script>
 
