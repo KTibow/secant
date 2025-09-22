@@ -48,9 +48,9 @@
 {#if clazz}
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
+  {@const active = clazz.period == truePeriod && clazz.endTime}
   {#snippet content()}
-    {@const active = clazz.period == truePeriod && clazz.endTime}
-    <div class="content" class:active>
+    <div class="content">
       {clazz.name}
       {#if active}
         <span style:color="rgb(var(--m3-scheme-tertiary))">
@@ -74,7 +74,7 @@
       <Icon icon={iconLeft} />
     </button>
     {#if grade}
-      <button class="focus-inset fade main" onclick={() => (gradeOpen = !gradeOpen)}>
+      <button class="focus-inset fade main" class:active onclick={() => (gradeOpen = !gradeOpen)}>
         <Layer />
         {@render content()}
         <div class="grade">
@@ -88,7 +88,7 @@
         </div>
       </button>
     {:else}
-      <div class="main">
+      <div class="main" class:active>
         {@render content()}
       </div>
     {/if}
