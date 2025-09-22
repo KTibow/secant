@@ -2,7 +2,7 @@
   import iconDone from "@ktibow/iconset-material-symbols/done-all-rounded";
   import iconExternal from "@ktibow/iconset-material-symbols/arrow-outward-rounded";
   import iconTest from "@ktibow/iconset-material-symbols/task-alt-rounded";
-  import { Icon, Layer } from "m3-svelte";
+  import { Button, Icon, Layer } from "m3-svelte";
   import type { ResourceData } from "./loader.remote";
   let {
     resources,
@@ -25,10 +25,9 @@
   <div class="zen-links-anchor">
     <div class="zen-links m3-font-body-medium">
       {#each links as { title, url }}
-        <a href={url} target="_blank">
-          <Layer />
+        <Button variant="text" href={url} target="_blank">
           {title}
-        </a>
+        </Button>
       {/each}
     </div>
   </div>
@@ -83,15 +82,6 @@
     align-self: center;
     position: absolute;
     bottom: 0.5rem;
-    > a {
-      display: flex;
-      align-items: center;
-      height: 2.5rem;
-      border-radius: var(--m3-util-rounding-full);
-      color: rgb(var(--m3-scheme-secondary));
-      padding-inline: 1rem;
-      position: relative;
-    }
   }
 
   .resources {
