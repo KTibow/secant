@@ -48,11 +48,11 @@
 {#if clazz}
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
-  {@const active = clazz.period == truePeriod && clazz.endTime}
+  {@const active = clazz.period == truePeriod}
   {#snippet content()}
     <div class="content">
       {clazz.name}
-      {#if active}
+      {#if active && clazz.endTime}
         <span style:color="rgb(var(--m3-scheme-tertiary))">
           {Math.ceil((clazz.endTime.getTime() - now.getTime()) / 60000)}
         </span>

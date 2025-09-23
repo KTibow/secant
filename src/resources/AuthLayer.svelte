@@ -4,7 +4,7 @@
   import ClassLayer from "./ClassLayer.svelte";
   import type { Class } from "../combine";
 
-  let { clazz }: { clazz: Class } = $props();
+  let { clazz }: { clazz: Class | undefined } = $props();
   const getAuth = () => getStorage("config").schoology;
   let auth = $state(getAuth());
   let clazzId = $derived(clazz?.id);
