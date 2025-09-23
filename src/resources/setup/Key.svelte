@@ -23,11 +23,12 @@
     <Icon icon={iconExternal} width="1.25rem" height="1.25rem" />
     Get key
   </a>
+  <!-- svelte-ignore a11y_autofocus -->
   <input
     class="focus-inset"
     placeholder="Key"
     bind:value={key}
-    use:focus
+    autofocus
     onpaste={() => setTimeout(() => secretEl?.focus())}
   />
   <input
