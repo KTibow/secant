@@ -13,6 +13,19 @@ const processAssignment = (assignment: any, courseId: string) => {
   if (assignment.assignment_type == "lti_submission") {
     icon = "worksheet";
   }
+
+  let text: string | undefined;
+  if (/^HW #(\d+)/.test(assignment.title)) {
+    text = assignment.description;
+  }
+  if (text) {
+    text = text.replace(/^HW #\d+ /, "");
+    text = text.replace(/^\(\d+\.\d+\)\s/, "");
+    text = text.replace(/^Read \d+-\d+\n/, "");
+    if (text.includes("Do")) {
+      text = text.slice(text.indexOf("Do"));
+    }
+  }
   return {
     url:
       assignment.type == "assignment"
@@ -24,6 +37,7 @@ const processAssignment = (assignment: any, courseId: string) => {
             : "",
     icon,
     title: assignment.title,
+    text,
   };
 };
 const processResources = (assignments: any[], courseId: string, todayRegex: RegExp) => {

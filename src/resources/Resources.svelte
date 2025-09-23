@@ -36,12 +36,12 @@
     {#each links as { title, url }}
       <a href={url} target="_blank" class="resource link m3-font-headline-large">
         <Icon icon={iconExternal} />
-        <div class="content">
+        <div class="content-b">
           {title}
         </div>
       </a>
     {/each}
-    {#each resources.slice(0, 8) as { icon, title, url }}
+    {#each resources.slice(0, 8) as { icon, title, url, text }}
       <a
         href={url}
         target="_blank"
@@ -50,10 +50,12 @@
       >
         {#if icon == "test"}
           <Icon icon={iconTest} />
-        {:else if icon == "worksheet"}
-          ?
+        {:else if text}
+          <div class="content-a">
+            {text}
+          </div>
         {/if}
-        <div class="content">
+        <div class="content-b" style:margin-top="auto">
           {title}
         </div>
       </a>
@@ -113,10 +115,17 @@
       outline-offset: -2px;
     }
   }
-  .content {
-    max-width: clamp(10rem, 40dvw, 25rem);
+  .content-a,
+  .content-b {
     max-height: 3.75em;
     overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .content-a {
+    contain: inline-size;
+  }
+  .content-b {
+    max-width: clamp(10rem, 40dvw, 25rem);
     margin-top: auto;
   }
 </style>
