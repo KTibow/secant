@@ -145,17 +145,17 @@
       &:first-child {
         border-start-start-radius: 1.5rem;
       }
-      &:first-child:enabled {
-        border-end-start-radius: 0;
-      }
       &:last-child {
         border-start-end-radius: 1.5rem;
       }
-      &:last-child:enabled {
-        border-end-end-radius: 0;
-      }
       &:active:enabled {
         border-radius: var(--m3-util-rounding-small);
+      }
+      &:first-child:enabled {
+        border-end-start-radius: 0;
+      }
+      &:last-child:enabled {
+        border-end-end-radius: 0;
       }
       position: relative;
 
