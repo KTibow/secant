@@ -87,7 +87,8 @@
   .resources {
     display: flex;
     flex-wrap: wrap;
-    flex-grow: 1;
+    flex: 1 1 0;
+    overflow: hidden;
     gap: 0.5rem;
     padding: 0.5rem;
   }
@@ -113,8 +114,9 @@
     }
   }
   .content {
-    max-width: 30rem;
+    max-width: clamp(10rem, 40dvw, 25rem);
     max-height: 3.75em;
+    overflow: hidden;
     margin-top: auto;
   }
 </style>
