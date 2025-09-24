@@ -1,6 +1,6 @@
 import districts from "school-districts";
 import { XMLParser } from "fast-xml-parser";
-import { getLogin } from "monoidentity";
+import { getLoginRecognized } from "monoidentity";
 
 const build = (object: Record<string, string>) => {
   const params = new URLSearchParams();
@@ -12,7 +12,7 @@ const build = (object: Record<string, string>) => {
 const parser = new XMLParser({ ignoreAttributes: false });
 
 export default async (name: string, params: Record<string, string> = {}) => {
-  const { email, password } = getLogin();
+  const { email, password } = getLoginRecognized();
 
   const domain = email.split("@")[1];
   const district = districts[domain];

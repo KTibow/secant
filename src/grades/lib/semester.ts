@@ -1,8 +1,8 @@
 import districts from "school-districts";
-import { getLogin } from "monoidentity";
+import { getLoginRecognized } from "monoidentity";
 
 export const getSemester = () => {
-  const { email } = getLogin();
+  const { email } = getLoginRecognized();
   const domain = email.split("@")[1];
   const district = districts[domain];
   if (!district) {
