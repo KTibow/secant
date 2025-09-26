@@ -10,16 +10,21 @@ export const getSchedule = async () => {
   );
 
   const periods = classList.map((c: any) => {
-    const timing = todaySchedule.find((t) => t["@_SectionGU"] == c["@_SectionGU"]);
-    const period = c["@_Period"].includes("-") ? +c["@_Period"].split("-")[0] : +c["@_Period"];
-
+    let startTime: Date | undefined;
+    let endTime: Date | undefined;
+    for (const s of todaySchedule) {
+      if (s["@_SectionGU"] == c["@_SectionGU"]) {
+        if (s["@_StartDate"]) startTime ||= new Date(s["@_StartDate"]);
+        if (s["@_EndDate"]) endTime = new Date(s["@_EndDate"]);
+      }
+    }
     return {
       name: simplifyClassName(c["@_CourseTitle"]),
-      period,
+      period: c["@_Period"].includes("-") ? +c["@_Period"].split("-")[0] : +c["@_Period"],
       id: c["@_SectionGU"],
       teacher: c["@_Teacher"],
-      startTime: (timing && timing["@_StartDate"] && new Date(timing["@_StartDate"])) || undefined,
-      endTime: (timing && timing["@_EndDate"] && new Date(timing["@_EndDate"])) || undefined,
+      startTime,
+      endTime,
     };
   });
 
