@@ -3,6 +3,6 @@
   import App from "./App.svelte";
 </script>
 
-<Monoidentity app="secant" scopes={["login-recognized", "storage"]}>
+<Monoidentity app="secant" intents={[{ loginRecognized: true }]}>
   <App />
 </Monoidentity>
