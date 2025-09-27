@@ -19,7 +19,7 @@
     "devalue": "^5.3.2",
     "fast-xml-parser": "^5.2.5",
     "m3-svelte": "^5.7.3",
-    "monoidentity": "^0.6.1",
+    "monoidentity": "^0.7.0",
     "monoserve": "^2.1.5",
     "prettier": "^3.6.2",
     "prettier-plugin-svelte": "^3.4.0",

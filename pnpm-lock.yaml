@@ -34,8 +34,8 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
       monoidentity:
-        specifier: ^0.6.1
-        version: 0.6.1(svelte@5.39.6)
+        specifier: ^0.7.0
+        version: 0.7.0(svelte@5.39.6)
       monoserve:
         specifier: ^2.1.5
         version: 2.1.5(devalue@5.3.2)(vite@7.1.7)
@@ -617,8 +617,8 @@ packages:
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
-  monoidentity@0.6.1:
-    resolution: {integrity: sha512-uRlbM8qK3KKvycaTMek4pX6C6P6eanP5oLOY89K6VKA55kfH7l93/m7f71ZVtpDXK1B6KAr7izKfvtsx1zhfBQ==}
+  monoidentity@0.7.0:
+    resolution: {integrity: sha512-xOuls3DNuPc2GCbFDbQn8aSnkXBxp4N6adCK9XVQIC7bLUFlwpH89mJHLWe20jRDhso7y4fN0Np05xvhgsnuow==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1204,7 +1204,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  monoidentity@0.6.1(svelte@5.39.6):
+  monoidentity@0.7.0(svelte@5.39.6):
     dependencies:
       devalue: 5.3.2
       idb: 8.0.3
