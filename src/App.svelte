@@ -5,6 +5,7 @@
   import iconRight from "@ktibow/iconset-material-symbols/chevron-right-rounded";
   import iconDown from "@ktibow/iconset-material-symbols/keyboard-arrow-down-rounded";
   import iconUp from "@ktibow/iconset-material-symbols/keyboard-arrow-up-rounded";
+  import { triangleSquare } from "kreations";
   import { trackCachedAuto } from "./lib/data-tracking";
   import { now } from "./lib/utils-now.svelte";
   import { ordinal } from "./lib/ordinal";
@@ -102,6 +103,8 @@
       <Icon icon={iconRight} />
     </button>
   </div>
+{:else if $schedule.loading || $grades.loading}
+  <Icon icon={triangleSquare} size={48} style="margin:auto" />
 {/if}
 {#if gradeShown}
   <div class="grade-details tnum" transition:slide={{ duration: 500, easing: easeEmphasized }}>
