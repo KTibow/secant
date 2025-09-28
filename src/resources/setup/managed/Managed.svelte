@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, Icon } from "m3-svelte";
-  import { m3Indicator } from "kreations";
+  import { onward } from "kreations";
   import { onMount } from "svelte";
   import { decode, retrieveVerification } from "monoidentity";
   import { save } from "../save";
@@ -33,7 +33,7 @@
 {#if schoologyLink}
   <Button href={schoologyLink} style="margin:auto">Connect quick links</Button>
 {:else if isLoading}
-  <Icon icon={m3Indicator} size={48} style="margin:auto" />
+  <Icon icon={onward} size={48} style="margin:auto" />
 {:else}
   <p style:margin="auto">Something went wrong</p>
 {/if}

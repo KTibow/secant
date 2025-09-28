@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon } from "m3-svelte";
-  import { m3Indicator } from "kreations";
+  import { onward } from "kreations";
   import { onMount } from "svelte";
   import exchange from "./exchange.remote";
   import { save } from "../../src/resources/setup/save";
@@ -27,7 +27,7 @@
 </script>
 
 {#if !errored}
-  <Icon icon={m3Indicator} size={48} style="margin:auto" />
+  <Icon icon={onward} size={48} style="margin:auto" />
 {:else}
   <p style:margin="auto">Something went wrong</p>
 {/if}
