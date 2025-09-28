@@ -17,7 +17,7 @@
   import Grades from "./grades/Index.svelte";
 
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
-  const grades = trackCachedAuto({ id: "grades", loader: getGrades });
+  const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
   let classes = $derived(combine($schedule.data, $grades.data));
 
   let truePeriod = $derived(
