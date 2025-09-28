@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getStorage } from "monoidentity";
-  import Setup from "./setup/Index.svelte";
-  import ClassLayer from "./ClassLayer.svelte";
   import type { Class } from "../combine";
+  import Setup from "./setup/Index.svelte";
+  import ResourcesFetcher from "./ResourcesFetcher.svelte";
 
   let { clazz }: { clazz: Class | undefined } = $props();
   const getAuth = () => getStorage("config").schoology;
@@ -13,6 +13,6 @@
 
 {#if !auth}
   <Setup finish={() => (auth = getAuth())} />
-{:else if clazzId && auth}
-  <ClassLayer {clazzId} {completedAssignments} {auth} />
+{:else if auth && clazzId}
+  <ResourcesFetcher {clazzId} {completedAssignments} {auth} />
 {/if}

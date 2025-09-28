@@ -5,7 +5,6 @@
   import iconRight from "@ktibow/iconset-material-symbols/chevron-right-rounded";
   import iconDown from "@ktibow/iconset-material-symbols/keyboard-arrow-down-rounded";
   import iconUp from "@ktibow/iconset-material-symbols/keyboard-arrow-up-rounded";
-  import { triangleSquare } from "kreations";
   import { trackCachedAuto } from "./lib/data-tracking";
   import { now } from "./lib/utils-now.svelte";
   import { ordinal } from "./lib/ordinal";
@@ -13,8 +12,9 @@
   import { getGrades } from "./grades";
   import { recalculateGrade, roundTo } from "./grades/lib/utils";
   import { getSchedule } from "./schedule";
-  import Resources from "./resources/AuthLayer.svelte";
+  import Resources from "./resources/Index.svelte";
   import Grades from "./grades/Index.svelte";
+  import Loader from "./lib/Loader.svelte";
 
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
   const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
@@ -45,7 +45,9 @@
   let gradeShown = $derived(gradeOpen ? grade : undefined);
 </script>
 
-<Resources {clazz} />
+<div class="resources">
+  <Resources {clazz} />
+</div>
 {#if clazz}
   {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
   {@const nextClass = classes.find((c) => c.period > clazz.period)}
@@ -103,13 +105,14 @@
       <Icon icon={iconRight} />
     </button>
   </div>
-{:else if $schedule.loading || $grades.loading}
-  <Icon icon={triangleSquare} size={48} style="margin:auto" />
 {/if}
 {#if gradeShown}
   <div class="grade-details tnum" transition:slide={{ duration: 500, easing: easeEmphasized }}>
     <Grades {...gradeShown} />
   </div>
+{/if}
+{#if $schedule.loading || $grades.loading}
+  <Loader />
 {/if}
 
 <style>
@@ -126,6 +129,13 @@
     color: rgb(var(--m3-scheme-on-primary-container-subtle));
   }
 
+  .resources {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
   .controls {
     display: flex;
     height: 3rem;

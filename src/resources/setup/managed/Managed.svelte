@@ -31,9 +31,9 @@
 </script>
 
 {#if schoologyLink}
-  <Button href={schoologyLink} style="margin:auto">Connect quick links</Button>
+  <Button href={schoologyLink}>Connect quick links</Button>
 {:else if isLoading}
-  <Icon icon={onward} size={48} style="margin:auto" />
+  <Icon icon={onward} size={48} />
 {:else}
-  <p style:margin="auto">Something went wrong</p>
+  <p>Something went wrong</p>
 {/if}

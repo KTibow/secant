@@ -2,7 +2,7 @@
   import iconDone from "@ktibow/iconset-material-symbols/done-all-rounded";
   import iconExternal from "@ktibow/iconset-material-symbols/arrow-outward-rounded";
   import iconTest from "@ktibow/iconset-material-symbols/task-alt-rounded";
-  import { Button, Icon, Layer } from "m3-svelte";
+  import { Button, Icon } from "m3-svelte";
   import type { ResourceData } from "./loader.remote";
   let {
     resources,
@@ -68,7 +68,7 @@
     display: flex;
     gap: 1rem;
     align-items: center;
-    margin: auto;
+    margin-block: auto;
     > :global(svg) {
       color: rgb(var(--m3-scheme-secondary));
     }
@@ -89,10 +89,11 @@
   .resources {
     display: flex;
     flex-wrap: wrap;
-    flex: 1 1 0;
     overflow: hidden;
     gap: 0.5rem;
     padding: 0.5rem;
+    align-self: stretch;
+    flex: 1 1 0;
   }
   .resource {
     display: flex;

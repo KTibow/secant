@@ -28,7 +28,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    margin: auto;
+    margin-block: auto;
   }
   .disclosure {
     text-align: center;

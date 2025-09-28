@@ -9,16 +9,13 @@
   let secret = $state("");
   let secretEl: HTMLInputElement | undefined = $state();
 
-  const focus = (node: HTMLInputElement) => {
-    node.focus();
-  };
   const submit = async () => {
     await save({ token: { key, secret }, appToken: "token" }, true);
     finish();
   };
 </script>
 
-<div class="center">
+<div class="group">
   <a class="m3-font-body-medium" href="https://nsd.schoology.com/api" target="_blank">
     <Icon icon={iconExternal} size={20} />
     Get key
@@ -41,11 +38,10 @@
 </div>
 
 <style>
-  .center {
+  .group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: auto;
   }
   a {
     display: flex;

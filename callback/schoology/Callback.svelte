@@ -4,7 +4,6 @@
   import { onMount } from "svelte";
   import exchange from "./exchange.remote";
   import { save } from "../../src/resources/setup/save";
-  import { decode } from "monoidentity";
 
   let errored = $state(false);
 
@@ -27,7 +26,7 @@
 </script>
 
 {#if !errored}
-  <Icon icon={onward} size={48} style="margin:auto" />
+  <Icon icon={onward} size={48} />
 {:else}
-  <p style:margin="auto">Something went wrong</p>
+  <p>Something went wrong</p>
 {/if}
