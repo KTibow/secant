@@ -15,7 +15,7 @@
     const verification = await retrieveVerification();
     const auth = await autoAuth(verification);
     if (auth) {
-      await save(auth);
+      save(auth);
       finish();
     } else {
       const requestAuth = await start();

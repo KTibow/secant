@@ -1,26 +1,31 @@
-import { homedir } from "os";
-import { readFile } from "node:fs/promises";
+import { rolldown } from "rolldown";
 
-let out = {};
+const bundle = await rolldown({
+  input: "./scripts/gather-users-inner.ts",
+  plugins: [
+    {
+      name: "virtual",
+      resolveId(id) {
+        if (id == "$env/static/private") return id;
+      },
+      async load(id) {
+        if (id == "$env/static/private") {
+          let js = "";
+          // @ts-expect-error not used to node
+          for (const [key, value] of Object.entries(process.env)) {
+            if (!/^[A-Z0-9_]+$/.test(key)) continue;
+            js += `export const ${key} = ${JSON.stringify(value)};\n`;
+          }
 
-let source1 = await readFile(
-  `${homedir()}/Downloads/db_cluster-15-12-2023@15-04-16.backup`,
-  "utf8",
-);
-source1 = source1.split(/COPY public\.schoology_users.+/)[1];
-source1 = source1.split(/^\\\.$/m)[0];
-source1 = source1.trim();
-for (const line of source1.split("\n")) {
-  const [_, key, secret, email] = line.split("\t");
-  out[email] = { token: { key, secret }, appToken: "a1" };
-}
+          return js;
+        }
+      },
+    },
+  ],
+});
+await bundle.write({
+  file: "/tmp/gather-users.js",
+});
 
-let source2 = await readFile(`${homedir()}/Downloads/legacy_sc_users_rows.csv`, "utf8");
-source2 = source2.split("\n").slice(1).join("\n").trim();
-for (const line of source2.split("\n")) {
-  const [email, key, secret] = line.split(",");
-  out[email] = { token: { key, secret }, appToken: "75" };
-}
-
-console.log(JSON.stringify(out));
-console.warn(Object.keys(out).length);
+// @ts-expect-error unknown file
+await import("/tmp/gather-users.js");

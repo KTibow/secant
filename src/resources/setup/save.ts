@@ -1,18 +1,7 @@
-import { encode, getStorage } from "monoidentity";
-import type { AuthBase } from "../../lib/api/schoology";
-import getId from "./get-id.remote";
+import { getStorage } from "monoidentity";
+import type { FullAuth } from "../../lib/api/schoology";
 
-export const save = async (auth: AuthBase, shouldEncode = false) => {
-  const encodedAuth = { ...auth };
-  if (shouldEncode) {
-    encodedAuth.token = {
-      key: encode(auth.token.key),
-      secret: encode(auth.token.secret),
-    };
-  }
-  const { id } = await getId(encodedAuth);
-  const fullAuth = { ...encodedAuth, userId: id };
-
+export const save = (auth: FullAuth) => {
   const storage = getStorage("config");
-  storage.schoology = fullAuth;
+  storage.schoology = auth;
 };

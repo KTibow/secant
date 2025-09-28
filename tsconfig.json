@@ -15,7 +15,8 @@
     "allowJs": true,
     "checkJs": true,
     "isolatedModules": true,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "noUnusedLocals": true
   },
   "include": ["src/**/*", "callback/**/*"]
 }

@@ -10,7 +10,7 @@
   const run = async () => {
     const requestAuth = JSON.parse(sessionStorage.requestAuth);
     const auth = await exchange(requestAuth);
-    await save(auth);
+    save(auth);
     location.href = location.origin;
   };
   onMount(() =>

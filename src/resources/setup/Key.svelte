@@ -2,6 +2,9 @@
   import iconExternal from "@ktibow/iconset-material-symbols/arrow-outward-rounded";
   import { Icon } from "m3-svelte";
   import { save } from "./save";
+  import getId from "./get-id.remote";
+  import type { AuthBase } from "../../lib/api/schoology";
+  import { encode } from "monoidentity";
 
   let { finish }: { finish: () => void } = $props();
 
@@ -10,7 +13,16 @@
   let secretEl: HTMLInputElement | undefined = $state();
 
   const submit = async () => {
-    await save({ token: { key, secret }, appToken: "token" }, true);
+    // Encode
+    const keyEncoded = encode(key);
+    const secretEncoded = encode(secret);
+    const authBase: AuthBase = {
+      token: { key: keyEncoded, secret: secretEncoded },
+      appToken: "token",
+    };
+    // Enrich
+    const { id } = await getId(authBase);
+    save({ ...authBase, userId: id });
     finish();
   };
 </script>

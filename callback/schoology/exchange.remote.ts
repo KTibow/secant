@@ -1,5 +1,5 @@
 import { fn } from "monoserve";
-import { authBase, createSchoology, type AuthBase } from "../../src/lib/api/schoology";
+import { authBase, createSchoology, type FullAuth } from "../../src/lib/api/schoology";
 import { encode } from "monoidentity";
 
 export default fn(authBase, async (auth) => {
@@ -12,8 +12,11 @@ export default fn(authBase, async (auth) => {
     secret: encode(tokenData.get("oauth_token_secret")!),
   };
 
+  const me = await schoology(new Request("https://api.schoology.com/v1/users/me"));
+
   return {
     token,
     appToken: "75",
-  } satisfies AuthBase;
+    userId: me.id,
+  } satisfies FullAuth;
 });
