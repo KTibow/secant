@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Switch } from "m3-svelte";
-  import Managed from "./Managed.svelte";
+  import Managed from "./managed/Managed.svelte";
   import Key from "./Key.svelte";
 
   let { finish }: { finish: () => void } = $props();
@@ -17,7 +17,7 @@
     <button class="link" onclick={() => (page = "key")}>provide API keys instead</button>.
   </p>
 {:else if page == "managed"}
-  <Managed />
+  <Managed {finish} />
 {:else if page == "key"}
   <Key {finish} />
 {/if}

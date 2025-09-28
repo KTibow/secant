@@ -1,17 +1,17 @@
 import { intersect, literal, number, object, string, union, type InferOutput } from "valibot";
 import { decode } from "monoidentity";
-import { SC_KEY_A1, SC_SECRET_A1 } from "$env/static/private";
+import { SC_KEY_A1, SC_SECRET_A1, SC_KEY_75, SC_SECRET_75 } from "$env/static/private";
 
 const tokenSchema = object({ key: string(), secret: string() });
 export const authBase = object({
   token: tokenSchema,
-  appToken: union([literal("token"), literal("a1")]),
+  appToken: union([literal("token"), literal("a1"), literal("75")]),
 });
 export const fullAuth = intersect([authBase, object({ userId: number() })]);
 export type AuthBase = InferOutput<typeof authBase>;
 export type FullAuth = InferOutput<typeof fullAuth>;
 
-const internalCreateSchoology = (
+export const internalCreateSchoology = (
   appKey: string,
   appSecret: string,
   userKey?: string,
@@ -76,19 +76,20 @@ const internalCreateSchoology = (
     const signature = await sign(req.method, baseUrl, params, userSecret ?? "");
     params.oauth_signature = signature;
 
-    const authHeader =
+    const headers: Record<string, string> = {};
+    headers.authorization =
       "OAuth " +
       Object.keys(params)
         .map((key) => `${key}="${encodeURIComponent(params[key])}"`)
         .join(", ");
+    if (req.body) {
+      headers["content-type"] = "application/json";
+    }
 
     const response = await fetch(req.url, {
       method: req.method,
       body: req.body,
-      headers: {
-        Authorization: authHeader,
-        "Content-Type": "application/json",
-      },
+      headers,
       redirect: "manual",
     });
 
@@ -125,6 +126,11 @@ export const createSchoology = (auth: AuthBase) => {
   } else if (auth.appToken == "a1") {
     appKey = SC_KEY_A1;
     appSecret = SC_SECRET_A1;
+    userKey = key;
+    userSecret = secret;
+  } else if (auth.appToken == "75") {
+    appKey = SC_KEY_75;
+    appSecret = SC_SECRET_75;
     userKey = key;
     userSecret = secret;
   } else {

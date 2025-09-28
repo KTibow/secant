@@ -20,6 +20,9 @@ jobs:
         env:
           SC_KEY_A1: ${{ secrets.SC_KEY_A1 }}
           SC_SECRET_A1: ${{ secrets.SC_SECRET_A1 }}
+          SC_KEY_75: ${{ secrets.SC_KEY_75 }}
+          SC_SECRET_75: ${{ secrets.SC_SECRET_75 }}
+          SC_KNOWN_TOKENS: ${{ secrets.SC_KNOWN_TOKENS }}
       - name: Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

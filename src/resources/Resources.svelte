@@ -16,7 +16,7 @@
 {#if resources.every((r) => completedAssignments.includes(r.title))}
   <div class="zen m3-font-headline-large">
     {#if resources.length}
-      <Icon icon={iconDone} width="2.5rem" height="2.5rem" />
+      <Icon icon={iconDone} size={40} />
       In zen
     {:else}
       In emptiness

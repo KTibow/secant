@@ -13,14 +13,14 @@
     node.focus();
   };
   const submit = async () => {
-    await save({ token: { key, secret }, appToken: "token" });
+    await save({ token: { key, secret }, appToken: "token" }, true);
     finish();
   };
 </script>
 
 <div class="center">
   <a class="m3-font-body-medium" href="https://nsd.schoology.com/api" target="_blank">
-    <Icon icon={iconExternal} width="1.25rem" height="1.25rem" />
+    <Icon icon={iconExternal} size={20} />
     Get key
   </a>
   <!-- svelte-ignore a11y_autofocus -->

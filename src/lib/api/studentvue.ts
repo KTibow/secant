@@ -19,8 +19,8 @@ export default async (name: string, params: Record<string, string> = {}) => {
   if (!district) {
     throw new Error("Unknown district");
   }
-  const host = district.apps.find((a) => a.app == "StudentVue")?.host;
-  if (!host) {
+  const base = district.apps.find((a) => a.app == "StudentVue")?.base;
+  if (!base) {
     throw new Error("District does not use StudentVue");
   }
 
@@ -38,16 +38,13 @@ export default async (name: string, params: Record<string, string> = {}) => {
       .join("")}</Parms>`,
   });
 
-  const response = await fetch(
-    `https://${host}/Service/PXPCommunication.asmx/ProcessWebServiceRequest`,
-    {
-      method: "POST",
-      body: request,
-      headers: {
-        "content-type": "application/x-www-form-urlencoded",
-      },
+  const response = await fetch(`${base}/Service/PXPCommunication.asmx/ProcessWebServiceRequest`, {
+    method: "POST",
+    body: request,
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
     },
-  );
+  });
   const dataWrap = await response.text();
   const data = dataWrap
     .split(`<string xmlns="http://edupoint.com/webservices/">`)[1]
