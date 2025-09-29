@@ -21,9 +21,13 @@ const processAssignment = (assignment: any, courseId: string) => {
   if (text) {
     text = text.replace(/^HW #\d+ /, "");
     text = text.replace(/^\(\d+\.\d+\)\s/, "");
+    text = text.replace(/^\(\d+\.\d+ and \d+\.\d+\)\s/, "");
     text = text.replace(/^Read \d+-\d+\n/, "");
-    if (text.includes("Do")) {
-      text = text.slice(text.indexOf("Do"));
+    if (text.includes("Do ")) {
+      text = text.slice(text.indexOf("Do "));
+    }
+    if (text.includes("DO ")) {
+      text = text.slice(text.indexOf("DO "));
     }
   }
   return {
