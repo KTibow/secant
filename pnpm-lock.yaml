@@ -34,8 +34,8 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(svelte@5.39.6)
       m3-svelte:
-        specifier: ^5.8.0
-        version: 5.8.0
+        specifier: ^5.9.0
+        version: 5.9.0
       monoidentity:
         specifier: ^0.9.0
         version: 0.9.0(svelte@5.39.6)(typescript@5.9.2)
@@ -714,8 +714,8 @@ packages:
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
 
-  m3-svelte@5.8.0:
-    resolution: {integrity: sha512-r31h5/faRS07CMK8DL/DmcRuwSS8Nmkuo6OZqvShoHssAqhepZt4rrQqDZuadU48DeNq+Qif3g9jhIznrc8vTw==}
+  m3-svelte@5.9.0:
+    resolution: {integrity: sha512-eanTP+vmCIoIyLQfP2XM88qU6vcgjR52ai1h1f8LXlvSm3FA6haZUyimdvMfBfb+1+yhTYz6LMDKr3ot/lpC9Q==}
 
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
@@ -1356,7 +1356,7 @@ snapshots:
 
   locate-character@3.0.0: {}
 
-  m3-svelte@5.8.0:
+  m3-svelte@5.9.0:
     dependencies:
       '@iconify/types': 2.0.0
       '@ktibow/iconset-material-symbols': 0.0.1758086573

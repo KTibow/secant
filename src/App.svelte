@@ -151,12 +151,6 @@
         color var(--m3-util-easing),
         border-radius var(--m3-util-easing-fast);
       border-radius: var(--m3-util-rounding-medium);
-      &::before {
-        /* square hitbox, todo/deprecated: once m3 svelte layer adds square hitbox we can remove this */
-        content: "";
-        position: absolute;
-        inset: 0;
-      }
       &.active {
         --fade-color: var(--m3-scheme-tertiary-container-subtle);
         color: rgb(var(--m3-scheme-on-tertiary-container-subtle));
