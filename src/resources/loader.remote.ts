@@ -45,27 +45,24 @@ const processAssignment = (assignment: any, courseId: string) => {
   };
 };
 const processResources = (assignments: any[], courseId: string, todayRegex: RegExp) => {
+  assignments = assignments.filter((a: any) => a.description || a.due || a.grading_category);
+  assignments.sort((a: any, b: any) => {
+    const isAToday = todayRegex.test(a.title);
+    const isBToday = todayRegex.test(b.title);
+    if (isAToday && !isBToday) return -1;
+    if (!isAToday && isBToday) return 1;
+    return +b.last_updated - +a.last_updated;
+  });
+  assignments = assignments.slice(0, 8);
   const links = [
     {
       title: "Schoology",
       url: `https://nsd.schoology.com/course/${courseId}/materials`,
     },
   ];
-  const resources = assignments
-    .filter((a: any) => a.description || a.due || a.grading_category)
-    .sort((a: any, b: any) => {
-      const isAToday = todayRegex.test(a.title);
-      const isBToday = todayRegex.test(b.title);
-      if (isAToday && !isBToday) return -1;
-      if (!isAToday && isBToday) return 1;
-      return +b.last_updated - +a.last_updated;
-    })
-    .map((a) => processAssignment(a, courseId))
-    .slice(0, 8);
-
   return {
     links,
-    resources,
+    resources: assignments.map((a) => processAssignment(a, courseId)),
   };
 };
 export type ResourceData = ReturnType<typeof processResources>;
