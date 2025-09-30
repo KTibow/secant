@@ -4,15 +4,22 @@
   import Setup from "./setup/Index.svelte";
   import ResourcesFetcher from "./ResourcesFetcher.svelte";
 
-  let { clazz }: { clazz: Class | undefined } = $props();
+  let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
   const getAuth = () => getStorage("config").schoology;
   let auth = $state(getAuth());
-  let clazzId = $derived(clazz?.id);
-  let completedAssignments = $derived(clazz?.grade?.assignments.map((a) => a.name) || []);
+  let classPeriod = $derived(clazz?.period);
+  let classId = $derived(clazz?.id);
+  let allGraded = $derived.by(() => {
+    const output: Record<number, string[]> = {};
+    for (const period in classes) {
+      output[period] = classes[period].grade?.assignments.map((a) => a.name);
+    }
+    return output;
+  });
 </script>
 
 {#if !auth}
   <Setup finish={() => (auth = getAuth())} />
-{:else if auth && clazzId}
-  <ResourcesFetcher {clazzId} {completedAssignments} {auth} />
+{:else}
+  <ResourcesFetcher {classPeriod} {classId} {allGraded} {auth} />
 {/if}

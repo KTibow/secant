@@ -35,5 +35,5 @@ export const combine = (schedule?: Class[], grades?: ClassGrade[]) => {
       output[grade.period].grade = grade;
     }
   }
-  return Object.values(output).sort((a, b) => a.period - b.period);
+  return output;
 };

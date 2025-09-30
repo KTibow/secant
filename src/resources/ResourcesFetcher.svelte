@@ -6,17 +6,19 @@
   import Loader from "../lib/Loader.svelte";
 
   let {
-    clazzId,
-    completedAssignments,
+    classPeriod,
+    classId,
+    allGraded,
     auth,
-  }: { clazzId: string; completedAssignments: string[]; auth: FullAuth } = $props();
+  }: { classPeriod?: number; classId?: string; allGraded: Record<number, string[]>; auth: FullAuth } = $props();
 
   const resources = trackCachedAuto({
     id: "resources",
     loader: () => loader(auth),
     expireAfter: 1000 * 60 * 10,
   });
-  let classResources = $derived.by(() => $resources.data?.[clazzId]);
+  let classResources = $derived($resources.data?.[classId]);
+  let completedAssignments = $derived(allGraded[classPeriod] || []);
 </script>
 
 {#if classResources}

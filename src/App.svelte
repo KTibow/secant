@@ -19,9 +19,10 @@
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
   const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
   let classes = $derived(combine($schedule.data, $grades.data));
+  let classesList = $derived(Object.values(classes).sort((a, b) => a.period - b.period));
 
   let truePeriod = $derived(
-    classes?.find((c) => {
+    classesList.find((c) => {
       if (!c.startTime || !c.endTime) return false;
       const time = now.getTime();
       const startTime = c.startTime.getTime();
@@ -39,18 +40,18 @@
   });
 
   let period = $state(1);
-  let clazz = $derived(classes.find((c) => c.period == period));
+  let clazz = $derived(classes[period]);
   let grade = $derived(clazz?.grade);
   let gradeOpen = $state(false);
   let gradeShown = $derived(gradeOpen ? grade : undefined);
 </script>
 
 <div class="resources">
-  <Resources {clazz} />
+  <Resources {classes} {clazz} />
 </div>
 {#if clazz}
-  {@const prevClass = classes.findLast((c) => c.period < clazz.period)}
-  {@const nextClass = classes.find((c) => c.period > clazz.period)}
+  {@const prevClass = classesList.findLast((c) => c.period < clazz.period)}
+  {@const nextClass = classesList.find((c) => c.period > clazz.period)}
   {@const active = clazz.period == truePeriod}
   {#snippet content()}
     <div class="content">
