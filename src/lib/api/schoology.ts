@@ -89,6 +89,8 @@ export const internalCreateSchoology = (
     const response = await fetch(req.url, {
       method: req.method,
       body: req.body,
+      // @ts-expect-error duplex def is wrong
+      duplex: "half",
       headers,
       redirect: "manual",
     });

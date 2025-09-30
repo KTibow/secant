@@ -75,16 +75,27 @@ const loadSections = async (
   todayRegex: RegExp,
 ) => {
   const output: Record<string, ReturnType<typeof processResources>> = {};
-  await Promise.all(
-    sections.map(async ({ id, section_school_code, course_title }) => {
-      const assignments = await schoology(
-        new Request(
-          `https://api.schoology.com/v1/sections/${id}/assignments?limit=100&with_attachments=1`,
-        ),
-      );
-      output[section_school_code] = processResources(assignments.assignment, id, todayRegex);
+
+  if (sections.length == 0) return output;
+
+  const body = {
+    request: sections.map(
+      ({ id }) => `/v1/sections/${id}/assignments?limit=100&with_attachments=1`,
+    ),
+  };
+  const mgResponse: { response: { body: { assignment: any[] } }[] } = await schoology(
+    new Request(`https://api.schoology.com/v1/multiget`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
     }),
   );
+
+  mgResponse.response.forEach(({ body: { assignment: assignments } }, idx) => {
+    const { section_school_code, id } = sections[idx];
+    output[section_school_code] = processResources(assignments, id, todayRegex);
+  });
+
   return output;
 };
 
