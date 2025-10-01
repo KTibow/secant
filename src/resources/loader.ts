@@ -34,7 +34,7 @@ export default async (auth: FullAuth) => {
 
   const cache = getStorage("cache");
 
-  const predSections = cache["schoology-sections"];
+  const predSections = cache["schoology-sections"] || [];
   const { resources, sections } = await remote({ auth, predSections, todayRegex });
   cache["schoology-sections"] = sections;
 
