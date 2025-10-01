@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { FullAuth } from "../lib/api/schoology";
   import { trackCachedAuto } from "../lib/data-tracking";
+  import Viz from "../lib/Viz.svelte";
   import loader from "./loader";
   import Resources from "./Resources.svelte";
-  import Loader from "../lib/Loader.svelte";
 
   let {
     classPeriod,
@@ -29,6 +29,4 @@
 {#if classResources}
   <Resources {...classResources} {completedAssignments} />
 {/if}
-{#if $resources.loading}
-  <Loader />
-{/if}
+<Viz loading={$resources.loading} errored={Boolean($resources.errors.length)} />

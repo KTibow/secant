@@ -14,7 +14,7 @@
   import { getSchedule } from "./schedule";
   import Resources from "./resources/Index.svelte";
   import Grades from "./grades/Index.svelte";
-  import Loader from "./lib/Loader.svelte";
+  import Viz from "./lib/Viz.svelte";
 
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
   const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
@@ -112,9 +112,10 @@
     <Grades {...gradeShown} />
   </div>
 {/if}
-{#if $schedule.loading || $grades.loading}
-  <Loader />
-{/if}
+<Viz
+  loading={$schedule.loading || $grades.loading}
+  errored={Boolean($schedule.errors.length || $grades.errors.length)}
+/>
 
 <style>
   :global(.fade) {
