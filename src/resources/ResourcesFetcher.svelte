@@ -10,15 +10,20 @@
     classId,
     allGraded,
     auth,
-  }: { classPeriod?: number; classId?: string; allGraded: Record<number, string[]>; auth: FullAuth } = $props();
+  }: {
+    classPeriod?: number;
+    classId?: string;
+    allGraded: Record<number, string[]>;
+    auth: FullAuth;
+  } = $props();
 
   const resources = trackCachedAuto({
     id: "resources",
     loader: () => loader(auth),
     expireAfter: 1000 * 60 * 10,
   });
-  let classResources = $derived($resources.data?.[classId]);
-  let completedAssignments = $derived(allGraded[classPeriod] || []);
+  let completedAssignments = $derived((classPeriod && allGraded[classPeriod]) || []);
+  let classResources = $derived(classId && $resources.data?.[classId]);
 </script>
 
 {#if classResources}

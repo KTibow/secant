@@ -12,7 +12,9 @@
   let allGraded = $derived.by(() => {
     const output: Record<number, string[]> = {};
     for (const period in classes) {
-      output[period] = classes[period].grade?.assignments.map((a) => a.name);
+      const { grade } = classes[period];
+      if (!grade) continue;
+      output[period] = grade.assignments.map((a) => a.name);
     }
     return output;
   });
