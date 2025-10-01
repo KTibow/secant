@@ -13,7 +13,7 @@
   } = $props();
 </script>
 
-{#if resources.every((r) => completedAssignments.includes(r.title))}
+{#if resources.every((r) => completedAssignments.includes(r.title) || r.submitted)}
   <div class="zen m3-font-headline-large">
     {#if resources.length}
       <Icon icon={iconDone} size={40} />
@@ -41,12 +41,13 @@
         </div>
       </a>
     {/each}
-    {#each resources.slice(0, 8) as { icon, title, url, text }}
+    {#each resources.slice(0, 8) as { icon, title, url, text, submitted }}
       <a
         href={url}
         target="_blank"
         class="resource m3-font-headline-large"
-        class:gray={completedAssignments.includes(title)}
+        class:graded={completedAssignments.includes(title)}
+        class:submitted={!completedAssignments.includes(title) && submitted}
       >
         {#if icon == "test"}
           <Icon icon={iconTest} />
@@ -108,12 +109,15 @@
       background-color: rgb(var(--m3-scheme-secondary-container-subtle));
       color: rgb(var(--m3-scheme-on-secondary-container-subtle));
     }
-    &.gray {
-      flex-grow: 1;
+    &.graded {
       background-color: transparent;
       color: rgb(var(--m3-scheme-on-surface) / 0.38);
       outline: solid 2px rgb(var(--m3-scheme-outline-variant));
       outline-offset: -2px;
+    }
+    &.submitted {
+      background-color: rgb(var(--m3-scheme-on-surface) / 0.08);
+      color: rgb(var(--m3-scheme-on-surface) / 0.38);
     }
   }
   .content-a,

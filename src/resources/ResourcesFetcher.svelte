@@ -6,23 +6,21 @@
   import Resources from "./Resources.svelte";
 
   let {
-    classPeriod,
     classId,
     allGraded,
     auth,
   }: {
-    classPeriod?: number;
     classId?: string;
-    allGraded: Record<number, string[]>;
+    allGraded: Record<string, string[]>;
     auth: FullAuth;
   } = $props();
 
   const resources = trackCachedAuto({
     id: "resources",
-    loader: () => loader(auth),
+    loader: () => loader(auth, allGraded),
     expireAfter: 1000 * 60 * 10,
   });
-  let completedAssignments = $derived((classPeriod && allGraded[classPeriod]) || []);
+  let completedAssignments = $derived((classId && allGraded[classId]) || []);
   let classResources = $derived(classId && $resources.data?.[classId]);
 </script>
 

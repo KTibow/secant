@@ -7,14 +7,13 @@
   let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
   const getAuth = () => getStorage("config").schoology;
   let auth = $state(getAuth());
-  let classPeriod = $derived(clazz?.period);
   let classId = $derived(clazz?.id);
   let allGraded = $derived.by(() => {
-    const output: Record<number, string[]> = {};
+    const output: Record<string, string[]> = {};
     for (const period in classes) {
-      const { grade } = classes[period];
-      if (!grade) continue;
-      output[period] = grade.assignments.map((a) => a.name);
+      const { grade, id } = classes[period];
+      if (!grade || !id) continue;
+      output[id] = grade.assignments.map((a) => a.name);
     }
     return output;
   });
@@ -23,5 +22,5 @@
 {#if !auth}
   <Setup finish={() => (auth = getAuth())} />
 {:else}
-  <ResourcesFetcher {classPeriod} {classId} {allGraded} {auth} />
+  <ResourcesFetcher {classId} {allGraded} {auth} />
 {/if}

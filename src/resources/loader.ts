@@ -2,7 +2,7 @@ import { getStorage } from "monoidentity";
 import type { FullAuth } from "../lib/api/schoology";
 import remote from "./loader.remote";
 
-export default async (auth: FullAuth) => {
+export default async (auth: FullAuth, skipSubmittedCheck: Record<string, string[]>) => {
   const pacificDate = new Date().toLocaleDateString(undefined, {
     timeZone: "America/Los_Angeles",
     month: "numeric",
@@ -35,8 +35,22 @@ export default async (auth: FullAuth) => {
   const cache = getStorage("cache");
 
   const predSections = cache["schoology-sections"] || [];
-  const { resources, sections } = await remote({ auth, predSections, todayRegex });
+  const predSubmitted = cache["schoology-submitted"] || [];
+
+  const { resources, sections } = await remote({
+    auth,
+    predSections,
+    predSubmitted,
+    skipSubmittedCheck,
+    todayRegex,
+  });
+
   cache["schoology-sections"] = sections;
+  const submittedCache: Record<string, string[]> = {};
+  for (const id in resources) {
+    submittedCache[id] = resources[id].resources.filter((r) => r.submitted).map((r) => r.title);
+  }
+  cache["schoology-submitted"] = submittedCache;
 
   return resources;
 };

@@ -54,23 +54,69 @@ const processAssignment = (assignment: any, courseId: string) => {
     icon,
     title: assignment.title,
     text,
+    submitted: false,
   };
 };
-const genResources = async (assignments: any[], courseId: string, todayRegex: RegExp) => {
+const genResources = async (
+  assignments: any[],
+  courseId: string,
+  {
+    schoology,
+    uid,
+    predSubmitted,
+    skipSubmittedCheck,
+    todayRegex,
+  }: {
+    schoology: (req: Request) => any;
+    uid: number;
+    predSubmitted: string[];
+    skipSubmittedCheck: string[];
+    todayRegex: RegExp;
+  },
+) => {
   assignments = filterAssignments(assignments, todayRegex);
-  return {
-    links: [
-      {
-        title: "Schoology",
-        url: `https://nsd.schoology.com/course/${courseId}/materials`,
-      },
-    ],
-    resources: assignments.map((a) => processAssignment(a, courseId)),
-  };
+
+  const links = [
+    {
+      title: "Schoology",
+      url: `https://nsd.schoology.com/course/${courseId}/materials`,
+    },
+  ];
+  const resources = assignments.map((a) => processAssignment(a, courseId));
+  await Promise.all(
+    assignments.map(async (assignment) => {
+      const resource = resources.find((r) => r.title == assignment.title);
+      if (!resource) return;
+
+      if (skipSubmittedCheck.includes(assignment.title)) {
+        return;
+      }
+      if (predSubmitted.includes(assignment.title)) {
+        resource.submitted = true;
+        return;
+      }
+      if (assignment.allow_dropbox != "1") {
+        return;
+      }
+      if (new Date(assignment.due).getTime() - Date.now() >= 5 * 24 * 60 * 60 * 1000) {
+        // more than a few days away
+        return;
+      }
+      const { revision: revisions } = await schoology(
+        // uses https://api.schoology.com/v1/sections/{section id}/submissions/{grade item id}/{user id}
+        new Request(
+          `https://api.schoology.com/v1/sections/${courseId}/submissions/${assignment.id}/${uid}`,
+        ),
+      );
+      resource.submitted = revisions.length > 0;
+    }),
+  );
+  return { links, resources };
 };
 export type ResourceData = Awaited<ReturnType<typeof genResources>>;
 const loadSections = async (
   schoology: (req: Request) => any,
+  uid: number,
   {
     sections,
     predSubmitted,
@@ -102,7 +148,13 @@ const loadSections = async (
   await Promise.all(
     responses.map(async ({ body: { assignment: assignments } }, idx) => {
       const { section_school_code, id } = sections[idx];
-      output[section_school_code] = await genResources(assignments, id, todayRegex);
+      output[section_school_code] = await genResources(assignments, id, {
+        schoology,
+        uid,
+        predSubmitted: predSubmitted[section_school_code] || [],
+        skipSubmittedCheck: skipSubmittedCheck[section_school_code] || [],
+        todayRegex,
+      });
     }),
   );
 
@@ -113,36 +165,42 @@ const regexp = custom<RegExp>((input): input is RegExp => input instanceof RegEx
 const schema = object({
   auth: fullAuth,
   predSections: array(section),
-  // predSubmitted: record(string(), array(string())),
-  // skipSubmittedCheck: record(string(), array(string())),
+  predSubmitted: record(string(), array(string())),
+  skipSubmittedCheck: record(string(), array(string())),
   todayRegex: regexp,
 });
-export default fn(schema, async ({ auth, predSections, todayRegex }) => {
-  const predSubmitted: Record<string, string[]> = {};
-  const skipSubmittedCheck: Record<string, string[]> = {}; // Not implemented yet
-  const schoology = createSchoology(auth);
-  const boundLoadSections = (sections: Section[]) =>
-    loadSections(schoology, { sections, predSubmitted, skipSubmittedCheck, todayRegex });
+export default fn(
+  schema,
+  async ({ auth, predSections, predSubmitted, skipSubmittedCheck, todayRegex }) => {
+    const schoology = createSchoology(auth);
+    const boundLoadSections = (sections: Section[]) =>
+      loadSections(schoology, auth.userId, {
+        sections,
+        predSubmitted,
+        skipSubmittedCheck,
+        todayRegex,
+      });
 
-  const outputPromise = boundLoadSections(predSections);
-  const realSections = await schoology(
-    new Request(`https://api.schoology.com/v1/users/${auth.userId}/sections`),
-  ).then(({ section }) =>
-    section
-      .map(({ id, section_school_code, course_title }: Section) => ({
-        id,
-        section_school_code,
-        course_title,
-      }))
-      .filter((s: Section) => s.id && s.section_school_code && s.course_title),
-  );
+    const outputPromise = boundLoadSections(predSections);
+    const realSections = await schoology(
+      new Request(`https://api.schoology.com/v1/users/${auth.userId}/sections`),
+    ).then(({ section }) =>
+      section
+        .map(({ id, section_school_code, course_title }: Section) => ({
+          id,
+          section_school_code,
+          course_title,
+        }))
+        .filter((s: Section) => s.id && s.section_school_code && s.course_title),
+    );
 
-  if (JSON.stringify(predSections) == JSON.stringify(realSections)) {
-    return { resources: await outputPromise, sections: predSections };
-  } else {
-    return {
-      resources: await boundLoadSections(realSections),
-      sections: realSections,
-    };
-  }
-});
+    if (JSON.stringify(predSections) == JSON.stringify(realSections)) {
+      return { resources: await outputPromise, sections: predSections };
+    } else {
+      return {
+        resources: await boundLoadSections(realSections),
+        sections: realSections,
+      };
+    }
+  },
+);
