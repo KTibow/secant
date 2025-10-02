@@ -20,7 +20,9 @@
     } else {
       const requestAuth = await start();
       sessionStorage.requestAuth = JSON.stringify(requestAuth);
-      schoologyLink = `https://nsd.schoology.com/oauth/authorize?oauth_token=${decode(requestAuth.token.key)}&oauth_callback=${encodeURIComponent("usesecant.web.app/callback/schoology")}`;
+
+      const hostname = location.hostname;
+      schoologyLink = `https://nsd.schoology.com/oauth/authorize?oauth_token=${decode(requestAuth.token.key)}&oauth_callback=${encodeURIComponent(`${hostname}/callback/schoology`)}`;
     }
   };
   onMount(() =>
