@@ -21,7 +21,8 @@
       const requestAuth = await start();
       sessionStorage.requestAuth = JSON.stringify(requestAuth);
 
-      const hostname = location.hostname;
+      let hostname = location.hostname;
+      if (hostname == "localhost") hostname = "[::1]";
       schoologyLink = `https://nsd.schoology.com/oauth/authorize?oauth_token=${decode(requestAuth.token.key)}&oauth_callback=${encodeURIComponent(`${hostname}/callback/schoology`)}`;
     }
   };

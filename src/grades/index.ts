@@ -2,12 +2,11 @@ import studentvue from "../lib/api/studentvue";
 import { simplifyClassName } from "../lib/naming";
 import { iterating } from "../lib/utils-xml";
 import type { ClassGrade } from "./lib/types";
-import { appearsMissing } from "./lib/const";
 
 const scoreMatcher = /^([0-9.]+) \/ ([0-9.]+)$/;
-const emptyValueMatcher = /^([0-9.]+) \/ ?$/;
-const emptyScoreMatcher = /^ ?\/ ([0-9.]+)$/;
 const futureMatcher = /^([0-9.]+) Points Possible$/;
+const emptyEarnedMatcher = /^ ?\/ ([0-9.]+)$/;
+const emptyPossibleMatcher = /^([0-9.]+) \/ ?$/;
 const getGrade = (clazz: any) => {
   const isMissing = (item: { "@_Notes": string }) =>
     item["@_Notes"].includes("Missing") || item["@_Notes"].includes("Missed due date");
@@ -31,43 +30,42 @@ const getGrade = (clazz: any) => {
 
   for (const item of assignmentsOriginal) {
     const perhapsIrrelevant = item["@_Notes"].includes("(Not For Grading)");
+    const perhapsMissing = needsNote ? isMissing(item) : true;
     if (perhapsIrrelevant) continue;
 
     const name = item["@_Measure"].replace("&amp;", "&");
     const likelyExtra =
       name.toLowerCase().includes("bonus") || name.toLowerCase().includes("extra");
-    const m1 = item["@_Points"].match(scoreMatcher);
-    const m2 = item["@_Points"].match(futureMatcher);
-    const m3 = item["@_Points"].match(emptyScoreMatcher);
-    const m4 = item["@_Points"].match(emptyValueMatcher);
-    if (m1) {
-      const perhapsMissing = needsNote ? isMissing(item) : true;
-      const appearsToMiss = appearsMissing(+m1[1], +m1[2]);
+    const scoreMatch = item["@_Points"].match(scoreMatcher);
+    const futureMatch = item["@_Points"].match(futureMatcher);
+    const emptyEarnedMatch = item["@_Points"].match(emptyEarnedMatcher); // probably missing
+    const emptyPossibleMatch = item["@_Points"].match(emptyPossibleMatcher); // probably extra credit
+    if (scoreMatch) {
       assignments.push({
-        earned: +m1[1],
-        possible: +m1[2],
+        earned: +scoreMatch[1],
+        possible: +scoreMatch[2],
         name,
         date: item["@_Date"],
-        missing: perhapsMissing && appearsToMiss,
+        missing: perhapsMissing && +scoreMatch[1] == 0,
         category: item["@_Type"],
       });
-    } else if (m2) {
+    } else if (futureMatch) {
       futureAssignments.push({
-        points: +m2[1],
+        points: +futureMatch[1],
         category: item["@_Type"],
         name: item["@_Measure"].replace("&amp;", "&"),
       });
-    } else if (title.includes("GERMAN") && m3) {
+    } else if (emptyEarnedMatch) {
       assignments.push({
         earned: 0,
-        possible: +m3[1],
+        possible: +emptyEarnedMatch[1],
         name,
         missing: true,
         category: item["@_Type"],
       });
-    } else if (likelyExtra && m4) {
+    } else if (likelyExtra && emptyPossibleMatch) {
       assignments.push({
-        earned: +m4[1],
+        earned: +emptyPossibleMatch[1],
         possible: 0,
         name,
         missing: false,
@@ -157,7 +155,8 @@ export const getGrades = async () => {
 
   for (const clazz of iterating(gradebook?.Gradebook?.Courses?.Course)) {
     const result = getGrade(clazz);
-    if (result) {
+    // prevent NaNs
+    if (result && result.assignments.length) {
       periods.push({ ...result, _original: clazz });
     }
   }

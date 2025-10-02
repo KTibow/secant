@@ -14,6 +14,7 @@ export const simplifyClassName = /* @__PURE__ */ (name: string) => {
   if (name.includes("german")) return "German";
   if (name.includes("japanese")) return "Japanese";
   if (name.includes("spanish")) return "Spanish";
+  if (/\bspan\b/.test(name)) return "Spanish";
   if (name.includes("french")) return "Fr*nch";
 
   if (name.includes("band")) return "Music";
@@ -34,6 +35,7 @@ export const simplifyClassName = /* @__PURE__ */ (name: string) => {
     name.includes("algebra") ||
     name.includes("calc") ||
     name.includes("geometry") ||
+    name.includes("statistics") ||
     /\bmath \d\b/.test(name)
   ) {
     return "Math";

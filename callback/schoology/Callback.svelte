@@ -8,7 +8,9 @@
   let errored = $state(false);
 
   const run = async () => {
-    const requestAuth = JSON.parse(sessionStorage.requestAuth);
+    const requestAuthStr = sessionStorage.requestAuth;
+    if (!requestAuthStr) throw new Error("No request auth found");
+    const requestAuth = JSON.parse(requestAuthStr);
     const auth = await exchange(requestAuth);
     save(auth);
     location.href = location.origin;
