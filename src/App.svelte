@@ -40,18 +40,32 @@
   });
 
   let period = $state(1);
+  let prevClass = $derived(classesList.findLast((c) => c.period < period));
+  let nextClass = $derived(classesList.find((c) => c.period > period));
   let clazz = $derived(classes[period]);
   let grade = $derived(clazz?.grade);
   let gradeOpen = $state(false);
   let gradeShown = $derived(gradeOpen ? grade : undefined);
 </script>
 
+<svelte:window
+  onkeydown={({ key, target }) => {
+    if (!(target instanceof Element)) return;
+    if (["INPUT", "TEXTAREA", "SELECT"].includes(target?.tagName || "")) return;
+
+    if (key == "ArrowLeft") {
+      const prevPeriod = prevClass?.period || classesList.at(-1)?.period;
+      if (prevPeriod) period = prevPeriod;
+    } else if (key == "ArrowRight") {
+      const nextPeriod = nextClass?.period || classesList[0]?.period;
+      if (nextPeriod) period = nextPeriod;
+    }
+  }}
+/>
 <div class="resources">
   <Resources {classes} {clazz} />
 </div>
 {#if clazz}
-  {@const prevClass = classesList.findLast((c) => c.period < clazz.period)}
-  {@const nextClass = classesList.find((c) => c.period > clazz.period)}
   {@const active = clazz.period == truePeriod}
   {#snippet content()}
     <div class="content">
