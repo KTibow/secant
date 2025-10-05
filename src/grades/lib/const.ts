@@ -1,7 +1,7 @@
 /**
  * The grade floor used throughout the application.
  */
-export const GRADE_FLOOR = 0.0;
+const GRADE_FLOOR = 0.0;
 
 /**
  * The grade ceiling (maximum grade before floor adjustment)
