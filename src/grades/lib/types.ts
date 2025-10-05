@@ -33,5 +33,4 @@ export type ClassGrade = {
       weight: number;
     }
   >;
-  _original?: any;
 };

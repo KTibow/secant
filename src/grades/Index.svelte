@@ -8,9 +8,10 @@
   import Simulator from "./simulator/Index.svelte";
   import type { ClassGrade } from "./lib/types";
   import { recalculateGrade } from "./lib/utils";
+  import { originals } from ".";
 
   let clazz: ClassGrade = $props();
-  $effect(() => console.log($state.snapshot(clazz)));
+  $effect(() => console.log($state.snapshot(clazz), originals[clazz.period]));
   let grade = $derived(recalculateGrade(clazz));
 
   let dialogRef: { open: () => void } | null = null;

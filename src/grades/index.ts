@@ -148,6 +148,7 @@ const getGrade = (clazz: any) => {
     reportedCategories,
   };
 };
+export const originals: Record<string, any> = {};
 export const getGrades = async () => {
   const gradebook = await studentvue("Gradebook");
 
@@ -157,7 +158,8 @@ export const getGrades = async () => {
     const result = getGrade(clazz);
     // prevent NaNs
     if (result && result.assignments.length) {
-      periods.push({ ...result, _original: clazz });
+      originals[result.period] = clazz;
+      periods.push(result);
     }
   }
 
