@@ -145,18 +145,20 @@ const loadSections = async (
     }),
   );
 
-  await Promise.all(
-    responses.map(async ({ body: { assignment: assignments } }, idx) => {
-      const { section_school_code, id } = sections[idx];
-      output[section_school_code] = await genResources(assignments, id, {
-        schoology,
-        uid,
-        predSubmitted: predSubmitted[section_school_code] || [],
-        skipSubmittedCheck: skipSubmittedCheck[section_school_code] || [],
-        todayRegex,
-      });
-    }),
-  );
+  const resourcePromises = responses.map(async ({ body: { assignment: assignments } }, idx) => {
+    const { section_school_code, id } = sections[idx];
+    const resources = await genResources(assignments, id, {
+      schoology,
+      uid,
+      predSubmitted: predSubmitted[section_school_code] || [],
+      skipSubmittedCheck: skipSubmittedCheck[section_school_code] || [],
+      todayRegex,
+    });
+    return { section_school_code, resources };
+  });
+  for await (const { section_school_code, resources } of resourcePromises) {
+    output[section_school_code] = resources;
+  }
 
   return output;
 };
@@ -191,7 +193,8 @@ export default fn(
           section_school_code,
           course_title,
         }))
-        .filter((s: Section) => s.id && s.section_school_code && s.course_title),
+        .filter((s: Section) => s.id && s.section_school_code && s.course_title)
+        .sort((a: Section, b: Section) => a.id.localeCompare(b.id)),
     );
 
     if (JSON.stringify(predSections) == JSON.stringify(realSections)) {
