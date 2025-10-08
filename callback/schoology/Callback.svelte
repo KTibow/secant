@@ -8,7 +8,7 @@
   let errored = $state(false);
 
   const run = async () => {
-    const requestAuthStr = sessionStorage.requestAuth;
+    const requestAuthStr = localStorage.requestAuth;
     if (!requestAuthStr) throw new Error("No request auth found");
     const requestAuth = JSON.parse(requestAuthStr);
     const auth = await exchange(requestAuth);
@@ -22,7 +22,7 @@
         errored = true;
       })
       .finally(() => {
-        delete sessionStorage.requestAuth;
+        delete localStorage.requestAuth;
       }),
   );
 </script>

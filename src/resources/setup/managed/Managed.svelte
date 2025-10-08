@@ -19,7 +19,7 @@
       finish();
     } else {
       const requestAuth = await start();
-      sessionStorage.requestAuth = JSON.stringify(requestAuth);
+      localStorage.requestAuth = JSON.stringify(requestAuth);
 
       let hostname = location.hostname;
       if (hostname == "localhost") hostname = "[::1]";
