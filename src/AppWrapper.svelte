@@ -1,11 +1,14 @@
 <script lang="ts">
   import Monoidentity from "monoidentity/Monoidentity.svelte";
-  import ErrorBoundary from "./lib/ErrorBoundary.svelte";
+  import ErrorAlert from "./lib/ErrorAlert.svelte";
   import App from "./App.svelte";
 </script>
 
 <Monoidentity app="secant" intents={[{ loginRecognized: true }]}>
-  <ErrorBoundary>
+  <svelte:boundary>
+    {#snippet failed(error)}
+      <ErrorAlert {error} />
+    {/snippet}
     <App />
-  </ErrorBoundary>
+  </svelte:boundary>
 </Monoidentity>
