@@ -16,6 +16,7 @@
   import Grades from "./grades/Index.svelte";
   import Viz from "./lib/Viz.svelte";
 
+  throw new Error("ping");
   const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
   const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
   let classes = $derived(combine($schedule.data, $grades.data));
