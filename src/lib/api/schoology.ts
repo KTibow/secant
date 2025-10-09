@@ -104,7 +104,9 @@ export const internalCreateSchoology = (
     }
 
     if (!response.ok) {
-      throw new Error(`Schoology is ${response.status}ing`, { cause: await response.text() });
+      throw new Error(`Schoology is ${response.status}ing`, {
+        cause: { request: `${req.method} ${req.url}`, response: await response.text() },
+      });
     }
 
     if (response.headers.get("content-type")?.includes("application/json")) {
