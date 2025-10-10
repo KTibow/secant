@@ -63,6 +63,12 @@
   }
   .list-wrapper {
     position: relative;
-    flex: 0 0 25rem;
+    flex: 0;
+    @media (width < 40rem) {
+      flex-basis: 10rem;
+    }
+    @media (width >= 40rem) {
+      flex-basis: 25rem;
+    }
   }
 </style>
