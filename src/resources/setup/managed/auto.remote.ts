@@ -1,4 +1,4 @@
-import { useVerification } from "monoidentity";
+import { useVerification } from "monoidentity/server";
 import { fn } from "monoserve";
 import { string } from "valibot";
 import { SC_KNOWN_TOKENS } from "$env/static/private";

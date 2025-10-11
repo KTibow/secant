@@ -1,6 +1,6 @@
 import { fn } from "monoserve";
 import { authBase, createSchoology, type FullAuth } from "../../src/lib/api/schoology";
-import { encode } from "monoidentity";
+import { encode } from "monoidentity/server";
 
 export default fn(authBase, async (auth) => {
   let schoology = createSchoology(auth);
