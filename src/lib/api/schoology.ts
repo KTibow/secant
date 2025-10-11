@@ -1,5 +1,5 @@
 import { intersect, literal, number, object, string, union, type InferOutput } from "valibot";
-import { decode } from "monoidentity";
+import { decode } from "monoidentity/server";
 import { SC_KEY_A1, SC_SECRET_A1, SC_KEY_75, SC_SECRET_75 } from "$env/static/private";
 
 const tokenSchema = object({ key: string(), secret: string() });

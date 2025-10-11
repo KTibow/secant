@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Monoidentity from "monoidentity/Monoidentity.svelte";
+  import { Monoidentity } from "monoidentity";
   import ErrorAlert from "./lib/ErrorAlert.svelte";
   import App from "./App.svelte";
 </script>
