@@ -1,7 +1,7 @@
 import { fn } from "monoserve";
 import { internalCreateSchoology, type AuthBase } from "../../../lib/api/schoology";
 import { SC_KEY_75, SC_SECRET_75 } from "$env/static/private";
-import { encode } from "monoidentity";
+import { encode } from "monoidentity/server";
 
 export default fn(async () => {
   const schoology = internalCreateSchoology(SC_KEY_75, SC_SECRET_75);

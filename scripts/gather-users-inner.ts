@@ -1,6 +1,6 @@
 import { homedir } from "os";
 import { readFile } from "node:fs/promises";
-import { encode } from "monoidentity";
+import { encode } from "monoidentity/server";
 import { createSchoology, type AuthBase, type FullAuth } from "../src/lib/api/schoology.ts";
 
 let auth: Record<string, AuthBase & Partial<FullAuth>> = {};
