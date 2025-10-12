@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@ktibow/iconset-material-symbols':
-        specifier: ^0.0.1760073587
+        specifier: ~0.0.1760073587
         version: 0.0.1760073587
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.1
