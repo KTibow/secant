@@ -25,12 +25,12 @@
   </div>
 
   <div class="columns" class:has-categories={hasCategories}>
-    {#each assignments as { earned, possible, name, category }, i (i)}
+    {#each assignments as { earned, possible, ogType, ogScore, name, category }, i (i)}
       {#if hasCategories}
         <CategoryRepresentation category={simplifyCategory(category)} />
       {/if}
       <p>{name}</p>
-      <p class="points">
+      <p class="points" title={ogScore ? `Originally ${ogScore} on ${ogType}` : undefined}>
         {roundTo(earned, 3)} <span class="slash">/</span>
         <span class:padded={assignments.some((a) => a.possible >= 10)}>{possible}</span>
       </p>
@@ -93,14 +93,19 @@
     > .points {
       display: flex;
       justify-self: end;
+      &[title] {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        cursor: help;
+      }
     }
-    .slash {
-      padding: 0 0.25rem;
-    }
-    .padded {
-      display: flex;
-      justify-content: end;
-      min-width: 1.5rem;
-    }
+  }
+  .slash {
+    padding: 0 0.25rem;
+  }
+  .padded {
+    display: flex;
+    justify-content: end;
+    min-width: 1.5rem;
   }
 </style>

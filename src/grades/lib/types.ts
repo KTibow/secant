@@ -1,6 +1,8 @@
 export type Assignment = {
   earned: number;
   possible: number;
+  ogType?: string;
+  ogScore?: number;
   name: string;
   date?: string;
   missing: boolean;

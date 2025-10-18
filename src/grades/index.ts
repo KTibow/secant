@@ -5,7 +5,7 @@ import type { ClassGrade } from "./lib/types";
 
 const possiblePointsPattern = /([0-9.]+) Points Possible$/;
 
-const getGrade = (clazz: any) => {
+const getGrade = (clazz: any): ClassGrade | undefined => {
   const isMissing = (item: { "@_Notes": string }) =>
     item["@_Notes"].includes("Missing") || item["@_Notes"].includes("Missed due date");
   const period = clazz["@_Period"].includes("-")
@@ -37,10 +37,14 @@ const getGrade = (clazz: any) => {
       // intentional: ungraded will not have, graded will have at least ""
       const earned = item["@_Point"] ? parseFloat(item["@_Point"]) : 0;
       const possible = parseFloat(item["@_PointPossible"]);
+      const ogType = item["@_ScoreType"] != "Raw Score" ? item["@_ScoreType"] : undefined;
+      const ogScore = item["@_ScoreType"] != "Raw Score" ? parseFloat(item["@_Score"]) : undefined;
 
       assignments.push({
         earned,
         possible,
+        ogType,
+        ogScore,
         name,
         date: item["@_Date"],
         missing: perhapsMissing && earned === 0,
