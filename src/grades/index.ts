@@ -3,10 +3,8 @@ import { simplifyClassName } from "../lib/naming";
 import { iterating } from "../lib/utils-xml";
 import type { ClassGrade } from "./lib/types";
 
-const scoreMatcher = /^([0-9.]+) \/ ([0-9.]+)$/;
-const futureMatcher = /^([0-9.]+) Points Possible$/;
-const emptyEarnedMatcher = /^ ?\/ ([0-9.]+)$/;
-const emptyPossibleMatcher = /^([0-9.]+) \/ ?$/;
+const possiblePointsPattern = /([0-9.]+) Points Possible$/;
+
 const getGrade = (clazz: any) => {
   const isMissing = (item: { "@_Notes": string }) =>
     item["@_Notes"].includes("Missing") || item["@_Notes"].includes("Missed due date");
@@ -34,46 +32,41 @@ const getGrade = (clazz: any) => {
     if (perhapsIrrelevant) continue;
 
     const name = item["@_Measure"].replace("&amp;", "&");
-    const likelyExtra =
-      name.toLowerCase().includes("bonus") || name.toLowerCase().includes("extra");
-    const scoreMatch = item["@_Points"].match(scoreMatcher);
-    const futureMatch = item["@_Points"].match(futureMatcher);
-    const emptyEarnedMatch = item["@_Points"].match(emptyEarnedMatcher); // probably missing
-    const emptyPossibleMatch = item["@_Points"].match(emptyPossibleMatcher); // probably extra credit
-    if (scoreMatch) {
+
+    if (item["@_Point"] != undefined) {
+      // intentional: ungraded will not have, graded will have at least ""
+      const earned = item["@_Point"] ? parseFloat(item["@_Point"]) : 0;
+      const possible = parseFloat(item["@_PointPossible"]);
+
       assignments.push({
-        earned: +scoreMatch[1],
-        possible: +scoreMatch[2],
+        earned,
+        possible,
         name,
         date: item["@_Date"],
-        missing: perhapsMissing && +scoreMatch[1] == 0,
+        missing: perhapsMissing && earned === 0,
         category: item["@_Type"],
       });
-    } else if (futureMatch) {
-      futureAssignments.push({
-        points: +futureMatch[1],
-        category: item["@_Type"],
-        name: item["@_Measure"].replace("&amp;", "&"),
-      });
-    } else if (emptyEarnedMatch) {
-      assignments.push({
-        earned: 0,
-        possible: +emptyEarnedMatch[1],
-        name,
-        missing: true,
-        category: item["@_Type"],
-      });
-    } else if (likelyExtra && emptyPossibleMatch) {
-      assignments.push({
-        earned: +emptyPossibleMatch[1],
-        possible: 0,
-        name,
-        missing: false,
-        category: item["@_Type"],
-      });
-    } else {
-      failedAssignments.push({ name, item });
+      continue;
     }
+
+    if (["Not Due", "Not Graded"].includes(item["@_DisplayScore"])) {
+      const pointsString = item["@_Points"];
+      const possibleMatch = pointsString.match(possiblePointsPattern);
+
+      if (possibleMatch) {
+        futureAssignments.push({
+          points: parseFloat(possibleMatch[1]),
+          category: item["@_Type"],
+          name,
+        });
+        continue;
+      } else if (pointsString == "Points Possible") {
+        // 0/0
+        continue;
+      }
+    }
+
+    failedAssignments.push({ name, item });
   }
 
   let categories: ClassGrade["categories"] = {};
