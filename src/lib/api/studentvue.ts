@@ -1,6 +1,6 @@
 import districts from "school-districts";
 import { XMLParser } from "fast-xml-parser";
-import { getLoginRecognized } from "monoidentity";
+import { getLoginRecognized, relog } from "monoidentity";
 
 const build = (object: Record<string, string>) => {
   const params = new URLSearchParams();
@@ -56,7 +56,7 @@ export default async (name: string, params: Record<string, string> = {}) => {
   const err = xml.RT_ERROR;
   if (err) {
     if (err["@_ERROR_MESSAGE"].startsWith("Invalid user id or password")) {
-      throw new Error("Invalid auth");
+      relog();
     }
     throw new Error("StudentVue error");
   }
