@@ -141,7 +141,7 @@ const loadSections = async (
           ({ id }) => `/v1/sections/${id}/assignments?limit=100&with_attachments=1`,
         ),
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: { "content-type": "application/json" },
     }),
   );
 
