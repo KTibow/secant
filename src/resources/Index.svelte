@@ -5,6 +5,7 @@
   import ResourcesFetcher from "./ResourcesFetcher.svelte";
 
   let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
+
   const getAuth = () => getStorage("config").schoology;
   let auth = $state(getAuth());
   let classId = $derived(clazz?.id);

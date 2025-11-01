@@ -15,6 +15,11 @@ jobs:
           version: latest
       - name: Install
         run: pnpm install
+      - name: Inject private teacher info implementation
+        run: |
+          cat > src/schedule/teacher-info-impl.private.ts << 'EOF'
+          ${{ secrets.TEACHER_INFO_IMPL }}
+          EOF
       - name: Build
         run: pnpm build
         env:
