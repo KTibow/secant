@@ -19,12 +19,11 @@ const track = <T>({
   const data = {
     data: initialData,
     dataAsOf: initialStale ? 0 : Date.now(),
-    expireAfter,
     loading: false,
     errors: [] as number[],
     async run() {
       if (data.loading) return;
-      if (Date.now() - data.dataAsOf < data.expireAfter) return;
+      if (Date.now() - data.dataAsOf < expireAfter) return;
       if (data.errors.length >= 4 && Date.now() - data.errors.at(-1)! < 2000) {
         return;
       }
