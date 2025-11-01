@@ -1,6 +1,7 @@
 <script lang="ts">
   import { trackCachedAuto } from "../lib/data-tracking";
   import teacherInfoRemote from "./teacher-info.remote";
+  import { getSubs } from "./subs";
   import { onDestroy } from "svelte";
   import TeacherInfo from "./TeacherInfo.svelte";
 
@@ -11,16 +12,22 @@
     aborter.abort();
   });
 
-  let teacherInfo = trackCachedAuto({
-    id: "teacher-info",
+  let birthdays = trackCachedAuto({
+    id: "teacher-birthdays",
     loader: async () => {
       return await teacherInfoRemote(teachers, { signal: aborter.signal });
     },
   });
 
-  let currentTeacherInfo = $derived($teacherInfo.data?.find((info) => info.teacher == teacher));
+  let subs = trackCachedAuto({
+    id: "teacher-subs",
+    loader: getSubs,
+  });
+
+  let isBirthday = $derived(Boolean(teacher && $birthdays.data?.includes(teacher)));
+  let isSubbed = $derived(Boolean(teacher && $subs.data?.includes(teacher)));
 </script>
 
-{#if currentTeacherInfo && (currentTeacherInfo.isBirthday || currentTeacherInfo.isSubbed)}
-  <TeacherInfo {...currentTeacherInfo} />
+{#if teacher && (isBirthday || isSubbed)}
+  <TeacherInfo {teacher} {isBirthday} {isSubbed} />
 {/if}

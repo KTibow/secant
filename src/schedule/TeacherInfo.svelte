@@ -1,7 +1,5 @@
 <script lang="ts">
-  import type { TeacherInfo } from "./teacher-info.remote";
-
-  let { teacher, isBirthday, isSubbed }: TeacherInfo = $props();
+  let { teacher, isBirthday, isSubbed }: { teacher: string; isBirthday: boolean; isSubbed: boolean } = $props();
 </script>
 
 <div class="teacher-info">
