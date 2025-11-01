@@ -33,8 +33,8 @@ importers:
         specifier: ^5.12.0
         version: 5.12.0
       monoidentity:
-        specifier: ^0.15.0
-        version: 0.15.0(svelte@5.41.2)(typescript@5.9.3)
+        specifier: ^0.15.1
+        version: 0.15.1(svelte@5.41.2)(typescript@5.9.3)
       monoserve:
         specifier: ^3.0.0
         version: 3.0.0(devalue@5.4.2)(vite@7.1.11)
@@ -671,8 +671,8 @@ packages:
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
-  monoidentity@0.15.0:
-    resolution: {integrity: sha512-Wr2QcScuu1RT3JnRVS5tgaCEQXMEG5QKOAxf8f7JgzZsGss41pv98r43KoxD+vi1O0IIIrAFMiNQ8KQwaTHOuA==}
+  monoidentity@0.15.1:
+    resolution: {integrity: sha512-c0sXbr4h7AzXaNa12qlS+zFAYVRqAOQblvh+Tz61PcbJse2J3uz4MRO4Bpd096+2YxboXm6nwqNWbUWrynziqg==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1260,7 +1260,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  monoidentity@0.15.0(svelte@5.41.2)(typescript@5.9.3):
+  monoidentity@0.15.1(svelte@5.41.2)(typescript@5.9.3):
     dependencies:
       '@tsndr/cloudflare-worker-jwt': 3.2.0
       aws4fetch: 1.0.20
