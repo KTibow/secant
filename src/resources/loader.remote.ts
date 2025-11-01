@@ -171,6 +171,7 @@ const schema = object({
   skipSubmittedCheck: record(string(), array(string())),
   todayRegex: regexp,
 });
+//! monoserve input: devalue
 export default fn(
   schema,
   async ({ auth, predSections, predSubmitted, skipSubmittedCheck, todayRegex }) => {
