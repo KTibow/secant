@@ -24,7 +24,7 @@
   </div>
   <div class="zen-links">
     {#each links as { title, url }}
-      <Button variant="text" href={url} target="_blank">
+      <Button variant="tonal" href={url} target="_blank">
         {title}
       </Button>
     {/each}
