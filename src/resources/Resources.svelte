@@ -22,14 +22,12 @@
       In emptiness
     {/if}
   </div>
-  <div class="zen-links-anchor">
-    <div class="zen-links m3-font-body-medium">
-      {#each links as { title, url }}
-        <Button variant="text" href={url} target="_blank">
-          {title}
-        </Button>
-      {/each}
-    </div>
+  <div class="zen-links">
+    {#each links as { title, url }}
+      <Button variant="text" href={url} target="_blank">
+        {title}
+      </Button>
+    {/each}
   </div>
 {:else}
   <div class="resources">
@@ -74,17 +72,16 @@
       color: rgb(var(--m3-scheme-secondary));
     }
   }
-  .zen-links-anchor {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
   .zen-links {
     display: flex;
     gap: 1rem;
-    align-self: center;
     position: absolute;
-    bottom: 0.5rem;
+    top: 0.5rem;
+    left: 0.5rem;
+    pointer-events: none;
+    > :global(*) {
+      pointer-events: auto;
+    }
   }
 
   .resources {
