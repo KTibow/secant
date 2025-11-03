@@ -24,7 +24,8 @@
   </div>
   <div class="zen-links">
     {#each links as { title, url }}
-      <Button variant="tonal" href={url} target="_blank" square>
+      <Button variant="tonal" iconType="left" square href={url} target="_blank">
+        <Icon icon={iconExternal} />
         {title}
       </Button>
     {/each}
