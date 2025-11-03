@@ -101,7 +101,11 @@
     min-height: 10rem;
     flex-grow: 1000;
     padding: 1rem;
-    border-radius: var(--m3-util-rounding-large);
+    border-radius: var(--m3-util-rounding-medium);
+    &:active {
+      border-radius: var(--m3-util-rounding-small);
+    }
+    transition: border-radius var(--m3-util-easing);
     background-color: rgb(var(--m3-scheme-surface-container-low));
     &.link {
       background-color: rgb(var(--m3-scheme-secondary-container-subtle));
