@@ -105,7 +105,7 @@
     &:active {
       border-radius: var(--m3-util-rounding-small);
     }
-    transition: border-radius var(--m3-util-easing);
+    transition: border-radius var(--m3-util-easing-fast-spatial);
     background-color: rgb(var(--m3-scheme-surface-container-low));
     &.link {
       background-color: rgb(var(--m3-scheme-secondary-container-subtle));
