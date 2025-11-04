@@ -7,6 +7,7 @@
 
   let {
     assignments,
+    futureAssignments,
     categories,
     openSimulator,
     grade,
@@ -15,25 +16,22 @@
   let hasCategories = $derived(categories && Object.keys(categories).length > 1);
 
   const openToss = () => {
-    const bits = assignments.map((x) => JSON.stringify(x)).join("\n");
-    const instruction =
-      grade < 93
-        ? `you're now being connected to the user, so explain how you can analyze them beyond a basic breakdown (secant already let the user view their grade, their composition, and run what-ifs ("simulate")) quick`
-        : `you're now being connected to the user, but it's a bit odd they asked you to analyze them when they're good already and they can already do basic analysis (view grade, its composition, and what-ifs ("simulate")) in secant. maybe explain how you can help with other classes or tasks, or laugh at how they're trying to analyze a ~perfect grade.`;
-    const prompt = categories
-      ? `the user just hit a "toss" button on secant, tossing their grades in a weighted class to you. ${instruction}
-
-it has the categories:
-${Object.entries(categories)
-  .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
-  .join("\n")}
-
-all assignments:
-${bits}`
-      : `the user just hit a "toss" button on secant, tossing their grades in an unweighted class to you. ${instruction}
-
-all assignments:
-${bits}`;
+    let prompt = "";
+    prompt += `the user just hit a "toss" button on secant, tossing their grades in ${categories ? "a weighted" : "an unweighted"} class to you. `;
+    if (grade < 93)
+      prompt += `you're now being connected to the user, so explain how you can analyze them beyond a basic breakdown (secant already let the user view their grade, their composition, and run what-ifs ("simulate")) quick`;
+    else
+      prompt += `you're now being connected to the user, but it's a bit odd they asked you to analyze them when they're good already and they can already do basic analysis (view grade, its composition, and what-ifs ("simulate")) in secant. maybe explain how you can help with other classes or tasks, or laugh at how they're trying to analyze a ~perfect grade.`;
+    prompt += `\n\noverall grade: ${grade}%`;
+    if (categories) {
+      prompt += `\n\ncategories:`;
+      for (const [k, v] of Object.entries(categories)) {
+        prompt += `\n${k}: ${JSON.stringify(v)}`;
+      }
+    }
+    prompt += `\n\nall assignments:`;
+    prompt += `\n${assignments.map((x) => JSON.stringify(x)).join("\n")}`;
+    prompt += `\n${(futureAssignments || []).map((x) => "future: " + JSON.stringify(x)).join("\n")}`;
     const encoded = encodeURIComponent(prompt);
     window.open(`https://cosinehq.web.app?q=${encoded}`, "_blank");
   };
