@@ -46,7 +46,7 @@ const getGrade = (clazz: any): ClassGrade | undefined => {
         ogType,
         ogScore,
         name,
-        date: item["@_Date"],
+        // date: item["@_Date"],
         missing: perhapsMissing && earned == 0,
         category: item["@_Type"],
       });

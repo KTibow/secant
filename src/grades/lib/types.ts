@@ -4,7 +4,7 @@ export type Assignment = {
   ogType?: string;
   ogScore?: number;
   name: string;
-  date?: string;
+  // date?: string;
   missing: boolean;
   category: string;
 };

@@ -5,10 +5,38 @@
   import { simplifyCategory } from "./lib/naming";
   import { roundTo } from "./lib/utils";
 
-  let { assignments, categories, openSimulator }: ClassGrade & { openSimulator: () => void } =
-    $props();
+  let {
+    assignments,
+    categories,
+    openSimulator,
+    grade,
+  }: ClassGrade & { openSimulator: () => void; grade: number } = $props();
 
   let hasCategories = $derived(categories && Object.keys(categories).length > 1);
+
+  const openToss = () => {
+    const bits = assignments.map((x) => JSON.stringify(x)).join("\n");
+    const instruction =
+      grade < 93
+        ? `you're now being connected to the user, so explain how you can analyze them beyond a basic breakdown (secant already let the user view their grade, their composition, and run what-ifs ("simulate")) quick`
+        : `you're now being connected to the user, but it's a bit odd they asked you to analyze them when they're good already and they can already do basic analysis (view grade, its composition, and what-ifs ("simulate")) in secant. maybe explain how you can help with other classes or tasks, or laugh at how they're trying to analyze a ~perfect grade.`;
+    const prompt = categories
+      ? `the user just hit a "toss" button on secant, tossing their grades in a weighted class to you. ${instruction}
+
+it has the categories:
+${Object.entries(categories)
+  .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
+  .join("\n")}
+
+all assignments:
+${bits}`
+      : `the user just hit a "toss" button on secant, tossing their grades in an unweighted class to you. ${instruction}
+
+all assignments:
+${bits}`;
+    const encoded = encodeURIComponent(prompt);
+    window.open(`https://cosinehq.web.app?q=${encoded}`, "_blank");
+  };
 </script>
 
 <div class="list">
@@ -18,6 +46,10 @@
       {assignments.length == 1 ? "assignment" : "assignments"}
     </span>
     <div style:flex-grow="1"></div>
+    <button onclick={openToss}>
+      <Layer />
+      Toss
+    </button>
     <button onclick={openSimulator}>
       <Layer />
       Simulate

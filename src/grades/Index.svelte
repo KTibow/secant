@@ -38,7 +38,7 @@
   <Missing {...clazz} {grade} />
 {/if}
 <div class="list-wrapper">
-  <AssignmentsList {...clazz} openSimulator={() => dialogRef?.open()} />
+  <AssignmentsList {...clazz} {grade} openSimulator={() => dialogRef?.open()} />
 </div>
 <Simulator bind:this={dialogRef} {...clazz} {grade} />
 
