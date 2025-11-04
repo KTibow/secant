@@ -130,7 +130,7 @@
 {/if}
 <Viz
   loading={$schedule.loading || $grades.loading}
-  errored={Boolean($schedule.errors.length || $grades.errors.length)}
+  errored={Boolean($schedule.errors.length + $grades.errors.length)}
 />
 
 <style>

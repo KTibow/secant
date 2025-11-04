@@ -1,5 +1,6 @@
 <script lang="ts">
   import { trackCachedAuto } from "../lib/data-tracking";
+  import Viz from "../lib/Viz.svelte";
   import teacherInfoRemote from "./teacher-info.remote";
   import { getSubs } from "./subs";
   import { onDestroy } from "svelte";
@@ -31,3 +32,7 @@
 {#if teacher && (isBirthday || isSubbed)}
   <TeacherInfo {teacher} {isBirthday} {isSubbed} />
 {/if}
+<Viz
+  loading={$birthdays.loading || $subs.loading}
+  errored={Boolean($birthdays.errors.length + $subs.errors.length)}
+/>
