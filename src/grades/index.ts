@@ -1,4 +1,4 @@
-import studentvue from "../lib/api/studentvue";
+import { studentvue } from "../lib/api/studentvue";
 import { simplifyClassName } from "../lib/naming";
 import { iterating } from "../lib/utils-xml";
 import type { ClassGrade } from "./lib/types";
