@@ -33,8 +33,8 @@ importers:
         specifier: ^5.12.3
         version: 5.12.3
       monoidentity:
-        specifier: ^0.15.2
-        version: 0.15.2(svelte@5.43.4)(typescript@5.9.3)
+        specifier: ^0.15.3
+        version: 0.15.3(svelte@5.43.4)(typescript@5.9.3)
       monoserve:
         specifier: ^3.2.2
         version: 3.2.2(devalue@5.4.2)(rolldown-vite@7.2.2(esbuild@0.25.11))
@@ -45,7 +45,7 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0(prettier@3.6.2)(svelte@5.43.4)
       rolldown:
-        specifier: ^1.0.0-beta.47
+        specifier: 1.0.0-beta.47
         version: 1.0.0-beta.47
       school-districts:
         specifier: ^2.0.0
@@ -558,8 +558,8 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
-  monoidentity@0.15.2:
-    resolution: {integrity: sha512-xmUHoESPoLRQvIDXvge2CXiHO7wcXYka3JcsF8x3bu5mfl7xq/w4tof9dnGF6LFwM/Z1s0ud3Vn2TZKhbei3Ng==}
+  monoidentity@0.15.3:
+    resolution: {integrity: sha512-CRqMDi6jlTs9W1xJIn2A7R4p3e1ZlR+falTCRNoXAWhmhwXn3FtXms7ETBusz59iUl65WLCEIJ7Mr4r+mt6H2g==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1079,7 +1079,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  monoidentity@0.15.2(svelte@5.43.4)(typescript@5.9.3):
+  monoidentity@0.15.3(svelte@5.43.4)(typescript@5.9.3):
     dependencies:
       '@tsndr/cloudflare-worker-jwt': 3.2.0
       aws4fetch: 1.0.20
