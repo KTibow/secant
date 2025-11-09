@@ -24,8 +24,8 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2
       fast-studentvue:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
       kreations:
         specifier: ^1.3.1
         version: 1.3.1(svelte@5.43.5)
@@ -447,8 +447,8 @@ packages:
   esrap@2.1.2:
     resolution: {integrity: sha512-DgvlIQeowRNyvLPWW4PT7Gu13WznY288Du086E751mwwbsgr29ytBiYeLzAGIo0qk3Ujob0SDk8TiSaM5WQzNg==}
 
-  fast-studentvue@2.0.2:
-    resolution: {integrity: sha512-rqSceDww7AJdFG3J0J5HOJZkMFfb96C48r0p8u8/M0uzWaEbwZsJnM0MVDK5b/lCSu8gEg4lj5LXwF3X0k21nw==}
+  fast-studentvue@2.0.3:
+    resolution: {integrity: sha512-GaTq3LhxrCkDts2R+Fq4cF0DmQ77zicqHAqSWaqMz0tMrvLfscZxdDsR7GkiGSUQTG+7WibXaYsLOFJnrij40g==}
 
   fast-xml-parser@5.3.1:
     resolution: {integrity: sha512-jbNkWiv2Ec1A7wuuxk0br0d0aTMUtQ4IkL+l/i1r9PRf6pLXjDgsBsWwO+UyczmQlnehi4Tbc8/KIvxGQe+I/A==}
@@ -656,9 +656,6 @@ packages:
   sade@1.8.1:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
     engines: {node: '>=6'}
-
-  school-districts@2.0.0:
-    resolution: {integrity: sha512-QTNnx3uJ7OPTPm3LYEoQEJXBK9J4z+GsTLq6OsOdFfcMKmQf+4GSgwB+F92dA/wYNQWD1Jkqctq+Ri3QOqXl1g==}
 
   school-districts@4.0.0:
     resolution: {integrity: sha512-QUNq81DJXllREVjtpJ8hhB8DJLUqzlIlvCzFA2iftetYFTv70yxEtN9GfqecSjCf7m2hSCD3cjcl01I1/sue4A==}
@@ -993,10 +990,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  fast-studentvue@2.0.2:
+  fast-studentvue@2.0.3:
     dependencies:
       fast-xml-parser: 5.3.1
-      school-districts: 2.0.0
+      school-districts: 4.0.0
 
   fast-xml-parser@5.3.1:
     dependencies:
@@ -1161,8 +1158,6 @@ snapshots:
   sade@1.8.1:
     dependencies:
       mri: 1.2.0
-
-  school-districts@2.0.0: {}
 
   school-districts@4.0.0: {}
 
