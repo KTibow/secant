@@ -13,7 +13,7 @@ importers:
         version: 0.0.1761892960
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.1
-        version: 6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4)
+        version: 6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5)
       '@tsconfig/svelte':
         specifier: ^5.0.5
         version: 5.0.5
@@ -24,17 +24,17 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2
       fast-studentvue:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^2.0.2
+        version: 2.0.2
       kreations:
         specifier: ^1.3.1
-        version: 1.3.1(svelte@5.43.4)
+        version: 1.3.1(svelte@5.43.5)
       m3-svelte:
         specifier: ^5.12.3
         version: 5.12.3
       monoidentity:
         specifier: ^0.15.3
-        version: 0.15.3(svelte@5.43.4)(typescript@5.9.3)
+        version: 0.15.3(svelte@5.43.5)(typescript@5.9.3)
       monoserve:
         specifier: ^3.2.2
         version: 3.2.2(devalue@5.4.2)(rolldown-vite@7.2.2(esbuild@0.25.11))
@@ -43,19 +43,19 @@ importers:
         version: 3.6.2
       prettier-plugin-svelte:
         specifier: ^3.4.0
-        version: 3.4.0(prettier@3.6.2)(svelte@5.43.4)
+        version: 3.4.0(prettier@3.6.2)(svelte@5.43.5)
       rolldown:
         specifier: 1.0.0-beta.47
         version: 1.0.0-beta.47
       school-districts:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       svelte:
-        specifier: ^5.43.4
-        version: 5.43.4
+        specifier: ^5.43.5
+        version: 5.43.5
       svelte-check:
         specifier: ^4.3.3
-        version: 4.3.3(picomatch@4.0.3)(svelte@5.43.4)(typescript@5.9.3)
+        version: 4.3.3(picomatch@4.0.3)(svelte@5.43.5)(typescript@5.9.3)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -447,8 +447,8 @@ packages:
   esrap@2.1.2:
     resolution: {integrity: sha512-DgvlIQeowRNyvLPWW4PT7Gu13WznY288Du086E751mwwbsgr29ytBiYeLzAGIo0qk3Ujob0SDk8TiSaM5WQzNg==}
 
-  fast-studentvue@2.0.1:
-    resolution: {integrity: sha512-oJCQD9UcuUOJS4zepnSuBTn7IM049qitnXfSZLM4XzqxggFaqDm91H4jvypoPWvekw+sQN+ji+AzN998TxnL7g==}
+  fast-studentvue@2.0.2:
+    resolution: {integrity: sha512-rqSceDww7AJdFG3J0J5HOJZkMFfb96C48r0p8u8/M0uzWaEbwZsJnM0MVDK5b/lCSu8gEg4lj5LXwF3X0k21nw==}
 
   fast-xml-parser@5.3.1:
     resolution: {integrity: sha512-jbNkWiv2Ec1A7wuuxk0br0d0aTMUtQ4IkL+l/i1r9PRf6pLXjDgsBsWwO+UyczmQlnehi4Tbc8/KIvxGQe+I/A==}
@@ -660,6 +660,9 @@ packages:
   school-districts@2.0.0:
     resolution: {integrity: sha512-QTNnx3uJ7OPTPm3LYEoQEJXBK9J4z+GsTLq6OsOdFfcMKmQf+4GSgwB+F92dA/wYNQWD1Jkqctq+Ri3QOqXl1g==}
 
+  school-districts@4.0.0:
+    resolution: {integrity: sha512-QUNq81DJXllREVjtpJ8hhB8DJLUqzlIlvCzFA2iftetYFTv70yxEtN9GfqecSjCf7m2hSCD3cjcl01I1/sue4A==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -675,8 +678,8 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte@5.43.4:
-    resolution: {integrity: sha512-tPNp21nDWB0PSHE+VrTvEy9cFtDp2Q+ATxQoFomISEVdikZ1QZ69UqBPz/LlT+Oc8/LYS/COYwDQZrmZEUr+JQ==}
+  svelte@5.43.5:
+    resolution: {integrity: sha512-HQoZArIewxQVNedseDsgMgnRSC4XOXczxXLF9rOJaPIJkg58INOPUiL8aEtzqZIXNSZJyw8NmqObwg/voajiHQ==}
     engines: {node: '>=18'}
 
   tinyglobby@0.2.15:
@@ -896,22 +899,22 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/vite-plugin-svelte-inspector@5.0.1(@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4))(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4)':
+  '@sveltejs/vite-plugin-svelte-inspector@5.0.1(@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5))(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4)
+      '@sveltejs/vite-plugin-svelte': 6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5)
       debug: 4.4.3
-      svelte: 5.43.4
+      svelte: 5.43.5
       vite: rolldown-vite@7.2.2(esbuild@0.25.11)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4)':
+  '@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 5.0.1(@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4))(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.4)
+      '@sveltejs/vite-plugin-svelte-inspector': 5.0.1(@sveltejs/vite-plugin-svelte@6.2.1(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5))(rolldown-vite@7.2.2(esbuild@0.25.11))(svelte@5.43.5)
       debug: 4.4.3
       deepmerge: 4.3.1
       magic-string: 0.30.21
-      svelte: 5.43.4
+      svelte: 5.43.5
       vite: rolldown-vite@7.2.2(esbuild@0.25.11)
       vitefu: 1.1.1(rolldown-vite@7.2.2(esbuild@0.25.11))
     transitivePeerDependencies:
@@ -990,7 +993,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  fast-studentvue@2.0.1:
+  fast-studentvue@2.0.2:
     dependencies:
       fast-xml-parser: 5.3.1
       school-districts: 2.0.0
@@ -1012,10 +1015,10 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
 
-  kreations@1.3.1(svelte@5.43.4):
+  kreations@1.3.1(svelte@5.43.5):
     dependencies:
       '@iconify/types': 2.0.0
-      svelte: 5.43.4
+      svelte: 5.43.5
 
   lightningcss-android-arm64@1.30.2:
     optional: true
@@ -1073,19 +1076,19 @@ snapshots:
       '@iconify/types': 2.0.0
       '@ktibow/iconset-material-symbols': 0.0.1761892960
       '@ktibow/material-color-utilities-nightly': 0.3.11762544400000
-      svelte: 5.43.4
+      svelte: 5.43.5
 
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  monoidentity@0.15.3(svelte@5.43.4)(typescript@5.9.3):
+  monoidentity@0.15.3(svelte@5.43.5)(typescript@5.9.3):
     dependencies:
       '@tsndr/cloudflare-worker-jwt': 3.2.0
       aws4fetch: 1.0.20
       devalue: 5.4.2
       idb-keyval: 6.2.2
-      svelte: 5.43.4
+      svelte: 5.43.5
       valibot: 1.1.0(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
@@ -1113,10 +1116,10 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier-plugin-svelte@3.4.0(prettier@3.6.2)(svelte@5.43.4):
+  prettier-plugin-svelte@3.4.0(prettier@3.6.2)(svelte@5.43.5):
     dependencies:
       prettier: 3.6.2
-      svelte: 5.43.4
+      svelte: 5.43.5
 
   prettier@3.6.2: {}
 
@@ -1161,23 +1164,25 @@ snapshots:
 
   school-districts@2.0.0: {}
 
+  school-districts@4.0.0: {}
+
   source-map-js@1.2.1: {}
 
   strnum@2.1.1: {}
 
-  svelte-check@4.3.3(picomatch@4.0.3)(svelte@5.43.4)(typescript@5.9.3):
+  svelte-check@4.3.3(picomatch@4.0.3)(svelte@5.43.5)(typescript@5.9.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       chokidar: 4.0.3
       fdir: 6.5.0(picomatch@4.0.3)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.43.4
+      svelte: 5.43.5
       typescript: 5.9.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte@5.43.4:
+  svelte@5.43.5:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5

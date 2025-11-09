@@ -1,16 +1,15 @@
-import districts from "school-districts";
+import { districtApps } from "school-districts";
 import { getLoginRecognized } from "monoidentity";
 
 export const getSubs = async () => {
   const { email } = getLoginRecognized();
   const domain = email.split("@")[1];
-  const district = districts[domain];
-
-  if (!district) {
-    throw new Error("Unknown district");
+  const apps = districtApps[domain];
+  if (!apps) {
+    throw new Error("Unknown domain");
   }
 
-  const base = district.apps.find((a) => a.app == "StudentVue")?.base;
+  const base = apps.find((a) => a.app == "StudentVue")?.base;
   if (!base) {
     throw new Error("District does not use StudentVue");
   }
