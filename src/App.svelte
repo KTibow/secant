@@ -13,7 +13,6 @@
   import { recalculateGrade, roundTo } from "./grades/lib/utils";
   import { getSchedule } from "./schedule";
   import Resources from "./resources/Index.svelte";
-  import TeacherInfo from "./schedule/TeacherInfoWrapper.svelte";
   import Grades from "./grades/Index.svelte";
   import Viz from "./lib/Viz.svelte";
 
@@ -66,7 +65,6 @@
 <div class="resources">
   <Resources {classes} {clazz} />
 </div>
-<TeacherInfo {classes} {clazz} />
 {#if clazz}
   {@const active = clazz.period == truePeriod}
   {#snippet content()}

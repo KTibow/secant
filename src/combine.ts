@@ -4,7 +4,7 @@ export type Class = {
   period: number;
   name: string;
   id?: string;
-  teacher?: string;
+  // teacher?: string;
   grade?: ClassGrade;
   startTime?: Date;
   endTime?: Date;
@@ -18,7 +18,7 @@ export const combine = (schedule?: Class[], grades?: ClassGrade[]) => {
         period: clazz.period,
         name: clazz.name,
         id: clazz.id,
-        teacher: clazz.teacher,
+        // teacher: clazz.teacher,
       };
       if (clazz.startTime) {
         output[clazz.period].startTime = clazz.startTime;

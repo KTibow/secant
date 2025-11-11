@@ -22,7 +22,7 @@ export const getSchedule = async () => {
       name: simplifyClassName(c["@_CourseTitle"]),
       period: c["@_Period"].includes("-") ? +c["@_Period"].split("-")[0] : +c["@_Period"],
       id: c["@_SectionGU"],
-      teacher: c["@_Teacher"],
+      // teacher: c["@_Teacher"],
       startTime,
       endTime,
     };
