@@ -29,6 +29,7 @@
     }
     max-width: 40rem;
     max-height: 90%;
+    margin: auto;
     overflow: hidden;
 
     padding: 1.5rem;
