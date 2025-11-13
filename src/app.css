@@ -23,9 +23,6 @@ body {
   color: rgb(var(--m3-scheme-on-background));
   --m3-font: Inter Variable, system-ui;
 }
-select {
-  background-color: transparent;
-}
 button {
   text-align: start;
 }
