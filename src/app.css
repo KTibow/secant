@@ -1,4 +1,4 @@
-@import "@unocss/reset/tailwind";
+@import "@unocss/reset/tailwind-v4";
 @import "m3-svelte/misc/styles.css";
 @import "m3-svelte/misc/recommended-styles.css";
 @font-face {
