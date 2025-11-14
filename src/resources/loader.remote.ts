@@ -133,7 +133,9 @@ const loadSections = async (
 
   if (sections.length == 0) return output;
 
-  const { response: responses }: { response: { body: { assignment: any[] } }[] } = await schoology(
+  const {
+    response: responses,
+  }: { response: { response_code: any; body: { assignment: any[] } }[] } = await schoology(
     new Request(`https://api.schoology.com/v1/multiget`, {
       method: "POST",
       body: JSON.stringify({
@@ -145,9 +147,12 @@ const loadSections = async (
     }),
   );
 
-  const resourcePromises = responses.map(async ({ body: { assignment: assignments } }, idx) => {
+  const resourcePromises = responses.map(async ({ response_code, body }, idx) => {
+    if (!body.assignment) {
+      throw new Error(`Schoology says ${body} (${response_code})`);
+    }
     const { section_school_code, id } = sections[idx];
-    const resources = await genResources(assignments, id, {
+    const resources = await genResources(body.assignment, id, {
       schoology,
       uid,
       predSubmitted: predSubmitted[section_school_code] || [],
