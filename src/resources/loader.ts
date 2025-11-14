@@ -37,13 +37,21 @@ export default async (auth: FullAuth, skipSubmittedCheck: Record<string, string[
   const predSections = cache["schoology-sections"] || [];
   const predSubmitted = cache["schoology-submitted"] || [];
 
-  const { resources, sections } = await remote({
-    auth,
-    predSections,
-    predSubmitted,
-    skipSubmittedCheck,
-    todayRegex,
-  });
+  let resources;
+  let sections;
+  try {
+    ({ resources, sections } = await remote({
+      auth,
+      predSections,
+      predSubmitted,
+      skipSubmittedCheck,
+      todayRegex,
+    }));
+  } catch (e) {
+    delete cache["schoology-sections"];
+    delete cache["schoology-submitted"];
+    throw e;
+  }
 
   cache["schoology-sections"] = sections;
   const submittedCache: Record<string, string[]> = {};
