@@ -148,7 +148,7 @@ const loadSections = async (
   );
 
   const resourcePromises = responses.map(async ({ response_code, body }, idx) => {
-    if (!body.assignment) {
+    if (!body?.assignment) {
       throw new Error(`Schoology says ${body} (${response_code})`);
     }
     const { section_school_code, id } = sections[idx];
