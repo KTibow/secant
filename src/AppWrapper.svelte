@@ -8,7 +8,9 @@
   app="secant"
   intents={[{ loginRecognized: true }]}
   getSyncStrategy={(path) =>
-    path.startsWith(".config/secant") ? { mode: "immediate" } : undefined}
+    path.startsWith(".config/secant/") || path.startsWith(".core/")
+      ? { mode: "immediate" }
+      : undefined}
 >
   <svelte:boundary>
     {#snippet failed(error)}
