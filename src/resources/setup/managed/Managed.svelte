@@ -21,9 +21,11 @@
       return `https://nsd.schoology.com/oauth/authorize?oauth_token=${decode(requestAuth.token.key)}&oauth_callback=${encodeURIComponent(`${hostname}/callback/schoology`)}`;
     }
   };
+
+  const promise = run();
 </script>
 
-{#await run()}
+{#await promise}
   <Icon icon={onward} size={48} />
 {:then schoologyLink}
   {#if schoologyLink}
