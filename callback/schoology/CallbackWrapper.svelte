@@ -6,7 +6,8 @@
 <Monoidentity
   app="secant"
   intents={[{ loginRecognized: true }]}
-  shouldBackup={(path) => path.startsWith(".core") || path.startsWith(".config/secant")}
+  getSyncStrategy={(path) =>
+    path.startsWith(".config/secant") ? { mode: "immediate" } : undefined}
 >
   <Callback />
 </Monoidentity>

@@ -6,8 +6,7 @@
 
   let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
 
-  const getAuth = () => getStorage("config").schoology;
-  let auth = $state(getAuth());
+  const config = getStorage("config");
   let classId = $derived(clazz?.id);
   let allGraded = $derived.by(() => {
     const output: Record<string, string[]> = {};
@@ -20,8 +19,8 @@
   });
 </script>
 
-{#if !auth}
-  <Setup finish={() => (auth = getAuth())} />
+{#if !config.schoology}
+  <Setup />
 {:else}
-  <ResourcesFetcher {classId} {allGraded} {auth} />
+  <ResourcesFetcher {classId} {allGraded} auth={config.schoology} />
 {/if}

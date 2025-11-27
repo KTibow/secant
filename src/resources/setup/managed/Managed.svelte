@@ -6,14 +6,11 @@
   import autoAuth from "./auto.remote";
   import start from "./start.remote";
 
-  let { finish }: { finish: () => void } = $props();
-
   const run = async () => {
     const verification = await retrieveVerification();
     const auth = await autoAuth(verification);
     if (auth) {
       save(auth);
-      finish();
       return;
     } else {
       const requestAuth = await start();
@@ -26,7 +23,9 @@
   };
 </script>
 
-{#await run() then schoologyLink}
+{#await run()}
+  <Icon icon={onward} size={48} />
+{:then schoologyLink}
   {#if schoologyLink}
     <Button href={schoologyLink}>Connect quick links</Button>
   {/if}

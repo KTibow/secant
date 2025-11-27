@@ -3,7 +3,6 @@
   import Managed from "./managed/Managed.svelte";
   import Key from "./Key.svelte";
 
-  let { finish }: { finish: () => void } = $props();
   let page = $state("home");
 </script>
 
@@ -17,9 +16,9 @@
     <button class="link" onclick={() => (page = "key")}>provide API keys instead</button>.
   </p>
 {:else if page == "managed"}
-  <Managed {finish} />
+  <Managed />
 {:else if page == "key"}
-  <Key {finish} />
+  <Key />
 {/if}
 
 <style>

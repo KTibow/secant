@@ -7,7 +7,8 @@
 <Monoidentity
   app="secant"
   intents={[{ loginRecognized: true }]}
-  shouldBackup={(path) => path.startsWith(".core") || path.startsWith(".config/secant")}
+  getSyncStrategy={(path) =>
+    path.startsWith(".config/secant") ? { mode: "immediate" } : undefined}
 >
   <svelte:boundary>
     {#snippet failed(error)}

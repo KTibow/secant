@@ -6,8 +6,6 @@
   import type { AuthBase } from "../../lib/api/schoology";
   import { encode } from "monoidentity";
 
-  let { finish }: { finish: () => void } = $props();
-
   let key = $state("");
   let secret = $state("");
   let secretEl: HTMLInputElement | undefined = $state();
@@ -23,7 +21,6 @@
     // Enrich
     const { id } = await getId(authBase);
     save({ ...authBase, userId: id });
-    finish();
   };
 </script>
 
