@@ -1,6 +1,7 @@
 import { getLoginRecognized, relog } from "monoidentity";
 import fastStudentvue from "fast-studentvue";
 
+let authFails = 0;
 export const studentvue = (methodName: string, params?: Record<string, string>) => {
   let login: { email: string; password: string };
   try {
@@ -8,5 +9,20 @@ export const studentvue = (methodName: string, params?: Record<string, string>) 
   } catch {
     relog();
   }
-  return fastStudentvue(login, relog, methodName, params);
+  return fastStudentvue(
+    login,
+    () => {
+      try {
+        if (authFails == 0) {
+          throw new Error("Invalid auth, will relog soon");
+        }
+        console.trace("Relogging");
+        relog();
+      } finally {
+        authFails++;
+      }
+    },
+    methodName,
+    params,
+  );
 };
