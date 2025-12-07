@@ -35,12 +35,12 @@
   }
 
   .normal {
-    background-color: rgb(var(--m3-scheme-surface-container-lowest));
+    background-color: var(--m3c-surface-container-lowest);
   }
 
   .shadowed {
-    background-color: rgb(var(--m3-scheme-primary-container));
-    color: rgb(var(--m3-scheme-on-primary-container));
+    background-color: var(--m3c-primary-container);
+    color: var(--m3c-on-primary-container);
     clip-path: inset(0 calc(100% - var(--percent)) 0 0 round 0.5rem);
   }
 

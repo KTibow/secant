@@ -46,8 +46,8 @@ export const calculateLetter = (grade: number) => {
   return "A";
 };
 export const calculateExtraCredit = (extra: number) => {
-  if (extra >= 50) return "rgb(var(--m3-scheme-primary))";
-  return `color-mix(in srgb-linear, rgb(var(--m3-scheme-primary)) ${
+  if (extra >= 50) return "var(--m3c-primary)";
+  return `color-mix(in srgb-linear, var(--m3c-primary) ${
     extra * 2
-  }%, rgb(var(--m3-scheme-on-background)) ${(50 - extra) * 2}%)`;
+  }%, var(--m3c-on-background) ${(50 - extra) * 2}%)`;
 };

@@ -22,7 +22,7 @@
 <style>
   dialog {
     flex-direction: column;
-    background-color: rgb(var(--m3-scheme-surface-container));
+    background-color: var(--m3c-surface-container);
     border-radius: 1.75rem;
     @media (width >= 40rem) {
       width: 40rem;

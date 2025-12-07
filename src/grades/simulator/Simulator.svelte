@@ -58,7 +58,7 @@
     height: 4.5rem;
     margin: -1.5rem;
     font-size: 1rem;
-    color: rgb(var(--m3-scheme-on-surface-variant));
+    color: var(--m3c-on-surface-variant);
 
     > select {
       padding-left: 1.5rem;

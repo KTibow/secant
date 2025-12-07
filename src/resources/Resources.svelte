@@ -14,7 +14,7 @@
 </script>
 
 {#if resources.every((r) => completedAssignments.includes(r.title) || r.submitted)}
-  <div class="zen m3-font-headline-large">
+  <div class="zen">
     {#if resources.length}
       <Icon icon={iconDone} size={40} />
       In zen
@@ -33,7 +33,7 @@
 {:else}
   <div class="resources">
     {#each links as { title, url }}
-      <a href={url} target="_blank" class="resource link m3-font-headline-large">
+      <a href={url} target="_blank" class="resource link">
         <Icon icon={iconExternal} />
         <div class="content-b">
           {title}
@@ -44,7 +44,7 @@
       <a
         href={url}
         target="_blank"
-        class="resource m3-font-headline-large"
+        class="resource"
         class:graded={completedAssignments.includes(title)}
         class:submitted={!completedAssignments.includes(title) && submitted}
       >
@@ -65,12 +65,13 @@
 
 <style>
   .zen {
+    @apply --m3-headline-large;
     display: flex;
     gap: 1rem;
     align-items: center;
     margin-block: auto;
     > :global(svg) {
-      color: rgb(var(--m3-scheme-secondary));
+      color: var(--m3c-secondary);
     }
   }
   .zen-links {
@@ -95,31 +96,32 @@
     flex: 1 1 0;
   }
   .resource {
+    @apply --m3-headline-large;
     display: flex;
     flex-direction: column;
     min-width: 20dvw;
     min-height: 10rem;
     flex-grow: 1000;
     padding: 1rem;
-    border-radius: var(--m3-util-rounding-medium);
+    border-radius: var(--m3-shape-medium);
     &:active {
-      border-radius: var(--m3-util-rounding-small);
+      border-radius: var(--m3-shape-small);
     }
-    transition: border-radius var(--m3-util-easing-fast-spatial);
-    background-color: rgb(var(--m3-scheme-surface-container-low));
+    transition: border-radius var(--m3-easing-fast-spatial);
+    background-color: var(--m3c-surface-container-low);
     &.link {
-      background-color: rgb(var(--m3-scheme-secondary-container-subtle));
-      color: rgb(var(--m3-scheme-on-secondary-container-subtle));
+      background-color: var(--m3c-secondary-container-subtle);
+      color: var(--m3c-on-secondary-container-subtle);
     }
     &.graded {
       background-color: transparent;
-      color: rgb(var(--m3-scheme-on-surface) / 0.38);
-      outline: solid 2px rgb(var(--m3-scheme-outline-variant));
+      color: --translucent(var(--m3c-on-surface), 0.38);
+      outline: solid 2px var(--m3c-outline-variant);
       outline-offset: -2px;
     }
     &.submitted {
-      background-color: rgb(var(--m3-scheme-on-surface) / 0.08);
-      color: rgb(var(--m3-scheme-on-surface) / 0.38);
+      background-color: --translucent(var(--m3c-on-surface), 0.08);
+      color: --translucent(var(--m3c-on-surface), 0.38);
     }
   }
   .content-a,

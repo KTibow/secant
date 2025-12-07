@@ -107,7 +107,7 @@
     gap: 0.5rem;
 
     > :global(*) {
-      background-color: rgb(var(--m3-scheme-surface-container-low));
+      background-color: var(--m3c-surface-container-low);
       padding: 0.5rem;
       border-radius: 1rem;
       flex-grow: 1;
@@ -119,8 +119,8 @@
         grid-column: 2;
       }
       &.warning {
-        background-color: rgb(var(--m3-scheme-error-container));
-        color: rgb(var(--m3-scheme-on-error-container));
+        background-color: var(--m3c-error-container);
+        color: var(--m3c-on-error-container);
       }
     }
   }

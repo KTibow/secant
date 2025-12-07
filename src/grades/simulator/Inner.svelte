@@ -69,20 +69,20 @@
     style:left="0"
     style:width="100%"
     style:border-radius="0.5rem"
-    style:background-color="rgb(var(--m3-scheme-surface-container-lowest))"
+    style:background-color="var(--m3c-surface-container-lowest)"
   ></div>
   <div
     style:left="{maxLoss * 100}%"
     style:width="{(currentPercent - maxLoss) * 100}%"
     style:border-radius="1rem 0 0 1rem"
-    style:background-color="rgb(var(--m3-scheme-tertiary-container-subtle))"
+    style:background-color="var(--m3c-tertiary-container-subtle)"
     title="Max down is {(maxLoss * 100).toFixed(2)}%"
   ></div>
   <div
     style:left="{currentPercent * 100}%"
     style:width="{(fixedPercent + variablePercent - currentPercent) * 100}%"
     style:border-radius="0 1rem 1rem 0"
-    style:background-color="rgb(var(--m3-scheme-primary-container-subtle))"
+    style:background-color="var(--m3c-primary-container-subtle)"
     title="Max up is {((fixedPercent + variablePercent) * 100).toFixed(2)}%"
   ></div>
 </div>
@@ -124,12 +124,12 @@
   }
 
   .down {
-    background-color: rgb(var(--m3-scheme-tertiary-container-subtle));
-    color: rgb(var(--m3-scheme-on-tertiary-container-subtle));
+    background-color: var(--m3c-tertiary-container-subtle);
+    color: var(--m3c-on-tertiary-container-subtle);
   }
   .up {
-    background-color: rgb(var(--m3-scheme-primary-container-subtle));
-    color: rgb(var(--m3-scheme-on-primary-container-subtle));
+    background-color: var(--m3c-primary-container-subtle);
+    color: var(--m3c-on-primary-container-subtle);
     text-align: right;
   }
   .up h2 {

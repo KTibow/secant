@@ -50,7 +50,7 @@
     gap: 0.5rem;
     line-height: 1;
 
-    background-color: rgb(var(--m3-scheme-surface-container-low));
+    background-color: var(--m3c-surface-container-low);
     padding: 0.5rem;
     border-radius: 1rem;
 
@@ -68,7 +68,7 @@
       margin-bottom: auto;
 
       > :global(svg) {
-        color: rgb(var(--m3-scheme-tertiary));
+        color: var(--m3c-tertiary);
         flex-shrink: 0;
       }
     }
@@ -102,6 +102,6 @@
 
     padding: 0.5rem;
     border-radius: 1rem;
-    background-color: rgb(var(--m3-scheme-surface-container-low));
+    background-color: var(--m3c-surface-container-low);
   }
 </style>

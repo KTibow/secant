@@ -26,7 +26,7 @@
     margin: auto;
     gap: 0.5rem;
     > * {
-      background-color: rgb(var(--m3-scheme-surface-container-highest));
+      background-color: var(--m3c-surface-container-highest);
       padding: 1rem;
       border-radius: 0.75rem;
       &:first-child {

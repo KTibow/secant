@@ -25,7 +25,7 @@
 </script>
 
 <div class="group">
-  <a class="m3-font-body-medium" href="https://nsd.schoology.com/api" target="_blank">
+  <a href="https://nsd.schoology.com/api" target="_blank">
     <Icon icon={iconExternal} size={20} />
     Get key
   </a>
@@ -53,16 +53,17 @@
     gap: 0.5rem;
   }
   a {
+    @apply --m3-body-medium;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    color: rgb(var(--m3-scheme-primary));
+    color: var(--m3c-primary);
   }
   input {
     height: 3rem;
     padding-inline: 0.75rem;
-    background: rgb(var(--m3-scheme-surface-container-low));
-    border-radius: var(--m3-util-rounding-medium);
+    background: var(--m3c-surface-container-low);
+    border-radius: var(--m3-shape-medium);
   }
 </style>

@@ -51,9 +51,9 @@
     <h3>
       Turn in missing assignments for a
       {#if entriesTotal * GRADE_RANGE * 100 + grade == 100}
-        <span style:color="rgb(var(--m3-scheme-tertiary))">100%</span>
+        <span style:color="var(--m3c-tertiary)">100%</span>
       {:else}
-        <span style:color="rgb(var(--m3-scheme-tertiary))"
+        <span style:color="var(--m3c-tertiary)"
           >{(entriesTotal * GRADE_RANGE * 100).toFixed(2)}%</span
         >
         boost
@@ -62,12 +62,9 @@
     <div class="bar">
       <div
         style:width="{grade + entriesTotal * GRADE_RANGE * 100}%"
-        style:background-color="rgb(var(--m3-scheme-tertiary))"
+        style:background-color="var(--m3c-tertiary)"
       ></div>
-      <div
-        style:width="{grade}%"
-        style:background-color="rgb(var(--m3-scheme-surface-container-high))"
-      ></div>
+      <div style:width="{grade}%" style:background-color="var(--m3c-surface-container-high)"></div>
     </div>
     <div style:flex-grow="1"></div>
     <div class="table">
@@ -96,12 +93,9 @@
     <div class="bar">
       <div
         style:width="{grade + size * GRADE_RANGE * 100}%"
-        style:background-color="rgb(var(--m3-scheme-tertiary))"
+        style:background-color="var(--m3c-tertiary)"
       ></div>
-      <div
-        style:width="{grade}%"
-        style:background-color="rgb(var(--m3-scheme-surface-container-high))"
-      ></div>
+      <div style:width="{grade}%" style:background-color="var(--m3c-surface-container-high)"></div>
     </div>
     <div class="table">
       <p>At missing</p>
@@ -109,7 +103,7 @@
       <p>At 60%</p>
       <p>{(grade + size * (GRADE_RANGE - 0.6) * 100).toFixed(1)}%</p>
       <p>At 100%</p>
-      <p style:color="rgb(var(--m3-scheme-tertiary))">
+      <p style:color="var(--m3c-tertiary)">
         {(grade + size * GRADE_RANGE * 100).toFixed(2).replace(/0$/, "")}%
       </p>
     </div>
@@ -151,7 +145,7 @@
   }
   .bar {
     display: flex;
-    background-color: rgb(var(--m3-scheme-surface-container-low));
+    background-color: var(--m3c-surface-container-low);
     height: 2rem;
     border-radius: 1rem;
     position: relative;

@@ -7,7 +7,7 @@
 </script>
 
 {#if page == "home"}
-  <label class="center m3-font-title-large">
+  <label>
     Quick links
     <Switch bind:checked={() => false, () => (page = "managed")} />
   </label>
@@ -22,7 +22,8 @@
 {/if}
 
 <style>
-  .center {
+  label {
+    @apply --m3-title-large;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,6 +36,6 @@
     margin-bottom: 1.5rem;
   }
   .link {
-    color: rgb(var(--m3-scheme-primary));
+    color: var(--m3c-primary);
   }
 </style>

@@ -10,10 +10,10 @@
   <Icon
     icon={loading ? triangleSquare : iconError}
     size={24}
-    style="position:fixed;top:0.5rem;right:0.5rem;background-color:rgb(var(--m3-scheme-{errored
+    style="position:fixed;top:0.5rem;right:0.5rem;background-color:var(--m3c-{errored
       ? 'error-container'
-      : 'primary-container-subtle'}));color:rgb(var(--m3-scheme-{errored
+      : 'primary-container-subtle'});color:var(--m3c-{errored
       ? 'on-error-container'
-      : 'on-primary-container-subtle'}));border-radius:var(--m3-util-rounding-extra-small)"
+      : 'on-primary-container-subtle'});border-radius:var(--m3-shape-extra-small)"
   />
 {/if}

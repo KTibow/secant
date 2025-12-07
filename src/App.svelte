@@ -71,7 +71,7 @@
     <div class="content">
       {clazz.name}
       {#if active && clazz.endTime}
-        <span style:color="rgb(var(--m3-scheme-tertiary))">
+        <span style:color="var(--m3c-tertiary)">
           {Math.ceil((clazz.endTime.getTime() - now.getTime()) / 60000)}
         </span>
       {:else}
@@ -133,16 +133,16 @@
 
 <style>
   :global(.fade) {
-    --fade-color: var(--m3-scheme-primary-container-subtle);
+    --fade-color: var(--m3c-primary-container-subtle);
     background-image: linear-gradient(
       to bottom,
-      rgb(var(--fade-color) / 1) 0,
-      rgb(var(--fade-color) / 0.8) calc(var(--gradient-height) * 0.25),
-      rgb(var(--fade-color) / 0.4) calc(var(--gradient-height) * 0.5),
-      rgb(var(--fade-color) / 0.2) calc(var(--gradient-height) * 0.75),
+      --translucent(var(--fade-color), 1) 0,
+      --translucent(var(--fade-color), 0.8) calc(var(--gradient-height) * 0.25),
+      --translucent(var(--fade-color), 0.4) calc(var(--gradient-height) * 0.5),
+      --translucent(var(--fade-color), 0.2) calc(var(--gradient-height) * 0.75),
       transparent var(--gradient-height)
     );
-    color: rgb(var(--m3-scheme-on-primary-container-subtle));
+    color: var(--m3c-on-primary-container-subtle);
   }
 
   .resources {
@@ -163,13 +163,13 @@
       padding: 0 1rem;
 
       transition:
-        background-image var(--m3-util-easing),
-        color var(--m3-util-easing),
-        border-radius var(--m3-util-easing-fast);
-      border-radius: var(--m3-util-rounding-medium);
+        background-image var(--m3-easing),
+        color var(--m3-easing),
+        border-radius var(--m3-easing-fast);
+      border-radius: var(--m3-shape-medium);
       &.active {
-        --fade-color: var(--m3-scheme-tertiary-container-subtle);
-        color: rgb(var(--m3-scheme-on-tertiary-container-subtle));
+        --fade-color: var(--m3c-tertiary-container-subtle);
+        color: var(--m3c-on-tertiary-container-subtle);
       }
       &:first-child {
         border-start-start-radius: 1.5rem;
@@ -178,7 +178,7 @@
         border-start-end-radius: 1.5rem;
       }
       &:active:enabled {
-        border-radius: var(--m3-util-rounding-small);
+        border-radius: var(--m3-shape-small);
       }
       &:first-child:enabled {
         border-end-start-radius: 0;
@@ -217,10 +217,10 @@
       flex: 1;
     }
     > :disabled {
-      color: rgb(var(--m3-scheme-outline-variant));
+      color: var(--m3c-outline-variant);
     }
     > :not(:enabled) {
-      outline: solid 2px rgb(var(--m3-scheme-outline-variant));
+      outline: solid 2px var(--m3c-outline-variant);
       outline-offset: -2px;
     }
   }
