@@ -33,7 +33,7 @@
     prompt += `\n${assignments.map((x) => JSON.stringify(x)).join("\n")}`;
     prompt += `\n${(futureAssignments || []).map((x) => "future: " + JSON.stringify(x)).join("\n")}`;
     const encoded = encodeURIComponent(prompt);
-    window.open(`https://cosinehq.web.app?q=${encoded}`, "_blank");
+    window.open(`https://cosinehq.web.app#q=${encoded}`, "_blank");
   };
 </script>
 
