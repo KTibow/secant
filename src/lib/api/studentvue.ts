@@ -13,7 +13,7 @@ export const studentvue = (methodName: string, params?: Record<string, string>) 
     login,
     () => {
       try {
-        if (authFails == 0) {
+        if (authFails < 2) {
           throw new Error("Invalid auth, will relog soon");
         }
         console.trace("Relogging");
