@@ -29,6 +29,9 @@ body {
 button {
   text-align: start;
 }
+@function --m3-density(--size) {
+  result: var(--size);
+}
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
