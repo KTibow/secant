@@ -18,7 +18,7 @@ export const getTimeBasedProgress = () => {
   const semester = getSemester();
   const done = semester.filter((d) => d.getTime() < now.getTime()).length;
   const total = semester.length;
-  return done / total;
+  return total > 0 ? done / total : 0;
 };
 
 export const getPointBasedProgress = (
