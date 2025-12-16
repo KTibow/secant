@@ -31,7 +31,7 @@
       prompt += `you're now being connected to the user, but it's a bit odd they asked you to analyze them when they're good already and they can already do basic analysis (view grade, its composition, and what-ifs ("simulate")) in secant. maybe explain how you can help with other classes or tasks, or laugh at how they're trying to analyze a ~perfect grade.`;
     prompt += `\n\noverall grade: ${grade}%`;
     prompt += `\n% through the semester (measured by days): ${roundTo(timeBasedProgress * 100, 1)}%`;
-    prompt += `\n% through the semester (measured by coursework): ${roundTo(pointBasedProgress * 100, 1)}%`;
+    prompt += `\n% through the semester (measured by visible coursework): ${roundTo(pointBasedProgress * 100, 1)}%`;
     if (categories) {
       prompt += `\n\ncategories:`;
       for (const [k, v] of Object.entries(categories)) {
