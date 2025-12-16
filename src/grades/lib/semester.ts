@@ -35,7 +35,7 @@ export const getPointBasedProgress = (
   let cumulativeProgress = 0;
   for (const [category, { possible, weight }] of Object.entries(categories)) {
     const futurePossible = futureAssignments
-      .filter((a) => a.category == category)
+      .filter((a) => a.category === category)
       .reduce((a, b) => a + b.points, 0);
     const total = possible + futurePossible;
     if (total > 0) {
