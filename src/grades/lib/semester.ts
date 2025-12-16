@@ -29,14 +29,18 @@ export const getPointBasedProgress = (
   if (!categories) {
     const possible = getPoints(assignments).possible;
     const futurePossible = futureAssignments.reduce((a, b) => a + b.points, 0);
-    return possible / (possible + futurePossible);
+    const total = possible + futurePossible;
+    return total > 0 ? possible / total : 0;
   }
   let cumulativeProgress = 0;
   for (const [category, { possible, weight }] of Object.entries(categories)) {
     const futurePossible = futureAssignments
       .filter((a) => a.category == category)
       .reduce((a, b) => a + b.points, 0);
-    cumulativeProgress += (possible / (possible + futurePossible)) * weight;
+    const total = possible + futurePossible;
+    if (total > 0) {
+      cumulativeProgress += (possible / total) * weight;
+    }
   }
   return cumulativeProgress;
 };
