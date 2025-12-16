@@ -2,8 +2,8 @@
   import type { ClassGrade } from "../lib/types";
   import PercentDone from "./PercentDone.svelte";
   import Warnings from "./Warnings.svelte";
-  import { calculateLetter, getPoints, roundTo } from "../lib/utils";
-  import { getSemester } from "../lib/semester";
+  import { calculateLetter, roundTo } from "../lib/utils";
+  import { getTimeBasedProgress, getPointBasedProgress } from "../lib/semester";
 
   let {
     categories,
@@ -15,26 +15,10 @@
     grade: number;
   } = $props();
 
-  const now = new Date();
-  const semester = getSemester();
-  const done = semester.filter((d) => d.getTime() < now.getTime()).length;
-  const total = semester.length;
-  const timeBasedProgress = done / total;
-  let pointBasedProgress = $derived.by(() => {
-    if (!categories) {
-      const possible = getPoints(assignments).possible;
-      const futurePossible = futureAssignments.reduce((a, b) => a + b.points, 0);
-      return possible / (possible + futurePossible);
-    }
-    let cumulativeProgress = 0;
-    for (const [category, { possible, weight }] of Object.entries(categories)) {
-      const futurePossible = futureAssignments
-        .filter((a) => a.category == category)
-        .reduce((a, b) => a + b.points, 0);
-      cumulativeProgress += (possible / (possible + futurePossible)) * weight;
-    }
-    return cumulativeProgress;
-  });
+  const timeBasedProgress = getTimeBasedProgress();
+  let pointBasedProgress = $derived(
+    getPointBasedProgress(assignments, futureAssignments, categories),
+  );
   let progress = $derived(
     pointBasedProgress ? Math.min(timeBasedProgress, pointBasedProgress) : timeBasedProgress,
   );
