@@ -42,7 +42,7 @@
       style:flex-basis="{weight * 100}%"
       style:background-color={adjustedPercent > 1
         ? calculateExtraCredit((adjustedPercent - 1) * 100)
-        : `oklab(from var(--m3c-on-background) l a b / ${adjustedPercent ** 2 * 0.98 + 0.02})`}
+        : `oklab(from var(--m3c-on-surface) l a b / ${adjustedPercent ** 2 * 0.98 + 0.02})`}
       title="{name} {(percent * 100).toFixed(0)}%"
     ></div>
   {/each}

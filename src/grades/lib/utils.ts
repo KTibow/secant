@@ -49,5 +49,5 @@ export const calculateExtraCredit = (extra: number) => {
   if (extra >= 50) return "var(--m3c-primary)";
   return `color-mix(in srgb-linear, var(--m3c-primary) ${
     extra * 2
-  }%, var(--m3c-on-background) ${(50 - extra) * 2}%)`;
+  }%, var(--m3c-on-surface) ${(50 - extra) * 2}%)`;
 };
