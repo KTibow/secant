@@ -84,9 +84,8 @@ const genResources = async (
   ];
   const resources = assignments.map((a) => processAssignment(a, courseId));
   await Promise.all(
-    assignments.map(async (assignment) => {
-      const resource = resources.find((r) => r.title == assignment.title);
-      if (!resource) return;
+    assignments.map(async (assignment, index) => {
+      const resource = resources[index];
 
       if (skipSubmittedCheck.includes(assignment.title)) {
         return;
