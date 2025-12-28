@@ -12,15 +12,12 @@ export const studentvue = (methodName: string, params?: Record<string, string>) 
   return fastStudentvue(
     login,
     () => {
-      try {
-        if (authFails < 2) {
-          throw new Error("Invalid auth, will relog soon");
-        }
-        console.trace("Relogging");
-        relog();
-      } finally {
-        authFails++;
+      authFails++;
+      if (authFails < 3) {
+        throw new Error("Invalid auth, will relog soon");
       }
+      console.trace("Relogging");
+      relog();
     },
     methodName,
     params,
