@@ -83,7 +83,6 @@
   {/snippet}
   <div class="controls">
     <button
-      class="focus-inset"
       class:fade={prevClass}
       disabled={!prevClass}
       onclick={() => (period = prevClass!.period)}
@@ -92,7 +91,7 @@
       <Icon icon={iconLeft} />
     </button>
     {#if grade}
-      <button class="focus-inset fade main" class:active onclick={() => (gradeOpen = !gradeOpen)}>
+      <button class="fade main" class:active onclick={() => (gradeOpen = !gradeOpen)}>
         <Layer />
         {@render content()}
         <div class="grade">
@@ -111,7 +110,6 @@
       </div>
     {/if}
     <button
-      class="focus-inset"
       class:fade={nextClass}
       disabled={!nextClass}
       onclick={() => (period = nextClass!.period)}
@@ -161,6 +159,7 @@
       display: flex;
       align-items: center;
       padding: 0 1rem;
+      @apply --m3-focus-inward;
 
       transition:
         background-image var(--m3-easing),

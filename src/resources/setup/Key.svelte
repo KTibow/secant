@@ -31,14 +31,12 @@
   </a>
   <!-- svelte-ignore a11y_autofocus -->
   <input
-    class="focus-inset"
     placeholder="Key"
     bind:value={key}
     autofocus
     onpaste={() => setTimeout(() => secretEl?.focus())}
   />
   <input
-    class="focus-inset"
     placeholder="Secret"
     bind:value={secret}
     bind:this={secretEl}
@@ -61,6 +59,7 @@
     color: var(--m3c-primary);
   }
   input {
+    @apply --m3-focus-inward;
     height: 3rem;
     padding-inline: 0.75rem;
     background: var(--m3c-surface-container-low);
