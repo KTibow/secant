@@ -1,4 +1,4 @@
-@import "@unocss/reset/tailwind-v4";
+@import "@unocss/reset/tailwind-v4" layer(base);
 @import "m3-svelte/etc/styles.css";
 @import "m3-svelte/etc/recommended-styles.css";
 @font-face {
@@ -20,6 +20,7 @@
   background-color: var(--m3c-surface);
   color: var(--m3c-on-surface);
   --m3-font: Inter Variable, system-ui;
+  color-scheme: light dark;
 }
 body {
   display: flex;
