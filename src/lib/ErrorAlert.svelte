@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { Layer } from "m3-svelte";
-
   let { error }: { error: unknown } = $props();
 </script>
 
@@ -8,13 +6,11 @@
   <pre class="blurb">{"Something went wrong" +
       (error instanceof Error ? "\n\nTechnical details:\n" + error.message : "")}</pre>
   {#if !navigator.userAgent.includes("Chrome")}
-    <button onclick={() => console.log(error)}>
-      <Layer />
+    <button class="m3-layer" onclick={() => console.log(error)}>
       Log
     </button>
   {/if}
-  <button class="primary" onclick={() => window.location.reload()}>
-    <Layer />
+  <button class="m3-layer primary" onclick={() => window.location.reload()}>
     Reload
   </button>
 </div>
@@ -42,7 +38,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
   }
 </style>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Layer } from "m3-svelte";
   import CategoryRepresentation from "./lib/CategoryRepresentation.svelte";
   import type { ClassGrade } from "./lib/types";
   import { simplifyCategory } from "./lib/naming";
@@ -53,12 +52,10 @@
       {assignments.length == 1 ? "assignment" : "assignments"}
     </span>
     <div style:flex-grow="1"></div>
-    <button onclick={openToss}>
-      <Layer />
+    <button class="m3-layer" onclick={openToss}>
       Toss
     </button>
-    <button onclick={openSimulator}>
-      <Layer />
+    <button class="m3-layer" onclick={openSimulator}>
       Simulate
     </button>
   </div>
@@ -104,7 +101,6 @@
       align-items: center;
       padding: 0 0.5rem;
       border-radius: 0.5rem;
-      position: relative;
 
       background-color: var(--m3c-secondary-container);
       color: var(--m3c-on-secondary-container);

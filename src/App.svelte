@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Layer, Icon, easeEmphasized } from "m3-svelte";
+  import { Icon, easeEmphasized } from "m3-svelte";
   import { slide } from "svelte/transition";
   import iconLeft from "@ktibow/iconset-material-symbols/chevron-left-rounded";
   import iconRight from "@ktibow/iconset-material-symbols/chevron-right-rounded";
@@ -83,16 +83,15 @@
   {/snippet}
   <div class="controls">
     <button
+      class="m3-layer"
       class:fade={prevClass}
       disabled={!prevClass}
       onclick={() => (period = prevClass!.period)}
     >
-      <Layer />
       <Icon icon={iconLeft} />
     </button>
     {#if grade}
-      <button class="fade main" class:active onclick={() => (gradeOpen = !gradeOpen)}>
-        <Layer />
+      <button class="fade main m3-layer" class:active onclick={() => (gradeOpen = !gradeOpen)}>
         {@render content()}
         <div class="grade">
           {#if gradeOpen}
@@ -110,11 +109,11 @@
       </div>
     {/if}
     <button
+      class="m3-layer"
       class:fade={nextClass}
       disabled={!nextClass}
       onclick={() => (period = nextClass!.period)}
     >
-      <Layer />
       <Icon icon={iconRight} />
     </button>
   </div>
@@ -185,7 +184,6 @@
       &:last-child:enabled {
         border-end-end-radius: 0;
       }
-      position: relative;
 
       --gradient-height: 3rem;
     }
