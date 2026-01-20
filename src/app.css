@@ -17,9 +17,10 @@
 }
 :root {
   @apply --m3-body-large;
+  --m3-font: Inter Variable, system-ui;
   background-color: var(--m3c-surface);
   color: var(--m3c-on-surface);
-  --m3-font: Inter Variable, system-ui;
+  box-sizing: border-box;
   color-scheme: light dark;
 }
 body {
