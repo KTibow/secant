@@ -40,16 +40,18 @@ const getGrade = (clazz: any): ClassGrade | undefined => {
       const ogType = item["@_ScoreType"] != "Raw Score" ? item["@_ScoreType"] : undefined;
       const ogScore = item["@_ScoreType"] != "Raw Score" ? parseFloat(item["@_Score"]) : undefined;
 
-      assignments.push({
-        earned,
-        possible,
-        ogType,
-        ogScore,
-        name,
-        // date: item["@_Date"],
-        missing: perhapsMissing && earned == 0,
-        category: item["@_Type"],
-      });
+      if (Number.isFinite(earned) && Number.isFinite(possible) && possible > 0) {
+        assignments.push({
+          earned,
+          possible,
+          ogType,
+          ogScore,
+          name,
+          // date: item["@_Date"],
+          missing: perhapsMissing && earned == 0,
+          category: item["@_Type"],
+        });
+      }
       continue;
     }
 
