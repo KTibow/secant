@@ -1,24 +1,38 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { getStorage } from "monoidentity";
   import Clock from "./Clock.svelte";
   import ClassPane from "./schedule/ClassPane.svelte";
   import { getSchedule } from "./lib/schedule";
   import { getGrades } from "./lib/grades";
+  import loader from "./lib/resources/loader";
   import { combine, type Class } from "./lib/combine";
-  import type { ClassGrade } from "./lib/types";
+  import type { ClassGrade, ResourceData } from "./lib/types";
 
   let schedule = $state<Class[]>([]);
   let grades = $state<ClassGrade[]>([]);
+  let resources = $state<Record<string, ResourceData>>({});
   let now = $state(new Date());
 
   let classes = $derived(
-    Object.values(combine(schedule, grades)).sort((a, b) => a.period - b.period),
+    Object.values(combine(schedule, grades, resources)).sort((a, b) => a.period - b.period),
   );
+
+  let allGraded = $derived.by(() => {
+    const output: Record<string, string[]> = {};
+    for (const clazz of classes) {
+      if (!clazz.grade || !clazz.id) continue;
+      output[clazz.id] = clazz.grade.assignments.map((a) => a.name);
+    }
+    return output;
+  });
 
   onMount(() => {
     const interval = setInterval(() => {
       now = new Date();
     }, 1000);
+
+    const config = getStorage("config");
 
     getSchedule().then((data) => {
       schedule = data;
@@ -27,6 +41,13 @@
     getGrades().then((data) => {
       grades = data;
     });
+
+    if (config?.schoology) {
+      // Pass empty skipSubmittedCheck for now or implement persistence
+      loader(config.schoology, {}).then((data) => {
+        resources = data;
+      });
+    }
 
     return () => clearInterval(interval);
   });

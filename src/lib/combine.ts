@@ -1,4 +1,4 @@
-import type { ClassGrade } from "./types";
+import type { ClassGrade, ResourceData } from "./types";
 
 export type Class = {
   period: number;
@@ -6,11 +6,16 @@ export type Class = {
   id?: string;
   // teacher?: string;
   grade?: ClassGrade;
+  resources?: ResourceData;
   startTime?: Date;
   endTime?: Date;
 };
 
-export const combine = (schedule?: Class[], grades?: ClassGrade[]) => {
+export const combine = (
+  schedule?: Class[],
+  grades?: ClassGrade[],
+  resources?: Record<string, ResourceData>,
+) => {
   const output: Record<number, Class> = {};
   if (schedule) {
     for (const clazz of schedule) {
@@ -35,6 +40,15 @@ export const combine = (schedule?: Class[], grades?: ClassGrade[]) => {
         name: grade.title,
       };
       output[grade.period].grade = grade;
+    }
+  }
+  if (resources) {
+    for (const periodStr in output) {
+      const period = Number(periodStr);
+      const clazz = output[period];
+      if (clazz.id && resources[clazz.id]) {
+        clazz.resources = resources[clazz.id];
+      }
     }
   }
   return output;

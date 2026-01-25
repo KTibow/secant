@@ -36,3 +36,21 @@ export type ClassGrade = {
     }
   >;
 };
+
+export type ResourceLink = {
+  title: string;
+  url: string;
+};
+
+export type ResourceItem = {
+  url: string;
+  icon: string;
+  title: string;
+  text?: string;
+  submitted: boolean;
+};
+
+export type ResourceData = {
+  links: ResourceLink[];
+  resources: ResourceItem[];
+};
