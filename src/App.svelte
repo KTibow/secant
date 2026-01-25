@@ -18,6 +18,10 @@
     Object.values(combine(schedule, grades, resources)).sort((a, b) => a.period - b.period),
   );
 
+  $effect(() => {
+    console.log("Combined classes:", classes);
+  });
+
   let allGraded = $derived.by(() => {
     const output: Record<string, string[]> = {};
     for (const clazz of classes) {
@@ -35,16 +39,19 @@
     const config = getStorage("config");
 
     getSchedule().then((data) => {
+      console.log("Schedule:", data);
       schedule = data;
     });
 
     getGrades().then((data) => {
+      console.log("Grades:", data);
       grades = data;
     });
 
     if (config?.schoology) {
       // Pass empty skipSubmittedCheck for now or implement persistence
       loader(config.schoology, {}).then((data) => {
+        console.log("Resources:", data);
         resources = data;
       });
     }

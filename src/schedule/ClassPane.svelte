@@ -29,9 +29,9 @@
   <div class="content-wrapper">
     <div class="header">
       <h2>{clazz.name}</h2>
-      {#if clazz.grade?.reportedGrade !== undefined}
+      {#if clazz.grade}
         <button class="grade-button" onclick={() => (gradeOpen = !gradeOpen)}>
-          <span class="score">{clazz.grade.reportedGrade}%</span>
+          <span class="score">{clazz.grade.reportedGrade ?? "--"}%</span>
           <Icon icon={gradeOpen ? iconCollapse : iconExpand} />
         </button>
         {#if gradeOpen}
