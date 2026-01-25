@@ -60,5 +60,5 @@ export default async (auth: FullAuth, skipSubmittedCheck: Record<string, string[
   }
   cache["schoology-submitted"] = submittedCache;
 
-  return resources;
+  return { resources, sections };
 };
