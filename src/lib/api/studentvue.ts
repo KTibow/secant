@@ -1,5 +1,15 @@
 import { getLoginRecognized, relog } from "monoidentity";
-import fastStudentvue from "fast-studentvue";
+import fastStudentvue, { getStudentVueBase } from "fast-studentvue";
+
+export const svAvailable = () => {
+  try {
+    const { email } = getLoginRecognized();
+    getStudentVueBase(email);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 let authFails = 0;
 export const studentvue = (methodName: string, params?: Record<string, string>) => {
@@ -8,6 +18,7 @@ export const studentvue = (methodName: string, params?: Record<string, string>) 
     login = getLoginRecognized();
   } catch {
     relog();
+    throw new Error("Redirecting to login...");
   }
   return fastStudentvue(
     login,
