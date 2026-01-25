@@ -1,14 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Clock from "./Clock.svelte";
-  import Grades from "./grades/Grades.svelte";
   import ClassPane from "./schedule/ClassPane.svelte";
   import { getSchedule } from "./lib/schedule";
+  import { getGrades } from "./lib/grades";
+  import { combine, type Class } from "./lib/combine";
+  import type { ClassGrade } from "./lib/types";
 
-  let classes = $state<
-    { name: string; period: number; id: string; startTime?: Date; endTime?: Date }[]
-  >([]);
+  let schedule = $state<Class[]>([]);
+  let grades = $state<ClassGrade[]>([]);
   let now = $state(new Date());
+
+  let classes = $derived(
+    Object.values(combine(schedule, grades)).sort((a, b) => a.period - b.period),
+  );
 
   onMount(() => {
     const interval = setInterval(() => {
@@ -16,7 +21,11 @@
     }, 1000);
 
     getSchedule().then((data) => {
-      classes = data;
+      schedule = data;
+    });
+
+    getGrades().then((data) => {
+      grades = data;
     });
 
     return () => clearInterval(interval);
@@ -51,7 +60,6 @@
 </script>
 
 <Clock schedule={classes} />
-<Grades />
 
 {#each classes as clazz (clazz.period)}
   <ClassPane {clazz} order={clazz.period} id="period-{clazz.period}" />

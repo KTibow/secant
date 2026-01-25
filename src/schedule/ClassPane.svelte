@@ -2,12 +2,14 @@
   import Pane from "../lib/Pane.svelte";
   import { ordinal } from "../lib/ordinal";
 
+  import type { Class } from "../lib/combine";
+
   let {
     clazz,
     order,
     ...rest
   }: {
-    clazz: { name: string; period: number; startTime?: Date; endTime?: Date };
+    clazz: Class;
     order: number;
     [key: string]: any;
   } = $props();
@@ -19,7 +21,9 @@
   {/snippet}
   <div class="content">
     <h2>{clazz.name}</h2>
-    <!-- Placeholder for future content -->
+    {#if clazz.grade?.reportedGrade !== undefined}
+      <div class="grade">{clazz.grade.reportedGrade}%</div>
+    {/if}
   </div>
 </Pane>
 
@@ -36,5 +40,10 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+  }
+  .grade {
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--m3c-primary);
   }
 </style>
