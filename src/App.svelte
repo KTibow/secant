@@ -1,7 +1,9 @@
 <script>
   import Clock from "./Clock.svelte";
-  // import Meals from "./meals/Meals.svelte";
+  import Schedule from "./schedule/Schedule.svelte";
+  import Grades from "./grades/Grades.svelte";
 </script>
 
 <Clock />
-<!-- <Meals /> -->
+<Grades />
+<Schedule />
