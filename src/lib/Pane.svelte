@@ -5,14 +5,16 @@
     children,
     status,
     order,
+    ...rest
   }: {
     children: Snippet;
     status: Snippet;
     order: number;
+    [key: string]: any;
   } = $props();
 </script>
 
-<div class="pane" style:order>
+<div class="pane" style:order {...rest}>
   <div class="content">{@render children()}</div>
   <div class="status">{@render status()}</div>
 </div>
