@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 functions
+.wrangler
+dist-worker.js
 
 .env
 
