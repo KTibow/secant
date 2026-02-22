@@ -20,11 +20,11 @@
 
     loading = 'Finding saved authentication';
     progress.target = 0.8;
-    // const authSaved = await retrieve(jwt);
-    // if (authSaved) {
-    //   save(authSaved);
-    //   return;
-    // }
+    const authSaved = await retrieve(jwt);
+    if (authSaved) {
+      save(authSaved);
+      return;
+    }
 
     fail();
   };
