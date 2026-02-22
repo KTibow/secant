@@ -1,4 +1,4 @@
-import 'monoidentity/init';
+import 'monoidentity/receive-callback';
 import { mount } from 'svelte';
 import AppWrapper from './AppWrapper.svelte';
 

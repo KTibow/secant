@@ -21,7 +21,7 @@
     "fast-studentvue": "^2.1.1",
     "kreations": "^1.3.2",
     "m3-svelte": "^7.1.0",
-    "monoidentity": "^0.26.0",
+    "monoidentity": "^0.27.0",
     "monoidentity-verification": "^0.1.2",
     "monoserve": "^3.2.4",
     "prettier": "^3.8.1",

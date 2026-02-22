@@ -36,8 +36,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0(svelte@5.53.2)(vite-plugin-functions-mixins@0.4.1(vite@8.0.0-beta.15(esbuild@0.27.3)))
       monoidentity:
-        specifier: ^0.26.0
-        version: 0.26.0(svelte@5.53.2)(typescript@5.9.3)
+        specifier: ^0.27.0
+        version: 0.27.0(svelte@5.53.2)(typescript@5.9.3)
       monoidentity-verification:
         specifier: ^0.1.2
         version: 0.1.2
@@ -881,8 +881,8 @@ packages:
   monoidentity-verification@0.1.2:
     resolution: {integrity: sha512-qev24Kb78r3kuk7TgjMuzrc0FWI6jDw8AAEqs/hOrPTohbR2StXlcpGE8IzB9t5RJS2B9NGnIaxppaBJxko/VQ==}
 
-  monoidentity@0.26.0:
-    resolution: {integrity: sha512-rHL/0nuYoLnv7Thbf0Lljuq6oIDY9l89cJxlK4oy+xPgPoqxy6pmmpyo/H8eEpWkKJE2Bt9QlMIsUDZJh6yliA==}
+  monoidentity@0.27.0:
+    resolution: {integrity: sha512-9i5CeIe/XB9Zq02bBshFIc0UJE03yhWLg7xKY5M0pONvx/qxkGADxDEz/g3nVWB6bX1XUKZBPPPPYYJ8q+vr7g==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1683,7 +1683,7 @@ snapshots:
       fast-studentvue: 2.1.1
       school-districts: 5.0.1
 
-  monoidentity@0.26.0(svelte@5.53.2)(typescript@5.9.3):
+  monoidentity@0.27.0(svelte@5.53.2)(typescript@5.9.3):
     dependencies:
       aws4fetch: 1.0.20
       devalue: 5.6.3
