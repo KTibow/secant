@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ClassGrade } from "../lib/types";
+  import type { ClassGrade } from '../lib/types';
 
   let {
     failedAssignments,
@@ -59,7 +59,7 @@
     }
 
     if (nonLineUpCount == 1) {
-      warningsList.push("a calculated category is different from official");
+      warningsList.push('a calculated category is different from official');
     } else if (nonLineUpCount > 1) {
       warningsList.push(`${nonLineUpCount} calculated categories are different from official`);
     }
@@ -67,7 +67,7 @@
     return warningsList;
   });
 
-  const formatter = new Intl.ListFormat("en", { style: "long", type: "conjunction" });
+  const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 </script>
 

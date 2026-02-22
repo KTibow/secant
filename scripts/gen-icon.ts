@@ -1,10 +1,10 @@
-import { writeFile } from "node:fs/promises";
+import { writeFile } from 'node:fs/promises';
 
 const map = (v: number, inMin: number, inMax: number, outMin: number, outMax: number) =>
   ((v - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 const round = (v: number, places: number) => Math.round(v * 10 ** places) / 10 ** places;
 
-let path = "";
+let path = '';
 let lastX = -Infinity;
 let lastY = -Infinity;
 for (let x = Math.PI * -0.5; x < Math.PI * 1.5; x += Math.PI / 64) {
@@ -23,4 +23,4 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 </svg>
 `;
 
-await writeFile("src/icon.svg", svg);
+await writeFile('src/icon.svg', svg);

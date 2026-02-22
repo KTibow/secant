@@ -1,7 +1,7 @@
 <script lang="ts">
-  import iconError from "@ktibow/iconset-material-symbols/error-outline-rounded";
-  import { triangleSquare } from "kreations";
-  import { Icon } from "m3-svelte";
+  import iconError from '@ktibow/iconset-material-symbols/error-outline-rounded';
+  import { triangleSquare } from 'kreations';
+  import { Icon } from 'm3-svelte';
 
   let { loading, errored }: { loading: boolean; errored: boolean } = $props();
 </script>

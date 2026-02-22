@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { type Assignment, type ClassGrade } from "./lib/types";
-  import { GRADE_RANGE } from "./lib/const";
+  import { type Assignment, type ClassGrade } from './lib/types';
+  import { GRADE_RANGE } from './lib/const';
 
   let { grade, categories, assignments }: ClassGrade & { grade: number } = $props();
 
@@ -73,7 +73,7 @@
       <p>At 60%</p>
       <p>{(grade + entriesTotal * (GRADE_RANGE - 0.6) * 100).toFixed(1)}%</p>
       <p>At 100%</p>
-      <p>{(grade + entriesTotal * GRADE_RANGE * 100).toFixed(2).replace(/0$/, "")}%</p>
+      <p>{(grade + entriesTotal * GRADE_RANGE * 100).toFixed(2).replace(/0$/, '')}%</p>
     </div>
   </div>
   <div class="group">
@@ -104,7 +104,7 @@
       <p>{(grade + size * (GRADE_RANGE - 0.6) * 100).toFixed(1)}%</p>
       <p>At 100%</p>
       <p style:color="var(--m3c-tertiary)">
-        {(grade + size * GRADE_RANGE * 100).toFixed(2).replace(/0$/, "")}%
+        {(grade + size * GRADE_RANGE * 100).toFixed(2).replace(/0$/, '')}%
       </p>
     </div>
   </div>

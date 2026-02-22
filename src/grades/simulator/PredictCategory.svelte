@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Inner from "./Inner.svelte";
-  import Slider from "./Slider.svelte";
+  import Inner from './Inner.svelte';
+  import Slider from './Slider.svelte';
 
   let {
     category,

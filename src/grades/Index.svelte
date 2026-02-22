@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Grade from "./Grade.svelte";
-  import Tips from "./tips/Index.svelte";
-  import GradeBar from "./GradeBar.svelte";
-  import GradeDetails from "./GradeDetails.svelte";
-  import Missing from "./Missing.svelte";
-  import AssignmentsList from "./AssignmentsList.svelte";
-  import Simulator from "./simulator/Index.svelte";
-  import type { ClassGrade } from "./lib/types";
-  import { recalculateGrade } from "./lib/utils";
-  import { originals } from ".";
+  import Grade from './Grade.svelte';
+  import Tips from './tips/Index.svelte';
+  import GradeBar from './GradeBar.svelte';
+  import GradeDetails from './GradeDetails.svelte';
+  import Missing from './Missing.svelte';
+  import AssignmentsList from './AssignmentsList.svelte';
+  import Simulator from './simulator/Index.svelte';
+  import type { ClassGrade } from './lib/types';
+  import { recalculateGrade } from './lib/utils';
+  import { originals } from '.';
 
   let clazz: ClassGrade = $props();
   $effect(() => console.log($state.snapshot(clazz), originals[clazz.period]));

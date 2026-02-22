@@ -1,6 +1,6 @@
-import { fn } from "monoserve";
-import { array, custom, object, record, string, type InferOutput } from "valibot";
-import { createSchoology, fullAuth } from "../lib/api/schoology";
+import { fn } from 'monoserve';
+import { array, custom, object, record, string, type InferOutput } from 'valibot';
+import { createSchoology, fullAuth } from '../lib/api/schoology';
 
 const section = object({ id: string(), section_school_code: string(), course_title: string() });
 type Section = InferOutput<typeof section>;
@@ -18,12 +18,12 @@ const filterAssignments = (assignments: any[], todayRegex: RegExp) => {
   return assignments;
 };
 const processAssignment = (assignment: any, courseId: string) => {
-  let icon = "none";
-  if (assignment.type == "assessment" || assignment.type == "assessment_v2") {
-    icon = "test";
+  let icon = 'none';
+  if (assignment.type == 'assessment' || assignment.type == 'assessment_v2') {
+    icon = 'test';
   }
-  if (assignment.assignment_type == "lti_submission") {
-    icon = "worksheet";
+  if (assignment.assignment_type == 'lti_submission') {
+    icon = 'worksheet';
   }
 
   let text: string | undefined;
@@ -31,26 +31,26 @@ const processAssignment = (assignment: any, courseId: string) => {
     text = assignment.description;
   }
   if (text) {
-    text = text.replace(/^HW #\d+ /, "");
-    text = text.replace(/^\(\d+\.\d+\)\s/, "");
-    text = text.replace(/^\(\d+\.\d+ and \d+\.\d+\)\s/, "");
-    text = text.replace(/^Read \d+-\d+\n/, "");
-    if (text.includes("Do ")) {
-      text = text.slice(text.indexOf("Do "));
+    text = text.replace(/^HW #\d+ /, '');
+    text = text.replace(/^\(\d+\.\d+\)\s/, '');
+    text = text.replace(/^\(\d+\.\d+ and \d+\.\d+\)\s/, '');
+    text = text.replace(/^Read \d+-\d+\n/, '');
+    if (text.includes('Do ')) {
+      text = text.slice(text.indexOf('Do '));
     }
-    if (text.includes("DO ")) {
-      text = text.slice(text.indexOf("DO "));
+    if (text.includes('DO ')) {
+      text = text.slice(text.indexOf('DO '));
     }
   }
   return {
     url:
-      assignment.type == "assignment"
+      assignment.type == 'assignment'
         ? `https://nsd.schoology.com/assignment/${assignment.id}/info`
-        : assignment.type == "assessment"
+        : assignment.type == 'assessment'
           ? `https://nsd.schoology.com/assignment/${assignment.id}/assessment_view`
-          : assignment.type == "assessment_v2"
+          : assignment.type == 'assessment_v2'
             ? `https://nsd.schoology.com/course/${courseId}/assessments/${assignment.id}`
-            : "",
+            : '',
     icon,
     title: assignment.title,
     text,
@@ -78,7 +78,7 @@ const genResources = async (
 
   const links = [
     {
-      title: "Schoology",
+      title: 'Schoology',
       url: `https://nsd.schoology.com/course/${courseId}/materials`,
     },
   ];
@@ -94,7 +94,7 @@ const genResources = async (
         resource.submitted = true;
         return;
       }
-      if (assignment.allow_dropbox != "1") {
+      if (assignment.allow_dropbox != '1') {
         return;
       }
       if (new Date(assignment.due).getTime() - Date.now() >= 5 * 24 * 60 * 60 * 1000) {
@@ -136,13 +136,13 @@ const loadSections = async (
     response: responses,
   }: { response: { response_code: any; body: { assignment: any[] } }[] } = await schoology(
     new Request(`https://api.schoology.com/v1/multiget`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({
         request: sections.map(
           ({ id }) => `/v1/sections/${id}/assignments?limit=100&with_attachments=1`,
         ),
       }),
-      headers: { "content-type": "application/json" },
+      headers: { 'content-type': 'application/json' },
     }),
   );
 

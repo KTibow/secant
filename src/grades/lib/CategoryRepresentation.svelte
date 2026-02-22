@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Icon } from "m3-svelte";
-  import iconTriangle from "@ktibow/iconset-material-symbols/change-history-rounded";
-  import iconPentagon from "@ktibow/iconset-material-symbols/pentagon-rounded";
+  import { Icon } from 'm3-svelte';
+  import iconTriangle from '@ktibow/iconset-material-symbols/change-history-rounded';
+  import iconPentagon from '@ktibow/iconset-material-symbols/pentagon-rounded';
 
   let { category }: { category: string } = $props();
   const iconDiamond = {
@@ -11,11 +11,11 @@
   };
 </script>
 
-{#if category == "assignment"}
+{#if category == 'assignment'}
   <div></div>
-{:else if category == "project"}
+{:else if category == 'project'}
   <Icon icon={iconTriangle} />
-{:else if category == "test"}
+{:else if category == 'test'}
   <Icon icon={iconDiamond} />
 {:else}
   <Icon icon={iconPentagon} />

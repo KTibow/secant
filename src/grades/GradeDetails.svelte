@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { simplifyCategory, shortenCategory } from "./lib/naming";
-  import CategoryRepresentation from "./lib/CategoryRepresentation.svelte";
-  import type { ClassGrade } from "./lib/types";
-  import { roundTo, getPoints } from "./lib/utils";
+  import { simplifyCategory, shortenCategory } from './lib/naming';
+  import CategoryRepresentation from './lib/CategoryRepresentation.svelte';
+  import type { ClassGrade } from './lib/types';
+  import { roundTo, getPoints } from './lib/utils';
 
   let { categories, assignments }: ClassGrade = $props();
 </script>

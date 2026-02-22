@@ -1,5 +1,5 @@
-import { getLoginRecognized, relog } from "monoidentity";
-import fastStudentvue from "fast-studentvue";
+import { getLoginRecognized, relog } from 'monoidentity';
+import fastStudentvue from 'fast-studentvue';
 
 let authFails = 0;
 export const studentvue = (methodName: string, params?: Record<string, string>) => {
@@ -14,9 +14,9 @@ export const studentvue = (methodName: string, params?: Record<string, string>) 
     () => {
       authFails++;
       if (authFails < 3) {
-        throw new Error("Invalid auth, will relog soon");
+        throw new Error('Invalid auth, will relog soon');
       }
-      console.trace("Relogging");
+      console.trace('Relogging');
       relog();
     },
     methodName,

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import CategoryRepresentation from "./lib/CategoryRepresentation.svelte";
-  import type { ClassGrade } from "./lib/types";
-  import { simplifyCategory } from "./lib/naming";
-  import { roundTo } from "./lib/utils";
-  import { getTimeBasedProgress, getPointBasedProgress } from "./lib/semester";
+  import CategoryRepresentation from './lib/CategoryRepresentation.svelte';
+  import type { ClassGrade } from './lib/types';
+  import { simplifyCategory } from './lib/naming';
+  import { roundTo } from './lib/utils';
+  import { getTimeBasedProgress, getPointBasedProgress } from './lib/semester';
 
   let {
     assignments,
@@ -22,8 +22,8 @@
   );
 
   const openToss = () => {
-    let prompt = "";
-    prompt += `the user just hit a "toss" button on secant, tossing their grades in ${categories ? "a weighted" : "an unweighted"} class to you. `;
+    let prompt = '';
+    prompt += `the user just hit a "toss" button on secant, tossing their grades in ${categories ? 'a weighted' : 'an unweighted'} class to you. `;
     if (grade < 93)
       prompt += `you're now being connected to the user, so explain how you can analyze them beyond a basic breakdown (secant already let the user view their grade, their composition, and run what-ifs ("simulate")) quick`;
     else
@@ -38,10 +38,10 @@
       }
     }
     prompt += `\n\nall assignments:`;
-    prompt += `\n${assignments.map((x) => JSON.stringify(x)).join("\n")}`;
-    prompt += `\n${(futureAssignments || []).map((x) => "future: " + JSON.stringify(x)).join("\n")}`;
+    prompt += `\n${assignments.map((x) => JSON.stringify(x)).join('\n')}`;
+    prompt += `\n${(futureAssignments || []).map((x) => 'future: ' + JSON.stringify(x)).join('\n')}`;
     const encoded = encodeURIComponent(prompt);
-    window.open(`https://cosinehq.web.app#q=${encoded}`, "_blank");
+    window.open(`https://cosinehq.web.app#q=${encoded}`, '_blank');
   };
 </script>
 
@@ -49,15 +49,11 @@
   <div class="header">
     <span>
       {assignments.length}
-      {assignments.length == 1 ? "assignment" : "assignments"}
+      {assignments.length == 1 ? 'assignment' : 'assignments'}
     </span>
     <div style:flex-grow="1"></div>
-    <button class="m3-layer" onclick={openToss}>
-      Toss
-    </button>
-    <button class="m3-layer" onclick={openSimulator}>
-      Simulate
-    </button>
+    <button class="m3-layer" onclick={openToss}> Toss </button>
+    <button class="m3-layer" onclick={openSimulator}> Simulate </button>
   </div>
 
   <div class="columns" class:has-categories={hasCategories}>

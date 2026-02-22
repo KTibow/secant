@@ -33,20 +33,20 @@ export const recalculateGrade = (period: {
 };
 export const roundTo = (n: number, d: number) => Math.round(n * 10 ** d) / 10 ** d;
 export const calculateLetter = (grade: number) => {
-  if (grade < 60) return "F";
-  if (grade < 67) return "D";
-  if (grade < 70) return "D+";
-  if (grade < 73) return "C-";
-  if (grade < 77) return "C";
-  if (grade < 80) return "C+";
-  if (grade < 83) return "B-";
-  if (grade < 87) return "B";
-  if (grade < 90) return "B+";
-  if (grade < 93) return "A-";
-  return "A";
+  if (grade < 60) return 'F';
+  if (grade < 67) return 'D';
+  if (grade < 70) return 'D+';
+  if (grade < 73) return 'C-';
+  if (grade < 77) return 'C';
+  if (grade < 80) return 'C+';
+  if (grade < 83) return 'B-';
+  if (grade < 87) return 'B';
+  if (grade < 90) return 'B+';
+  if (grade < 93) return 'A-';
+  return 'A';
 };
 export const calculateExtraCredit = (extra: number) => {
-  if (extra >= 50) return "var(--m3c-primary)";
+  if (extra >= 50) return 'var(--m3c-primary)';
   return `color-mix(in srgb-linear, var(--m3c-primary) ${
     extra * 2
   }%, var(--m3c-on-surface) ${(50 - extra) * 2}%)`;

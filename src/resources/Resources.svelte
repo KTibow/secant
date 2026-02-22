@@ -1,9 +1,9 @@
 <script lang="ts">
-  import iconDone from "@ktibow/iconset-material-symbols/done-all-rounded";
-  import iconExternal from "@ktibow/iconset-material-symbols/arrow-outward-rounded";
-  import iconTest from "@ktibow/iconset-material-symbols/task-alt-rounded";
-  import { Button, Icon } from "m3-svelte";
-  import type { ResourceData } from "./loader.remote";
+  import iconDone from '@ktibow/iconset-material-symbols/done-all-rounded';
+  import iconExternal from '@ktibow/iconset-material-symbols/arrow-outward-rounded';
+  import iconTest from '@ktibow/iconset-material-symbols/task-alt-rounded';
+  import { Button, Icon } from 'm3-svelte';
+  import type { ResourceData } from './loader.remote';
   let {
     resources,
     links,
@@ -48,7 +48,7 @@
         class:graded={completedAssignments.includes(title)}
         class:submitted={!completedAssignments.includes(title) && submitted}
       >
-        {#if icon == "test"}
+        {#if icon == 'test'}
           <Icon icon={iconTest} />
         {:else if text}
           <div class="content-a">

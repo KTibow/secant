@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Assignment, ClassGrade } from "./lib/types";
-  import { calculateExtraCredit } from "./lib/utils";
-  import { getAdjustedPercent } from "./lib/const";
+  import type { Assignment, ClassGrade } from './lib/types';
+  import { calculateExtraCredit } from './lib/utils';
+  import { getAdjustedPercent } from './lib/const';
 
   let { categories, assignments }: ClassGrade = $props();
 

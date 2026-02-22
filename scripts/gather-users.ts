@@ -1,16 +1,16 @@
-import { rolldown } from "rolldown";
+import { rolldown } from 'rolldown';
 
 const bundle = await rolldown({
-  input: "./scripts/gather-users-inner.ts",
+  input: './scripts/gather-users-inner.ts',
   plugins: [
     {
-      name: "virtual",
+      name: 'virtual',
       resolveId(id) {
-        if (id == "$env/static/private") return id;
+        if (id == '$env/static/private') return id;
       },
       async load(id) {
-        if (id == "$env/static/private") {
-          let js = "";
+        if (id == '$env/static/private') {
+          let js = '';
           // @ts-expect-error not used to node
           for (const [key, value] of Object.entries(process.env)) {
             if (!/^[A-Z0-9_]+$/.test(key)) continue;
@@ -24,8 +24,8 @@ const bundle = await rolldown({
   ],
 });
 await bundle.write({
-  file: "/tmp/gather-users.js",
+  file: '/tmp/gather-users.js',
 });
 
 // @ts-expect-error unknown file
-await import("/tmp/gather-users.js");
+await import('/tmp/gather-users.js');

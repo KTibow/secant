@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { Icon, easeEmphasized } from "m3-svelte";
-  import { slide } from "svelte/transition";
-  import iconLeft from "@ktibow/iconset-material-symbols/chevron-left-rounded";
-  import iconRight from "@ktibow/iconset-material-symbols/chevron-right-rounded";
-  import iconDown from "@ktibow/iconset-material-symbols/keyboard-arrow-down-rounded";
-  import iconUp from "@ktibow/iconset-material-symbols/keyboard-arrow-up-rounded";
-  import { trackCachedAuto } from "./lib/data-tracking";
-  import { now } from "./lib/utils-now.svelte";
-  import { ordinal } from "./lib/ordinal";
-  import { combine } from "./combine";
-  import { getGrades } from "./grades";
-  import { recalculateGrade, roundTo } from "./grades/lib/utils";
-  import { getSchedule } from "./schedule";
-  import Resources from "./resources/Index.svelte";
-  import Grades from "./grades/Index.svelte";
-  import Viz from "./lib/Viz.svelte";
+  import { Icon, easeEmphasized } from 'm3-svelte';
+  import { slide } from 'svelte/transition';
+  import iconLeft from '@ktibow/iconset-material-symbols/chevron-left-rounded';
+  import iconRight from '@ktibow/iconset-material-symbols/chevron-right-rounded';
+  import iconDown from '@ktibow/iconset-material-symbols/keyboard-arrow-down-rounded';
+  import iconUp from '@ktibow/iconset-material-symbols/keyboard-arrow-up-rounded';
+  import { trackCachedAuto } from './lib/data-tracking';
+  import { now } from './lib/utils-now.svelte';
+  import { ordinal } from './lib/ordinal';
+  import { combine } from './combine';
+  import { getGrades } from './grades';
+  import { recalculateGrade, roundTo } from './grades/lib/utils';
+  import { getSchedule } from './schedule';
+  import Resources from './resources/Index.svelte';
+  import Grades from './grades/Index.svelte';
+  import Viz from './lib/Viz.svelte';
 
-  const schedule = trackCachedAuto({ id: "schedule", loader: getSchedule });
-  const grades = trackCachedAuto({ id: "grades", loader: getGrades, expireAfter: 1000 * 60 * 60 });
+  const schedule = trackCachedAuto({ id: 'schedule', loader: getSchedule });
+  const grades = trackCachedAuto({ id: 'grades', loader: getGrades, expireAfter: 1000 * 60 * 60 });
   let classes = $derived(combine($schedule.data, $grades.data));
   let classesList = $derived(Object.values(classes).sort((a, b) => a.period - b.period));
 
@@ -51,12 +51,12 @@
 <svelte:window
   onkeydown={({ key, target }) => {
     if (!(target instanceof Element)) return;
-    if (["INPUT", "TEXTAREA", "SELECT"].includes(target?.tagName || "")) return;
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName || '')) return;
 
-    if (key == "ArrowLeft") {
+    if (key == 'ArrowLeft') {
       const prevPeriod = prevClass?.period || classesList.at(-1)?.period;
       if (prevPeriod) period = prevPeriod;
-    } else if (key == "ArrowRight") {
+    } else if (key == 'ArrowRight') {
       const nextPeriod = nextClass?.period || classesList[0]?.period;
       if (nextPeriod) period = nextPeriod;
     }

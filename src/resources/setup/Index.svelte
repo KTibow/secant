@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { Switch } from "m3-svelte";
-  import Managed from "./managed/Managed.svelte";
-  import Key from "./Key.svelte";
+  import { Switch } from 'm3-svelte';
+  import Managed from './managed/Managed.svelte';
+  import Key from './Key.svelte';
 
-  let page = $state("home");
+  let page = $state('home');
 </script>
 
-{#if page == "home"}
+{#if page == 'home'}
   <label>
     Quick links
-    <Switch bind:checked={() => false, () => (page = "managed")} />
+    <Switch bind:checked={() => false, () => (page = 'managed')} />
   </label>
   <p class="disclosure">
     Toggling that switch lets Secant manage setup. You may like to
-    <button class="link" onclick={() => (page = "key")}>provide API keys instead</button>.
+    <button class="link" onclick={() => (page = 'key')}>provide API keys instead</button>.
   </p>
-{:else if page == "managed"}
+{:else if page == 'managed'}
   <Managed />
-{:else if page == "key"}
+{:else if page == 'key'}
   <Key />
 {/if}
 

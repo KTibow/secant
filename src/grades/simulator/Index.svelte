@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Simulator from "./Simulator.svelte";
-  import type { ClassGrade } from "../lib/types";
+  import Simulator from './Simulator.svelte';
+  import type { ClassGrade } from '../lib/types';
 
   let clazz: ClassGrade & { grade: number } = $props();
 

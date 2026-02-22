@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Inner from "./Inner.svelte";
-  import Slider from "./Slider.svelte";
-  import { type Assignment } from "../lib/types";
+  import Inner from './Inner.svelte';
+  import Slider from './Slider.svelte';
+  import { type Assignment } from '../lib/types';
 
   let {
     assignments,

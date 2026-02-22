@@ -1,10 +1,10 @@
 <script lang="ts">
-  import iconClose from "@ktibow/iconset-material-symbols/close-rounded";
-  import { shortenCategory } from "../lib/naming";
-  import PredictCategory from "./PredictCategory.svelte";
-  import PredictWithoutCategory from "./PredictWithoutCategory.svelte";
-  import type { ClassGrade } from "../lib/types";
-  import { Icon } from "m3-svelte";
+  import iconClose from '@ktibow/iconset-material-symbols/close-rounded';
+  import { shortenCategory } from '../lib/naming';
+  import PredictCategory from './PredictCategory.svelte';
+  import PredictWithoutCategory from './PredictWithoutCategory.svelte';
+  import type { ClassGrade } from '../lib/types';
+  import { Icon } from 'm3-svelte';
 
   let {
     categories,

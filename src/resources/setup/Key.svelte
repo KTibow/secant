@@ -1,18 +1,18 @@
 <script lang="ts">
-  import iconExternal from "@ktibow/iconset-material-symbols/arrow-outward-rounded";
-  import { Icon } from "m3-svelte";
-  import { save } from "./save";
-  import getId from "./get-id.remote";
-  import type { AuthBase } from "../../lib/api/schoology";
+  import iconExternal from '@ktibow/iconset-material-symbols/arrow-outward-rounded';
+  import { Icon } from 'm3-svelte';
+  import { save } from './save';
+  import getId from './get-id.remote';
+  import type { AuthBase } from '../../lib/api/schoology';
 
-  let key = $state("");
-  let secret = $state("");
+  let key = $state('');
+  let secret = $state('');
   let secretEl: HTMLInputElement | undefined = $state();
 
   const submit = async () => {
     const authBase: AuthBase = {
       token: { key, secret },
-      appToken: "token",
+      appToken: 'token',
     };
     // Enrich
     const { id } = await getId(authBase);

@@ -1,10 +1,10 @@
-import { intersect, literal, number, object, string, union, type InferOutput } from "valibot";
-import { SC_KEY_A1, SC_SECRET_A1, SC_KEY_75, SC_SECRET_75 } from "$env/static/private";
+import { intersect, literal, number, object, string, union, type InferOutput } from 'valibot';
+import { SC_KEY_A1, SC_SECRET_A1, SC_KEY_75, SC_SECRET_75 } from '$env/static/private';
 
 const tokenSchema = object({ key: string(), secret: string() });
 export const authBase = object({
   token: tokenSchema,
-  appToken: union([literal("token"), literal("a1"), literal("75")]),
+  appToken: union([literal('token'), literal('a1'), literal('75')]),
 });
 export const fullAuth = intersect([authBase, object({ userId: number() })]);
 export type AuthBase = InferOutput<typeof authBase>;
@@ -20,14 +20,14 @@ export const internalCreateSchoology = (
     const sortedParams = Object.keys(params)
       .sort()
       .map((key) => `${key}=${encodeURIComponent(params[key])}`);
-    return `${method}&${encodeURIComponent(url)}&${encodeURIComponent(sortedParams.join("&"))}`;
+    return `${method}&${encodeURIComponent(url)}&${encodeURIComponent(sortedParams.join('&'))}`;
   };
 
   const sign = async (
     method: string,
     url: string,
     params: Record<string, string>,
-    tokenSecret = "",
+    tokenSecret = '',
   ) => {
     const baseString = createBaseString(method, url, params);
     const signingKey = `${encodeURIComponent(appSecret)}&${encodeURIComponent(tokenSecret)}`;
@@ -36,20 +36,20 @@ export const internalCreateSchoology = (
     const data = new TextEncoder().encode(baseString);
 
     const cryptoKey = await crypto.subtle.importKey(
-      "raw",
+      'raw',
       keyData,
-      { name: "HMAC", hash: "SHA-1" },
+      { name: 'HMAC', hash: 'SHA-1' },
       false,
-      ["sign"],
+      ['sign'],
     );
 
-    const signature = await crypto.subtle.sign("HMAC", cryptoKey, data);
+    const signature = await crypto.subtle.sign('HMAC', cryptoKey, data);
     return btoa(String.fromCharCode(...new Uint8Array(signature)));
   };
 
   return async function makeRequest(req: Request): Promise<any> {
     const timestamp = Math.floor(Date.now() / 1000).toString();
-    const nonce = crypto.randomUUID().replaceAll("-", "");
+    const nonce = crypto.randomUUID().replaceAll('-', '');
 
     // Parse URL to separate base URL from query parameters
     const url = new URL(req.url);
@@ -58,9 +58,9 @@ export const internalCreateSchoology = (
     const params: Record<string, string> = {
       oauth_consumer_key: appKey,
       oauth_nonce: nonce,
-      oauth_signature_method: "HMAC-SHA1",
+      oauth_signature_method: 'HMAC-SHA1',
       oauth_timestamp: timestamp,
-      oauth_version: "1.0",
+      oauth_version: '1.0',
     };
 
     // Add query parameters to OAuth parameters
@@ -72,31 +72,31 @@ export const internalCreateSchoology = (
       params.oauth_token = userKey;
     }
 
-    const signature = await sign(req.method, baseUrl, params, userSecret ?? "");
+    const signature = await sign(req.method, baseUrl, params, userSecret ?? '');
     params.oauth_signature = signature;
 
     const headers: Record<string, string> = {};
     headers.authorization =
-      "OAuth " +
+      'OAuth ' +
       Object.keys(params)
         .map((key) => `${key}="${encodeURIComponent(params[key])}"`)
-        .join(", ");
+        .join(', ');
     if (req.body) {
-      headers["content-type"] = "application/json";
+      headers['content-type'] = 'application/json';
     }
 
     const response = await fetch(req.url, {
       method: req.method,
       body: req.body,
       // @ts-expect-error duplex def is wrong
-      duplex: "half",
+      duplex: 'half',
       headers,
-      redirect: "manual",
+      redirect: 'manual',
     });
 
     // Rerequest if redirect
     if ([301, 302, 303].includes(response.status)) {
-      const location = response.headers.get("location");
+      const location = response.headers.get('location');
       if (location) {
         return await makeRequest(new Request(location));
       }
@@ -108,7 +108,7 @@ export const internalCreateSchoology = (
       });
     }
 
-    if (response.headers.get("content-type")?.includes("application/json")) {
+    if (response.headers.get('content-type')?.includes('application/json')) {
       return await response.json();
     } else {
       return await response.text();
@@ -123,21 +123,21 @@ export const createSchoology = (auth: AuthBase) => {
 
   const key = auth.token.key;
   const secret = auth.token.secret;
-  if (auth.appToken == "token") {
+  if (auth.appToken == 'token') {
     appKey = key;
     appSecret = secret;
-  } else if (auth.appToken == "a1") {
+  } else if (auth.appToken == 'a1') {
     appKey = SC_KEY_A1;
     appSecret = SC_SECRET_A1;
     userKey = key;
     userSecret = secret;
-  } else if (auth.appToken == "75") {
+  } else if (auth.appToken == '75') {
     appKey = SC_KEY_75;
     appSecret = SC_SECRET_75;
     userKey = key;
     userSecret = secret;
   } else {
-    throw new Error("Invalid appToken");
+    throw new Error('Invalid appToken');
   }
   return internalCreateSchoology(appKey, appSecret, userKey, userSecret);
 };

@@ -3,16 +3,12 @@
 </script>
 
 <div class="alert">
-  <pre class="blurb">{"Something went wrong" +
-      (error instanceof Error ? "\n\nTechnical details:\n" + error.message : "")}</pre>
-  {#if !navigator.userAgent.includes("Chrome")}
-    <button class="m3-layer" onclick={() => console.log(error)}>
-      Log
-    </button>
+  <pre class="blurb">{'Something went wrong' +
+      (error instanceof Error ? '\n\nTechnical details:\n' + error.message : '')}</pre>
+  {#if !navigator.userAgent.includes('Chrome')}
+    <button class="m3-layer" onclick={() => console.log(error)}> Log </button>
   {/if}
-  <button class="m3-layer primary" onclick={() => window.location.reload()}>
-    Reload
-  </button>
+  <button class="m3-layer primary" onclick={() => window.location.reload()}> Reload </button>
 </div>
 
 <style>

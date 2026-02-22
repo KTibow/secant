@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { FullAuth } from "../lib/api/schoology";
-  import { trackCachedAuto } from "../lib/data-tracking";
-  import Viz from "../lib/Viz.svelte";
-  import loader from "./loader";
-  import Resources from "./Resources.svelte";
+  import type { FullAuth } from '../lib/api/schoology';
+  import { trackCachedAuto } from '../lib/data-tracking';
+  import Viz from '../lib/Viz.svelte';
+  import loader from './loader';
+  import Resources from './Resources.svelte';
 
   let {
     classId,
@@ -16,7 +16,7 @@
   } = $props();
 
   const resources = trackCachedAuto({
-    id: "resources",
+    id: 'resources',
     loader: () => loader(auth, allGraded),
     expireAfter: 1000 * 60 * 10,
   });

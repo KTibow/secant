@@ -1,6 +1,6 @@
-import { getStorage } from "monoidentity";
-import { onMount } from "svelte";
-import { get, writable } from "svelte/store";
+import { getStorage } from 'monoidentity';
+import { onMount } from 'svelte';
+import { get, writable } from 'svelte/store';
 
 type Loader<T> = () => Promise<T>;
 type Config<T> = {
@@ -47,7 +47,7 @@ const track = <T>({
 
         process(await result);
       } catch (e) {
-        console.error("while updating", e);
+        console.error('while updating', e);
         data.errors.push(Date.now());
       } finally {
         data.loading = false;
@@ -59,9 +59,9 @@ const track = <T>({
   store.set(data);
   return store;
 };
-type CachedConfig<T> = Omit<Config<T>, "initialData"> & { id: string };
+type CachedConfig<T> = Omit<Config<T>, 'initialData'> & { id: string };
 const trackCached = <T>({ id, ...opts }: CachedConfig<T>) => {
-  const cache = getStorage("cache");
+  const cache = getStorage('cache');
   const result = track<T>({
     initialData: cache[id],
     ...opts,

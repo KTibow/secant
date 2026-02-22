@@ -1,8 +1,8 @@
 <script lang="ts">
-  import iconLeft from "@ktibow/iconset-material-symbols/arrow-back-rounded";
-  import iconRight from "@ktibow/iconset-material-symbols/arrow-forward-rounded";
-  import { Icon } from "m3-svelte";
-  import { getMinimumGrade } from "../lib/const";
+  import iconLeft from '@ktibow/iconset-material-symbols/arrow-back-rounded';
+  import iconRight from '@ktibow/iconset-material-symbols/arrow-forward-rounded';
+  import { Icon } from 'm3-svelte';
+  import { getMinimumGrade } from '../lib/const';
 
   let {
     currentPercent,

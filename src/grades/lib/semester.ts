@@ -1,14 +1,14 @@
-import { districtSemesters } from "school-districts";
-import { getLoginRecognized } from "monoidentity";
-import type { ClassGrade } from "./types";
-import { getPoints } from "./utils";
+import { districtSemesters } from 'school-districts';
+import { getLoginRecognized } from 'monoidentity';
+import type { ClassGrade } from './types';
+import { getPoints } from './utils';
 
 export const getSemester = () => {
   const { email } = getLoginRecognized();
-  const domain = email.split("@")[1];
+  const domain = email.split('@')[1];
   const semester = districtSemesters[domain];
   if (!semester) {
-    throw new Error("No semester information found");
+    throw new Error('No semester information found');
   }
   return semester;
 };
@@ -22,9 +22,9 @@ export const getTimeBasedProgress = () => {
 };
 
 export const getPointBasedProgress = (
-  assignments: ClassGrade["assignments"],
-  futureAssignments: ClassGrade["futureAssignments"],
-  categories?: ClassGrade["categories"],
+  assignments: ClassGrade['assignments'],
+  futureAssignments: ClassGrade['futureAssignments'],
+  categories?: ClassGrade['categories'],
 ) => {
   if (!categories) {
     const possible = getPoints(assignments).possible;

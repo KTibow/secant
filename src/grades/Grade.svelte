@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { roundTo } from "./lib/utils";
+  import { roundTo } from './lib/utils';
 
   let { grade }: { grade: number } = $props();
 </script>

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { getStorage } from "monoidentity";
-  import type { Class } from "../combine";
-  import Setup from "./setup/Index.svelte";
-  import { SCHOOLOGY_CONFIG_ENTRY } from "./setup/storage";
-  import ResourcesFetcher from "./ResourcesFetcher.svelte";
+  import { getStorage } from 'monoidentity';
+  import type { Class } from '../combine';
+  import Setup from './setup/Index.svelte';
+  import { SCHOOLOGY_CONFIG_ENTRY } from './setup/storage';
+  import ResourcesFetcher from './ResourcesFetcher.svelte';
 
   let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
 
-  const config = getStorage("config");
+  const config = getStorage('config');
   let classId = $derived(clazz?.id);
   let allGraded = $derived.by(() => {
     const output: Record<string, string[]> = {};

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { ClassGrade } from "../lib/types";
-  import PercentDone from "./PercentDone.svelte";
-  import Warnings from "./Warnings.svelte";
-  import { calculateLetter, roundTo } from "../lib/utils";
-  import { getTimeBasedProgress, getPointBasedProgress } from "../lib/semester";
+  import type { ClassGrade } from '../lib/types';
+  import PercentDone from './PercentDone.svelte';
+  import Warnings from './Warnings.svelte';
+  import { calculateLetter, roundTo } from '../lib/utils';
+  import { getTimeBasedProgress, getPointBasedProgress } from '../lib/semester';
 
   let {
     categories,
