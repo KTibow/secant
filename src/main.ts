@@ -1,3 +1,4 @@
+import 'monoidentity/init';
 import { mount } from 'svelte';
 import AppWrapper from './AppWrapper.svelte';
 

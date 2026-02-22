@@ -1,5 +1,5 @@
 import { fn } from 'monoserve';
-import { internalCreateSchoology, type AuthBase } from '../../../lib/api/schoology';
+import { internalCreateSchoology, type AuthBase } from '../../lib/api/schoology';
 import { SC_KEY_75, SC_SECRET_75 } from '$env/static/private';
 
 export default fn(async () => {
