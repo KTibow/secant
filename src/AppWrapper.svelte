@@ -4,13 +4,7 @@
   import App from './App.svelte';
 </script>
 
-<Monoidentity
-  intents={[{ loginRecognized: true }]}
-  getSyncStrategy={(path) =>
-    path.startsWith('.config/secant/') || path.startsWith('.core/')
-      ? { mode: 'immediate' }
-      : undefined}
->
+<Monoidentity intents={[{ loginRecognized: true }]}>
   <svelte:boundary>
     {#snippet failed(error)}
       <ErrorAlert {error} />

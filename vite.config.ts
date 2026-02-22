@@ -5,6 +5,8 @@ import { functionsMixins } from 'vite-plugin-functions-mixins';
 import { monoserve } from 'monoserve/plugin';
 import { build as rolldownBuild } from 'rolldown';
 import { importGlobPlugin } from 'rolldown/experimental';
+// @ts-expect-error not installing node types here
+import { resolve } from 'node:path';
 
 const buildCloudflareWorker = (): Plugin => ({
   name: 'build-cloudflare-worker',
@@ -25,6 +27,11 @@ const buildCloudflareWorker = (): Plugin => ({
   },
 });
 
+const inject = {
+  MONOIDENTITY_APP_ID: [resolve('./monoidentity-config.ts'), 'MONOIDENTITY_APP_ID'],
+  MONOIDENTITY_SYNC_FOR: [resolve('./monoidentity-config.ts'), 'MONOIDENTITY_SYNC_FOR'],
+} satisfies Record<string, [string, string]>;
+
 export default defineConfig({
   plugins: [
     svelte(),
@@ -32,13 +39,18 @@ export default defineConfig({
     monoserve({ monoserverURL: '/__monoserve/' }),
     buildCloudflareWorker(),
   ],
-  define: { MONOIDENTITY_APP_ID: JSON.stringify('secant') },
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         index: 'index.html',
         'callback/schoology': 'callback/schoology.html',
       },
+      transform: { inject },
+    },
+  },
+  optimizeDeps: {
+    rolldownOptions: {
+      transform: { inject },
     },
   },
 });
