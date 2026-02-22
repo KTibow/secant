@@ -2,6 +2,7 @@
   import { getStorage } from "monoidentity";
   import type { Class } from "../combine";
   import Setup from "./setup/Index.svelte";
+  import { SCHOOLOGY_CONFIG_ENTRY } from "./setup/storage";
   import ResourcesFetcher from "./ResourcesFetcher.svelte";
 
   let { classes, clazz }: { classes: Record<number, Class>; clazz: Class | undefined } = $props();
@@ -19,8 +20,8 @@
   });
 </script>
 
-{#if !config.schoology}
+{#if !config[SCHOOLOGY_CONFIG_ENTRY]}
   <Setup />
 {:else}
-  <ResourcesFetcher {classId} {allGraded} auth={config.schoology} />
+  <ResourcesFetcher {classId} {allGraded} auth={config[SCHOOLOGY_CONFIG_ENTRY]} />
 {/if}

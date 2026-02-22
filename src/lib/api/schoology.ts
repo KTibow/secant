@@ -1,5 +1,4 @@
 import { intersect, literal, number, object, string, union, type InferOutput } from "valibot";
-import { decode } from "monoidentity/server";
 import { SC_KEY_A1, SC_SECRET_A1, SC_KEY_75, SC_SECRET_75 } from "$env/static/private";
 
 const tokenSchema = object({ key: string(), secret: string() });
@@ -122,8 +121,8 @@ export const createSchoology = (auth: AuthBase) => {
   let userKey: string | undefined;
   let userSecret: string | undefined;
 
-  const key = decode(auth.token.key);
-  const secret = decode(auth.token.secret);
+  const key = auth.token.key;
+  const secret = auth.token.secret;
   if (auth.appToken == "token") {
     appKey = key;
     appSecret = secret;

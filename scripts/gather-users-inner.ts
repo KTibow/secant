@@ -1,6 +1,5 @@
 import { homedir } from "os";
 import { readFile } from "node:fs/promises";
-import { encode } from "monoidentity/server";
 import { createSchoology, type AuthBase, type FullAuth } from "../src/lib/api/schoology.ts";
 
 let auth: Record<string, AuthBase & Partial<FullAuth>> = {};
@@ -26,14 +25,20 @@ for (const line of source2.split("\n")) {
 
 console.warn("enriching...");
 for (const [email, a] of Object.entries(auth)) {
+  const schoology = createSchoology(a);
   try {
-    a.token = { key: encode(a.token.key), secret: encode(a.token.secret) };
-    const schoology = createSchoology(a);
     const me = await schoology(new Request("https://api.schoology.com/v1/users/me"));
     a.userId = me.id;
   } catch (e) {
-    console.warn(`failed to enrich ${email}: ${(e as Error).message}`);
-    delete auth[email];
+    try {
+      console.warn(`retrying ${email}`);
+      const me = await schoology(new Request("https://api.schoology.com/v1/users/me"));
+      a.userId = me.id;
+    } catch (e) {
+      console.warn(`failed to enrich ${email}`);
+      console.warn(e);
+      delete auth[email];
+    }
   }
 }
 
