@@ -32,6 +32,7 @@ export default defineConfig({
     monoserve({ monoserverURL: "/__monoserve/" }),
     buildCloudflareWorker(),
   ],
+  define: { MONOIDENTITY_APP_ID: JSON.stringify("secant") },
   build: {
     rollupOptions: {
       input: {

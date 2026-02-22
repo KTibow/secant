@@ -5,7 +5,6 @@
 </script>
 
 <Monoidentity
-  app="secant"
   intents={[{ loginRecognized: true }]}
   getSyncStrategy={(path) =>
     path.startsWith(".config/secant/") || path.startsWith(".core/")
