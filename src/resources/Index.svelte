@@ -14,7 +14,7 @@
     for (const period in classes) {
       const { grade, id } = classes[period];
       if (!grade || !id) continue;
-      output[id] = grade.assignments.map((a) => a.name);
+      output[id] = grade.assignments.filter((a) => !a.missing).map((a) => a.name);
     }
     return output;
   });
