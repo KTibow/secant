@@ -36,8 +36,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0(svelte@5.53.2)(vite-plugin-functions-mixins@0.4.1(vite@8.0.0-beta.15(esbuild@0.27.3)))
       monoidentity:
-        specifier: ^0.29.1
-        version: 0.29.1(svelte@5.53.2)(typescript@5.9.3)
+        specifier: ^0.31.1
+        version: 0.31.1(svelte@5.53.2)(typescript@5.9.3)
       monoidentity-verification:
         specifier: ^0.1.2
         version: 0.1.2
@@ -702,12 +702,12 @@ packages:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
     engines: {node: '>= 0.4'}
 
-  aws4fetch@1.0.20:
-    resolution: {integrity: sha512-/djoAN709iY65ETD6LKCtyyEI04XIBP5xVvfmNxsEP0uJB5tyaGBztSryRr4HqMStr9R06PisQE7m9zDTXKu6g==}
-
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
+
+  base36-esm@0.1.0:
+    resolution: {integrity: sha512-tS/RrucuZs937n7V7Ri1ASbznlrAxku/MSkzQwZkU6VPjBjXah1vZvTZ13eojlwG3m6Tso17Qa5nR0GnbwqP5Q==}
 
   blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
@@ -769,9 +769,6 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
-
-  idb-keyval@6.2.2:
-    resolution: {integrity: sha512-yjD9nARJ/jb1g+CvD0tlhUHOrJ9Sy0P8T9MF3YaLlHnSRpwPfpTX0XIvpmw3gAJUmEu3FiICLBDPXVwyEvrleg==}
 
   is-reference@3.0.3:
     resolution: {integrity: sha512-ixkJoqQvAP88E6wLydLGGqCJsrFUnqoH6HnaczB8XmDH1oaWU+xxdptvikTgaEhtZ53Ky6YXiBuUI2WXLMCwjw==}
@@ -881,8 +878,8 @@ packages:
   monoidentity-verification@0.1.2:
     resolution: {integrity: sha512-qev24Kb78r3kuk7TgjMuzrc0FWI6jDw8AAEqs/hOrPTohbR2StXlcpGE8IzB9t5RJS2B9NGnIaxppaBJxko/VQ==}
 
-  monoidentity@0.29.1:
-    resolution: {integrity: sha512-FMSBit5zM23TFt+YqiswjWzKCvjqW3iwIoApzGxwgcL3Lu/my4s1esAnEZDEO5XhgwaafM7lsTMGtWQzickANw==}
+  monoidentity@0.31.1:
+    resolution: {integrity: sha512-m65nS5SmU+dQAjdQ/n0G+bTCuWO3RKhiyhgeaYFNDbZKYDQ+ZQYJymb8wWLsdDLoXj7fomEF6dqlKDYABypaFA==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1516,9 +1513,9 @@ snapshots:
 
   aria-query@5.3.2: {}
 
-  aws4fetch@1.0.20: {}
-
   axobject-query@4.1.0: {}
+
+  base36-esm@0.1.0: {}
 
   blake3-wasm@2.1.5: {}
 
@@ -1588,8 +1585,6 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
-
-  idb-keyval@6.2.2: {}
 
   is-reference@3.0.3:
     dependencies:
@@ -1683,11 +1678,10 @@ snapshots:
       fast-studentvue: 2.1.1
       school-districts: 5.0.1
 
-  monoidentity@0.29.1(svelte@5.53.2)(typescript@5.9.3):
+  monoidentity@0.31.1(svelte@5.53.2)(typescript@5.9.3):
     dependencies:
-      aws4fetch: 1.0.20
+      base36-esm: 0.1.0
       devalue: 5.6.3
-      idb-keyval: 6.2.2
       svelte: 5.53.2
       valibot: 1.2.0(typescript@5.9.3)
     transitivePeerDependencies:
