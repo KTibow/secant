@@ -29,7 +29,6 @@ const buildCloudflareWorker = (): Plugin => ({
 
 const inject = {
   MONOIDENTITY_APP_ID: [resolve('./monoidentity-config.ts'), 'MONOIDENTITY_APP_ID'],
-  MONOIDENTITY_SYNC_FOR: [resolve('./monoidentity-config.ts'), 'MONOIDENTITY_SYNC_FOR'],
 } satisfies Record<string, [string, string]>;
 
 export default defineConfig({
